@@ -20,6 +20,7 @@ information in the SDL format.
 
 
 Team members:
+
 -Ana Rita Ferreira - ei12052 - https://github.com/AnaRitaFerreira
 
 -Gabriel Martins Souto - ei12087 - https://github.com/Inframan
