@@ -366,3 +366,41 @@ DIGIT: ('0'..'A');
                                   'NORMAL' |
                                   'DENSE' |
                                   'VERY_DENSE';
+
+
+//////////////////////////FUEL////////////////////
+
+FUEL_TYPE: '73' |
+           '87' |
+           '100' |
+           '130' |
+       '145' |
+           'MOGAS' |
+           'JET' |
+           'JETA' |
+           'JETA1' |
+           'JETAP' |
+           'JETB' |
+           'JET4' |
+           'JET5' |
+           'UNKNOWN';
+
+FUEL_AVAILABILITY: 'YES' |
+                   'NO' |
+                   'UNKNOWN' |
+                   'PRIOR_REQUEST';
+
+
+/////////////////////////////////FUEL TRIGGER /////////////////
+
+TRIGGER__TYPE: 'REFUEL_REPAIR' |
+               'WEATHER';
+
+
+
+///////////////////TRIGGER WEATHER DATA////////////
+
+TRIGGER_WEATHER_DATA_TYPE: 'THERMAL' |
+                           'NONDIRECTIONAL_TURBULENCE' |
+                           'DIRECTIONAL_TURBULENCE' |
+                           'RIDGE_LIFT';
