@@ -50,8 +50,6 @@ TRIGGER_CLOSE: '</trigger>';
 
 TRIGGER_WEATHER_DATA_OPEN: '<TriggerWeatherData' ;
 
-TRIGGER_WEATHER_DATA_CLOSE: '<TriggerWeatherData' ;
-
 FUEL_OPEN: '<Fuel' ;
 
 TYPE: 'type' ;
@@ -80,6 +78,10 @@ NUMBER: 'number' ;
 
 DESIGNATOR: 'designator' ;
 
+PRIMARY_DESIGNATOR: 'primaryDesignator' ;
+
+SECONDARY_DESIGNATOR: 'secondaryDesignator' ;
+
 PATTERN_ALTITUDE: 'patternAltitude' ;
 
 PRIMARY_TAKE_OFF: 'primaryTakeoff' ;
@@ -93,6 +95,10 @@ SECONDARY_TAKE_OFF: 'secondaryTakeoff' ;
 SECONDARY_LANDING: 'secondaryLanding' ;
 
 SECONDARY_PATTERN: 'secondaryPattern' ;
+
+PRIMARY_MARKING_BIAS: 'primaryMarkingBias' ;
+
+SECONDARY_MARKING_BIAS: 'secondaryMarkingBias' ;
 
 MARKINGS_OPEN: '<Markings' ;
 
@@ -182,7 +188,31 @@ RANGE: 'range' ;
 
 BACK_COURSE: 'backCourse' ;
 
-GLIDE_SLOPE: '<GlideSlope' ;
+GLIDE_SLOPE_OPEN: '<GlideSlope' ;
+
+VISUAL_MODEL_OPEN: '<VisualModel' ;
+
+VISUAL_MODEL_CLOSE: '<\VisualModel>' ;
+
+INSTANCE_ID: 'instanceId' ;
+
+RUNWAY_START_OPEN: '<RunwayStart' ;
+
+RUNWAY_ALIAS_OPEN: '<RunwayAlias' ;
+
+HELIPAD_OPEN: '<Helipad' ;
+
+CLOSED: 'closed' ;
+
+TRANSPARENT: 'transparent' ;
+
+RED: 'red' ;
+
+GREEN: 'green' ;
+
+BLUE: 'blue' ;
+
+COM_OPEN: '<Com' ;
 
 DME_OPEN: '<Dme' ;
 
@@ -361,6 +391,8 @@ NEXT_OPEN: '<Next' ;
 SCALAR: 'scalar' ;
 
 TRIGGER_HEIGHT: 'triggerHeight' ;
+
+
 
 
 WS: [ \t\r\n]+ -> skip ;
