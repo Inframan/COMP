@@ -395,3 +395,12 @@ FUEL_AVAILABILITY: 'YES' |
 
 TRIGGER__TYPE: 'REFUEL_REPAIR' |
                'WEATHER';
+
+
+
+///////////////////TRIGGER WEATHER DATA////////////
+
+TRIGGER_WEATHER_DATA_TYPE: 'THERMAL' |
+                           'NONDIRECTIONAL_TURBULENCE' |
+                           'DIRECTIONAL_TURBULENCE' |
+                           'RIDGE_LIFT';
