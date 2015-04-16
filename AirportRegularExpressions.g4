@@ -18,6 +18,8 @@ PERCENTAGE: ( '1'.'0' | '0'.'0'('1'..'9') | '0'.('1'..'9')('0'..'9')?);
 
 FLOAT: ('-' | '+')?('0'..'9')+'.'('0'..'9')+;
 
+TRAFFICSCALLAR: INT('F'|'M'|'N');
+
 INT: ('-' | '+')?('0'..'9')+;
 
 ALTITUDE_VALUES: FLOAT( 'M' | 'F')?;
@@ -66,3 +68,14 @@ TAXIWAY_PARKING_NAME: 'PARKING' |
 TAXIWAY_PARKING_TEEOFFSET: (('0'..'4')?('0'..'9')'.'('0'..'9') | '50.0');
 
 
+STRING0_TO_8: STRING0_TO4 STRING0_TO4;
+
+INTEGER_0_TO_255: (  ( ('0'..'1')?('0'..'9')?('0'..'9'))
+ | ('2'(('0'..'4')('0'..'9'))
+  | ( '5'('0'..'5'))));
+
+TAXI_NAME_SIZE: 'SIZE1' | 'SIZE2' | 'SIZE3' | 'SIZE4' | 'SIZE5';
+
+TAXI_NAME_JUSTIFICATION: 'LEFT' | 'RIGHT';
+
+ALL_STRING: .*;
