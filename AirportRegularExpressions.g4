@@ -30,6 +30,8 @@ STRING4: (('a'..'z') | ('A'..'Z') | ('0'..'9'))  (('a'..'z') | ('A'..'Z') | ('0'
 
 STRING0_TO4: (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
 
+STRING0_TO5: (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
+
 STRING48: STRING4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4; //12*4 = 48
 
 MAGVAR_VALUES: ('-' | '+')? (   ('3'('0'..'5')('0'..'9'))  |  (('0'..'2')?('0'..'9')?('0'..'9'))   |  '360');
@@ -254,3 +256,55 @@ VASI_TYPE: 'PAPI2' |
 VASI_PITCH: (('0'..'9')|'10') DECIMAL_PART;
 
 VASI_SPACING: UNSIGNED_INT DECIMAL_PART;
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////
+//////////////////FATIA///////////////////////////////////////
+//////////////////////////////////////////////////////////////
+
+///////////////MARKER/////////////////
+
+REGION: ('A'..'Z')|('0'..'9') ('A'..'Z')|('0'..'9') ;
+
+IDENT: STRING0_TO5;
+
+
+///////////////Waypoint/////////////////
+
+WAYPOINT_TYPE:  'NAMED' |
+                'UNNAMED' |
+                'VOR' |
+                'NDB' |
+                'OFF_ROUTE' |
+                'IAF' |
+                'FAF' ;
+
+WAYPOINT_REGION: ('A'..'Z')|('0'..'9') ('A'..'Z')|('0'..'9') ;
+
+WAYPOINT_IDENT: ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ;
+
+
+///////////////ROUTE/////////////////
+
+ROUTE_TYPE: 'VICTOR' |
+            'JET' |
+            'BOTH' ;
+
+NAME: STRING0_TO_8 ;
+
+///////////////Previous/////////////////
+
+
+ALTITUDE_MINIMUM: FLOAT;
+
+
+///////////////GEOPOL/////////////////
+
+
+GEOPOL_TYPE:    'COASTLINE' |
+                'BOUNDARY' |
+                'DASHED_BOUNDARY' ;
