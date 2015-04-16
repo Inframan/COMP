@@ -71,6 +71,12 @@ TAXIWAY_PARKING_NAME: 'PARKING' |
 
 TAXIWAY_PARKING_TEEOFFSET: (('0'..'4')?('0'..'9')'.'('0'..'9') | '50.0');
 
+TAXIWAY_PARKING_PUSHBACK: 'NONE'|
+                           'BOTH' |
+                       'LEFT' |
+                        'RIGHT';
+
+
 
 STRING0_TO_8: STRING0_TO4 STRING0_TO4;
 
@@ -84,7 +90,7 @@ TAXI_NAME_JUSTIFICATION: 'LEFT' | 'RIGHT';
 
 ALL_STRING: .*;
 
-TAXIWAT_PATH_TYPE: 'RUNWAY' |
+TAXIWAY_PATH_TYPE: 'RUNWAY' |
                    'PARKING' |
                    'TAXI' |
                    'PATH' |
@@ -297,6 +303,34 @@ WAYPOINT_REGION: ('A'..'Z')|('0'..'9') ('A'..'Z')|('0'..'9') ;
 
 WAYPOINT_IDENT: ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ;
 
+/////////////////////HELIPAD/////////////
+
+
+HELIPAD_TYPE: 'NONE' |
+              'CIRCLE' |
+              'H' |
+              'MEDICAL' |
+              'SQUARE';
+
+
+
+
+
+////////////////////JETWAY////////////////
+
+JETWAY_GATENAME: 'PARKING' |
+                 'DOCK' |
+                 'GATE' |
+                 'GATE_' ('A'..'Z') |
+                 'NONE' |
+                 'N_PARKING' |
+                 'NE_PARKING' |
+                 'NW_PARKING' |
+                 'SE_PARKING' |
+                 'S_PARKING' |
+                 'SW_PARKING' |
+                 'W_PARKING' |
+                 'E_PARKING';
 
 ///////////////ROUTE/////////////////
 
@@ -318,3 +352,17 @@ ALTITUDE_MINIMUM: FLOAT;
 GEOPOL_TYPE:    'COASTLINE' |
                 'BOUNDARY' |
                 'DASHED_BOUNDARY' ;
+
+
+///////////////SCENERY OBJECT/////////
+
+DIGIT: ('0'..'A');
+
+
+ SCENERY_OBJECT_ID: '{'DIGIT+ '-'DIGIT+ '-' DIGIT+ '-' DIGIT+ '-' DIGIT+ '}';
+
+ SCENERY_OBJECT_IMAGE_COMPLEXITY: 'VERY_SPARSE' |
+                                  'SPARSE' |
+                                  'NORMAL' |
+                                  'DENSE' |
+                                  'VERY_DENSE';
