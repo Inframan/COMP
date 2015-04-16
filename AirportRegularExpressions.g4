@@ -79,3 +79,64 @@ TAXI_NAME_SIZE: 'SIZE1' | 'SIZE2' | 'SIZE3' | 'SIZE4' | 'SIZE5';
 TAXI_NAME_JUSTIFICATION: 'LEFT' | 'RIGHT';
 
 ALL_STRING: .*;
+
+TAXIWAT_PATH_TYPE: 'RUNWAY' |
+                   'PARKING' |
+                   'TAXI' |
+                   'PATH' |
+                   'CLOSED' |
+                   'VEHICLE';
+
+TAXIWAY_PATH_SURFACE: 'ASPHALT' |
+                      'BITUMINOUS' |
+                      'BRICK' |
+                      'CLAY' |
+                      'CEMENT' |
+                      'CONCRETE' |
+                      'CORAL' |
+                      'DIRT' |
+                      'GRASS' |
+                      'GRAVEL' |
+                      'ICE' |
+                      'MACADAM' |
+                      'OIL_TREATED' |
+                      'PLANKS' |
+                      'SAND' |
+                      'SHALE' |
+                      'SNOW' |
+                      'STEEL_MATS' |
+                      'TARMAC' |
+                      'UNKNOWN' |
+                      'WATER';
+
+BOOLEAN: 'TRUE' | 'FALSE';
+
+TAXIWAY_PATH_EDGE: 'NONE' |
+                   'SOLID' |
+                   'DASHED' |
+                   'SOLID_DASHED';
+
+
+TAXIWAY_PATH_NUMBER_RUNWAY: ( '0'('0'..'9') | (  (('0'..'2')?('0'..'9')) | '3'('0'..'6')) );
+
+
+TAXIWAY_PATH_NUMBER_NOT_RUNWAY: 'EAST'|
+                                  'NORTH' |
+                                  'NORTHEAST' |
+                                  'NORTHWEST' |
+                                  'SOUTH' |
+                                  'SOUTHEAST' |
+                                  'SOUTHWEST' |
+                                  'WEST';
+
+TAXIWAY_PATH_NUMBER_DESIGNATOR: 'NONE' |
+                                'C' |
+                                'CENTER' |
+                                'L' |
+                                'LEFT' |
+                                'R' |
+                                'RIGHT' |
+                                'W' |
+                                'WATER' |
+                                'A' |
+                                'B';
