@@ -186,11 +186,17 @@ RADIUS: 'radius' ;
 
 TEE_OFFSET_1: 'teeOffset1' ;
 
+TEE_OFFSET_2: 'teeOffset2' ;
+
+TEE_OFFSET_3: 'teeOffset3' ;
+
+TEE_OFFSET_4: 'teeOffset4' ;
+
 PUSH_BACK: 'pushBack' ;
 
 TAXI_NAME_OPEN: '<TaxiName' ;
 
-TAXIWAY_PATH: '<TaxiwayPath' ;
+TAXIWAY_PATH_OPEN: '<TaxiwayPath' ;
 
 START: 'start' ;
 
@@ -205,6 +211,8 @@ LEFT_EDGE: 'leftEdge' ;
 RIGHT_EDGE: 'rightEdge' ;
 
 CENTER_LINE: 'centerLine' ;
+
+CENTER_LINE_LIGHTED: 'centerLineLighted' ;
 
 LEFT_EDGE_LIGHTED: 'leftEdgeLighted' ;
 
