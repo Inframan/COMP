@@ -215,3 +215,42 @@ OFFSET_THREASHHOLD_SURFACE: 'ASPHALT' |
                             'WATER';
 
 
+//////////////APPROACHLIGHTS////////
+
+APPROACH_LIGHTS_SYSTEM: 'NONE' |
+                        'ALSF1' |
+                        'ALSF2' |
+                        'CALVERT' |
+                        'CALVERT2' |
+                        'MALS' |
+                        'MALSF' |
+                        'MALSR' |
+                        'ODALS' |
+                        'RAIL' |
+                        'SALS' |
+                        'SALSF' |
+                        'SSALF' |
+                        'SSALR' |
+                        'SSALS';
+
+////////////VASI//////////
+
+VASI_TYPE: 'PAPI2' |
+           'PAPI4' |
+           'PVASI' |
+           'TRICOLOR' |
+           'TVASI' |
+           'VASI21' |
+           'VASI22' |
+           'VASI23' |
+           'VASI31' |
+           'VASI32' |
+           'VASI33' |
+           'BALL' |
+           'APAP' |
+           'PANELS';
+
+
+VASI_PITCH: (('0'..'9')|'10') DECIMAL_PART;
+
+VASI_SPACING: UNSIGNED_INT DECIMAL_PART;
