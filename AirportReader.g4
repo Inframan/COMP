@@ -20,6 +20,8 @@ AIRPORT_OPEN:  '<Airport' {ignoreWord=false;} ;
 
 AIRPORT_CLOSE: '</Airport>' {ignoreWord=true;} ;
 
+AIRLINE_CODES: 'airlineCodes';
+
 COUNTRY: 'country' ;
 
 CITY: 'city' ;
@@ -41,6 +43,14 @@ AIRPORT_TEST_RADIUS: 'airportTestRadius' ;
 IDENT: 'ident' ;
 
 SERVICES_OPEN: '<Services' ;
+
+TRIGGER_OPEN: '<trigger' ;
+
+TRIGGER_CLOSE: '</trigger>';
+
+TRIGGER_WEATHER_DATA_OPEN: '<TriggerWeatherData' ;
+
+TRIGGER_WEATHER_DATA_CLOSE: '<TriggerWeatherData' ;
 
 FUEL_OPEN: '<Fuel' ;
 
@@ -131,6 +141,10 @@ EDGE: 'edge' ;
 CENTER_RED: 'centerRed' ;
 
 OFFSET_THRESHOLD: '<OffsetThreshold' ;
+
+BLAST_PAD: '<BlastPad' ;
+
+OVERRUN: '<Overrun' ;
 
 END: 'end' ;
 
@@ -338,9 +352,15 @@ WAYPOINT_IDENT: 'waypointIdent';
 
 WAYPOINT_CLOSE: '</Waypoint>' ;
 
+PREVIOUS_OPEN: '<Previous' ;
 
+ALTITUDE_MINIMUM: 'altitudeMinimum' ;
 
+NEXT_OPEN: '<Next' ;
 
+SCALAR: 'scalar' ;
+
+TRIGGER_HEIGHT: 'triggerHeight' ;
 
 
 WS: [ \t\r\n]+ -> skip ;
