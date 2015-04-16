@@ -257,7 +257,17 @@ VASI_PITCH: (('0'..'9')|'10') DECIMAL_PART;
 
 VASI_SPACING: UNSIGNED_INT DECIMAL_PART;
 
+//////////////////////////////ILS///////////////////////
 
+NAUTICAL_OR_METER: 'N' | 'M';
+
+ILS_RANGE: UNSIGNED_INT NAUTICAL_OR_METER?;
+
+ILS_IDENT: (('a'..'z') | ('A'..'Z') | ('0'..'9'))STRING0_TO4;
+
+
+//////////////////RUNWAY START////////////////
+RUNWAY_START_TYPE: 'RUNWAY';
 
 
 
