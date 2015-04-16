@@ -22,6 +22,8 @@ TRAFFICSCALLAR: INT('F'|'M'|'N');
 
 INT: ('-' | '+')?('0'..'9')+;
 
+UNSIGNED_INT: ('0'..'9')+;
+
 ALTITUDE_VALUES: FLOAT( 'M' | 'F')?;
 
 STRING4: (('a'..'z') | ('A'..'Z') | ('0'..'9'))  (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
@@ -140,3 +142,76 @@ TAXIWAY_PATH_NUMBER_DESIGNATOR: 'NONE' |
                                 'WATER' |
                                 'A' |
                                 'B';
+
+///////////////////TOWER/////////////
+
+METERS_OR_FEET: 'M' | 'F';
+
+
+/////////////RUNWAY/////////////////
+
+RUNWAY_SURFACE: 'ASPHALT' |
+                'BITUMINOUS' |
+                'BRICK' |
+                'CLAY' |
+                'CEMENT' |
+                'CONCRETE' |
+                'CORAL' |
+                'DIRT' |
+                'GRASS' |
+                'GRAVEL' |
+                'ICE' |
+                'MACADAM' |
+                'OIL_TREATED' |
+                'PLANKS' |
+                'SAND' |
+                'SHALE' |
+                'SNOW' |
+                'STEEL_MATS' |
+                'TARMAC' |
+                'UNKNOWN' |
+                'WATER';
+
+
+RUNWAY_NUMBER: TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY;
+
+///////////////////////MARKINGS <3/////////////////////
+
+
+////////////////////LIGHTS////////////
+LIGHTS_VALUES: 'NONE' |
+               'LOW' |
+               'MEDIUM' |
+               'HIGH';
+
+
+///////////////OFFSET THREASHHOLD AND BLAST PAD AND OVERRUN///////////////
+
+
+PRIMARY_OR_SECONDARY_END: 'PRIMARY' |
+                        'SECONDARY';
+
+
+OFFSET_THREASHHOLD_SURFACE: 'ASPHALT' |
+                            'BITUMINOUS' |
+                            'BRICK' |
+                            'CLAY' |
+                            'CEMENT' |
+                            'CONCRETE' |
+                            'CORAL' |
+                            'DIRT' |
+                            'GRASS' |
+                            'GRAVEL' |
+                            'ICE' |
+                            'MACADAM' |
+                            'OIL_TREATED' |
+                            'PLANKS' |
+                            'SAND' |
+                            'SHALE' |
+                            'SNOW' |
+                            'STEEL_MATS' |
+                            'TARMAC' |
+                            'UNKNOWN' |
+                            'WATER';
+
+
