@@ -10,9 +10,14 @@ airporAttributeAnaliser: ;
 children: ;
 */
 
+EQUALS: '=' ;
+
+SIMPLE_TAG_CLOSE: '/>' ;
+
+TAG_CLOSE: '>' ;
 
 AIRPORT_OPEN:  '<Airport' {ignoreWord=false;} ;
-  
+
 AIRPORT_CLOSE: '</Airport>' {ignoreWord=true;} ;
 
 COUNTRY: 'country' ;
@@ -35,7 +40,7 @@ AIRPORT_TEST_RADIUS: 'airportTestRadius' ;
 
 IDENT: 'ident' ;
 
-SERVICES_OPEN: '<Services>' ;
+SERVICES_OPEN: '<Services' ;
 
 FUEL_OPEN: '<Fuel' ;
 
@@ -169,8 +174,164 @@ DME_OPEN: '<Dme' ;
 
 ILS_CLOSE: '</Ils>' ;
 
+TAXIWAY_POINT_OPEN: '<TaxiwayPoint' ;
 
-//linha 473
+INDEX: 'index' ;
+
+ORIENTATION: 'orientation' ;
+
+TAXIWAY_PARKING_OPEN: '<TaxiwayParking' ;
+
+RADIUS: 'radius' ;
+
+TEE_OFFSET_1: 'teeOffset1' ;
+
+PUSH_BACK: 'pushBack' ;
+
+TAXI_NAME_OPEN: '<TaxiName' ;
+
+TAXIWAY_PATH: '<TaxiwayPath' ;
+
+START: 'start' ;
+
+WEIGHT_LIMIT: 'weightLimit' ;
+
+DRAW_SURFACE: 'drawSurface' ;
+
+DRAW_DETAIL: 'drawDetail' ;
+
+LEFT_EDGE: 'leftEdge' ;
+
+RIGHT_EDGE: 'rightEdge' ;
+
+CENTER_LINE: 'centerLine' ;
+
+LEFT_EDGE_LIGHTED: 'leftEdgeLighted' ;
+
+RIGHT_EDGE_LIGHTED: 'rightEdgeLighted' ;
+
+JETWAY_OPEN: '<Jetway' ;
+
+JETWAY_CLOSE: '</Jetway>' ;
+
+GATE_NAME: 'gateName' ;
+
+PARKING_NUMBER: 'parkingNumber' ;
+
+SCENERY_OBJECT_OPEN: '<SceneryObject' ;
+
+SCENERY_OBJECT_CLOSE: '</SceneryObject>' ;
+
+ALTITUDE_IS_AGL: 'altitudeIsAgl' ;
+
+BANK: 'bank' ;
+
+IMAGE_COMPLEXITY: 'imageComplexity' ;
+
+LIBRARY_OBJECT_OPEN: '<LibraryObject' ;
+
+SCALE: 'scale' ;
+
+APRONS_OPEN: '<Aprons>' ;
+
+APRONS_CLOSE: '</Aprons>' ;
+
+APRON_OPEN: '<Apron' ;
+
+APRON_OPEN: '</Apron>' ;
+
+VERTEX_OPEN: '<Vertex' ;
+
+APRON_EDGE_LIGHTS_OPEN: '<ApronEdgeLights>' ;
+
+EDGE_LIGHTS_OPEN: '<EdgeLights>' ;
+
+EDGE_LIGHTS_CLOSE: '</EdgeLights>' ;
+
+TAXIWAY_SIGN_OPEN: '<TaxiwaySign' ;
+
+LABEL: 'label' ;
+
+SIZE: 'size' ;
+
+JUSTIFICATION: 'justification' ;
+
+BOUNDARY_FENCE_OPEN: '<BoundaryFence' ;
+
+PROFILE: 'profile' ;
+
+BOUNDARY_FENCE_CLOSE: '</BoundaryFence>' ;
+
+APPROACH_OPEN: '<Approach' ;
+
+RUNWAY: 'runway' ;
+
+SUFFIX: 'suffix' ;
+
+GPS_OVERLAY: 'gpsOverlay' ;
+
+FIX_TYPE: 'fixType' ;
+
+FIX_REGION: 'fixRegion' ;
+
+FIX_IDENT: 'fixIdent' ;
+
+ALTITUDE: 'altitude' ;
+
+MISSED_ALTITUDE: 'missedAltitude' ;
+
+APPROACH_LEGS_OPEN: '<ApproachLegs>' ;
+
+APPROACH_LEGS_CLOSE: '</ApproachLegs>' ;
+
+LEG_OPEN: '<Leg' ;
+
+RECOMMENDED_TYPE: 'recommendedType' ;
+
+RECOMMENDED_REGION: 'recomendedRegion' ;
+
+RECOMMENDED_IDENT: 'recomendedIdent' ;
+
+THETA: 'theta' ;
+
+RHO: 'rho' ;
+
+ALTITUDE_DESCRIPTOR: 'altitudeDescriptor' ;
+
+ALTITUDE1: 'altitude1' ;
+
+FLY_OVER: 'flyOver' ;
+
+MAGNETIC_COURSE: 'magneticCourse' ;
+
+DISTANCE: 'distance' ;
+
+TIME: 'time' ;
+
+MISSED_APPROACH_LEGS_OPEN: '<MissedApproachLegs>' ;
+
+MISSED_APPROACH_LEGS_CLOSE: '</MissedApproachLegs>' ;
+
+TRANSITION_OPEN: '<Transition' ;
+
+TRANSITION_TYPE: 'transitionType' ;
+
+TRANSITION_LEGS_OPEN: '<TransitionLegs>' ;
+
+TRANSITION_LEGS_CLOSE: '</TransitionLegs>' ;
+
+WAYPOINT_OPEN: '<Waypoint' ;
+
+WAYPOINT_TYPE: 'waypointType' ;
+
+WAYPOINT_REGION: 'waypointRegion' ;
+
+WAYPOINT_IDENT: 'waypointIdent';
+
+WAYPOINT_CLOSE: '</Waypoint>' ;
+
+
+
 
 
 WS: [ \t\r\n]+ -> skip ;
