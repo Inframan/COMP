@@ -979,3 +979,91 @@ glide_slope*
 dme*
 visual_model*
 ILS_CLOSE;
+
+
+//
+length: LENGTH EQUALS FLOAT METERS_OR_FEET;
+number: NUMBER EQUALS (TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY);
+primaryDesignator: PRIMARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
+secondaryDesignator: SECONDARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
+patternAltitude : PATTERN_ALTITUDE EQUALS FLOAT METERS_OR_FEET;
+primaryTakeoff : PRIMARY_TAKE_OFF EQUALS (BOOLEAN | YES_NO);
+primaryLanding  : PRIMARY_LANDING EQUALS BOOLEAN;
+primaryPattern : PRIMARY_PATTERN EQUALS LEFT_RIGHT;
+secondaryTakeoff : SECONDARY_TAKE_OFF EQUALS BOOLEAN;
+secondaryLanding : SECONDARY_LANDING EQUALS BOOLEAN;
+secondaryPattern : SECONDARY_PATTERN EQUALS LEFT_RIGHT;
+primaryMarkingBias : PRIMARY_MARKING_BIAS EQUALS TRAFFICSCALLAR;
+secondaryMarkingBias : SECONDARY_MARKING_BIAS EQUALS TRAFFICSCALLAR;
+
+//Markings
+alternateThreshold : ALTERNATE_THRESHOLD EQUALS BOOLEAN;
+alternateTouchdown : ALTERNATE_TOUCHDOWN EQUALS BOOLEAN;
+alternateFixedDistance : ALTERNATE_FIXED_DISTANCE EQUALS BOOLEAN;
+alternatePrecision : ALTERNATE_PRECISION EQUALS BOOLEAN;
+leadingZeroIdent : LEADING_ZERO_IDENT EQUALS BOOLEAN;
+noThresholdEndArrows : NO_THRESHOLD_END_ARROWS EQUALS BOOLEAN;
+edges : EDGES EQUALS BOOLEAN;
+threshold : THRESHOLD EQUALS BOOLEAN;
+fixed : FIXED_DISTANCE EQUALS BOOLEAN;
+touchdown : TOUCHDOWN EQUALS BOOLEAN;
+dashes : DASHES EQUALS BOOLEAN;
+ident_Marking : IDENT EQUALS BOOLEAN ;
+precision : PRECISION EQUALS BOOLEAN;
+edgePavement : EDGE_PAVEMENT EQUALS BOOLEAN;
+singleEnd : SINGLE_END EQUALS BOOLEAN;
+primaryClosed : PRIMARY_CLOSED EQUALS BOOLEAN;
+secondaryClosed : SECONDARY_CLOSED EQUALS BOOLEAN;
+primaryStol : PRIMARY_STOL EQUALS BOOLEAN;
+secondaryStol : SECONDARY_STOL EQUALS BOOLEAN;
+
+//Lights
+center: CENTER EQUALS LIGHTS_VALUES;
+edge: EDGE EQUALS LIGHTS_VALUES;
+centerRed: CENTER_RED EQUALS BOOLEAN;
+
+// ApproachLights
+system: SYSTEM EQUALS APPROACH_LIGHTS_SYSTEM;
+strobes: STROBES EQUALS UNSIGNED_INT;
+reil: REIL EQUALS BOOLEAN;
+endLights: END_LIGHTS EQUALS BOOLEAN;
+
+//VASI
+
+
+//RunwayStart
+
+airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  trafficScalar
+
+taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX biasZ SIMPLE_TAG_CLOSE;
+
+taxiwayParking: TAXIWAY_PARKING_OPEN index lattitude longitude biasX biasZ heading radius taxiwayparkingType taxiwayparkingName taxiwayparkingNumber airlineCodes teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
+
+taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit surface drawSurface drawDetail centerLine centerLineLighted leftEdge leftEdgeLighted rightEdge rightEdgeLighted taxiwayPathNumber designator TaxiwayPathName TAXIWAY_PATH_NUMBER_RUNWAY;
+
+taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
+
+tower:TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE;
+
+fuel:FUEL_OPEN fuelType availability SIMPLE_TAG_CLOSE;
+
+//
+markings: MARKINGS_OPEN alternateThreshold alternateTouchdown alternateFixedDistance alternatePrecision leadingZeroIdent noThresholdEndArrows edges threshold fixed touchdown dashes ident_Marking precision edgePavement singleEnd primaryClosed secondaryClosed primaryStol secondaryStol TAG_CLOSE;
+
+lights: LIGHTS_OPEN center edge centerRed TAG_CLOSE;
+
+offsetThreshold: OFFSET_THRESHOLD end length width? surface? TAG_CLOSE;
+
+blastPad: BLAST_PAD end length width? surface? TAG_CLOSE;
+
+overrun: OVERRUN end length width? surface? TAG_CLOSE;
+
+approachLights: APPROACH_LIGHTS_OPEN end system? strobes? reil? touchdown? endLights? TAG_CLOSE;
+
+vasi: VASI_OPEN  TAG_CLOSE;
+
+runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width designator? primaryDesignator secondaryDesignator patternAltitude? primaryLanding? primaryPattern? secondaryTakeoff? secondaryTakeoff? secondaryLanding? secondaryPattern? primaryMarkingBias secondaryMarkingBias TAG_CLOSE
+
+markings? lights? offsetThreshold? blastPad?
+
+RUNWAY_CLOSE;
