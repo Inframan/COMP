@@ -450,6 +450,8 @@ LONGITTUDE_VALUES:  (  ('-' | '+')?   (   ('1'('0'..'7')('0'..'9'))  |  (('0'..'
 
 PERCENTAGE: ( '1'.'0' | '0'.'0'('1'..'9') | '0'.('1'..'9')('0'..'9')?);
 
+PERCENTAGE_0: PERCENTAGE | '0.0';
+
 FLOAT: ('-' | '+')?('0'..'9')+'.'('0'..'9')+;
 
 TRAFFICSCALLAR: INT('F'|'M'|'N');
@@ -520,7 +522,7 @@ INTEGER_0_TO_255: (  ( ('0'..'1')?('0'..'9')?('0'..'9'))
 
 TAXI_NAME_SIZE: 'SIZE1' | 'SIZE2' | 'SIZE3' | 'SIZE4' | 'SIZE5';
 
-TAXI_NAME_JUSTIFICATION: 'LEFT' | 'RIGHT';
+LEFT_RIGHT: 'LEFT' | 'RIGHT';
 
 ALL_STRING: .*;
 
@@ -893,8 +895,24 @@ taxiwayNameString:NAME EQUALS STRING0_TO_8;
 taxiwayIndex:INDEX EQUALS INTEGER_0_TO_255;
 fuelType:TYPE EQUALS FUEL_TYPE;
 availability:AVAILABILITY EQUALS YES FUEL_AVAILABILITY;
+trafficScallar: TRAFFICSCALAR EQUALS PERCENTAGE;
 
-airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  trafficScalar
+airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius trafficScallar TAG_CLOSE
+ taxiwayPoint+
+ taxiwayParking+
+ taxiwayName+
+ taxiwayPath+
+ tower*
+ services*
+ runway*
+ runwayAlias*
+ aprons*
+ taxiwaySign*
+ waypoint*
+ helipad*
+ start*
+ jetway*
+ AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  trafficScalar
 
 taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX biasZ SIMPLE_TAG_CLOSE;
 
@@ -907,3 +925,35 @@ taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
 tower:TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE;
 
 fuel:FUEL_OPEN fuelType availability SIMPLE_TAG_CLOSE;
+
+vertex: VERTEX_OPEN (biasX biasZ |longitude lattitude) SIMPLE_TAG_CLOSE;
+
+triggerWeatherData: TRIGGER_WEATHER_DATA_OPEN TYPE EQUALS TRIGGER_WEATHER_DATA_TYPE heading SCALAR EQUALS PERCENTAGE_0 SIMPLE_TAG_CLOSE;
+
+
+trigger: TRIGGER_OPEN TYPE EQUALS TRIGGER__TYPE TRIGGER_HEIGHT EQUALS UNSIGNED_INT DECIMAL_PART TAG_CLOSE
+fuel*
+vertex*
+triggerWeatherData*
+TRIGGER_CLOSE;
+
+services: SERVICES_OPEN TAG_CLOSE fuel* SERVICES_CLOSE;
+
+taxiwaySign: TAXIWAY_SIGN_OPEN lattitude longitude heading LABEL EQUALS ALL_STRING (JUSTIFICATION EQUALS LEFT_RIGHT)? SIZE EQUALS TAXI_NAME_SIZE SIMPLE_TAG_CLOSE;
+
+aprons: APRONS_OPEN TAG_CLOSE APRONS_CLOSE;
+
+waypoint: WAYPOINT_OPEN lattitude longitude WAYPOINT_TYPE EQUALS WAYPOINT_TYPE_VALUES magvar WAYPOINT_REGION EQUALS WAYPOINT_REGION_VALUES WAYPOINT_IDENT EQUALS WAYPOINT_IDENT_VALUES TAG_CLOSE
+
+WAYPOINT_CLOSE;
+
+helipad: HELIPAD_OPEN lattitude longitude altitude surface heading LENGTH EQUALS FLOAT METERS_OR_FEET? width TYPE EQUALS HELIPAD_TYPE (CLOSED EQUALS BOOLEAN)? (TRANSPARENT EQUALS BOOLEAN)?
+(RED EQUALS INTEGER_0_TO_255)? (GREEN EQUALS INTEGER_0_TO_255)? (BLUE EQUALS INTEGER_0_TO_255)? SIMPLE_TAG_CLOSE;
+
+start: START_OPEN (TYPE EQUALS RUNWAY_START_TYPE)? lattitude longitude altitude heading (NUMBER EQUALS (TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY))?
+designator? SIMPLE_TAG_CLOSE;
+
+jetway: JETWAY_OPEN GATE_NAME EQUALS JETWAY_GATENAME PARKING_NUMBER EQUALS UNSIGNED_INT TAG_CLOSE
+
+JETWAY_CLOSE;
+

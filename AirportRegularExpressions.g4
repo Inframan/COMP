@@ -86,7 +86,7 @@ INTEGER_0_TO_255: (  ( ('0'..'1')?('0'..'9')?('0'..'9'))
 
 TAXI_NAME_SIZE: 'SIZE1' | 'SIZE2' | 'SIZE3' | 'SIZE4' | 'SIZE5';
 
-TAXI_NAME_JUSTIFICATION: 'LEFT' | 'RIGHT';
+LEFT_RIGHT: 'LEFT' | 'RIGHT';
 
 ALL_STRING: .*;
 
