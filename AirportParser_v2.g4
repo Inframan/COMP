@@ -952,7 +952,9 @@ reil: REIL EQUALS BOOLEAN;
 endLights: END_LIGHTS EQUALS BOOLEAN;
 
 //VASI
-
+vasiType:TYPE EQUALS VASI_TYPE;
+side: SIDE EQUALS LEFT_RIGHT;
+spacing: SPACING EQUALS FLOAT METERS_OR_FEET?;
 
 
 
@@ -1063,12 +1065,7 @@ overrun: OVERRUN end length width? surface? SIMPLE_TAG_CLOSE;
 
 approachLights: APPROACH_LIGHTS_OPEN end system? strobes? reil? touchdown? endLights? SIMPLE_TAG_CLOSE;
 
-vasi: VASI_OPEN end
-TYPE EQUALS VASI_TYPE
-SIDE EQUALS LEFT_RIGHT
-biasX biasZ
- SPACING EQUALS FLOAT METERS_OR_FEET?
-  pitch TAG_CLOSE;
+vasi: VASI_OPEN end vasiType side biasX biasZ spacing pitch TAG_CLOSE;
 
 
 
