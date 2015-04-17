@@ -494,7 +494,7 @@ TAXIWAY_PARKING_TYPE: 'NONE' |                      'DOCK_GA' |
 TAXIWAY_PARKING_NAME: 'PARKING' |
                       'DOCK' |
                       'GATE' |
-                      'GATE_A to GATE_Z' |
+                      'GATE_'('A'..'Z') |
                       'NONE' |
                       'N_PARKING' |
                       'NE_PARKING' |
@@ -1076,4 +1076,6 @@ markings? lights? offsetThreshold? blastPad?
 RUNWAY_CLOSE;
 
 runway_start: RUNWAY_START_OPEN TYPE EQUALS RUNWAY_START_TYPE lattitude longitude altitude heading end? SIMPLE_TAG_CLOSE;
+
+
 
