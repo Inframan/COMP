@@ -1,5 +1,439 @@
-lexer grammar AirportRegularExpressions;
+lexer grammar AirportParser_v2;
 
+
+//airports: data + EOF;
+/*
+data: AIRPORT_OPEN + airporAttributeAnaliser + children + AIRPORT_CLOSE;
+
+airporAttributeAnaliser: ;
+
+children: ;
+*/
+
+EQUALS: '=' ;
+
+SIMPLE_TAG_CLOSE: '/>' ;
+
+TAG_CLOSE: '>' ;
+
+AIRPORT_OPEN:  '<Airport' {ignoreWord=false;} ;
+
+AIRPORT_CLOSE: '</Airport>' {ignoreWord=true;} ;
+
+AIRLINE_CODES: 'airlineCodes';
+
+COUNTRY: 'country' ;
+
+CITY: 'city' ;
+
+NAME: 'name' ;
+
+LAT: 'lat';
+
+LON: 'lon';
+
+ALT: 'alt' ;
+
+MAGVAR : 'magvar' ;
+
+TRAFFICSCALAR: 'trafficScalar' ;
+
+AIRPORT_TEST_RADIUS: 'airportTestRadius' ;
+
+IDENT: 'ident' ;
+
+SERVICES_OPEN: '<Services' ;
+
+TRIGGER_OPEN: '<trigger' ;
+
+TRIGGER_CLOSE: '</trigger>';
+
+TRIGGER_WEATHER_DATA_OPEN: '<TriggerWeatherData' ;
+
+FUEL_OPEN: '<Fuel' ;
+
+TYPE: 'type' ;
+
+AVAILABILITY: 'availability' ;
+
+SERVICES_CLOSE: '</Services>' ;
+
+TOWER_OPEN: '<Tower' ;
+
+TOWER_CLOSE: '</Tower>' ;
+
+RUNWAY_OPEN: '<Runway' ;
+
+RUNWAY_CLOSE: '</Runway>' ;
+
+SURFACE: 'surface' ;
+
+HEADING: 'heading' ;
+
+LENGTH: 'length' ;
+
+WIDTH: 'width' ;
+
+NUMBER: 'number' ;
+
+DESIGNATOR: 'designator' ;
+
+PRIMARY_DESIGNATOR: 'primaryDesignator' ;
+
+SECONDARY_DESIGNATOR: 'secondaryDesignator' ;
+
+PATTERN_ALTITUDE: 'patternAltitude' ;
+
+PRIMARY_TAKE_OFF: 'primaryTakeoff' ;
+
+PRIMARY_LANDING: 'primaryLanding' ;
+
+PRIMARY_PATTERN: 'primaryPattern' ;
+
+SECONDARY_TAKE_OFF: 'secondaryTakeoff' ;
+
+SECONDARY_LANDING: 'secondaryLanding' ;
+
+SECONDARY_PATTERN: 'secondaryPattern' ;
+
+PRIMARY_MARKING_BIAS: 'primaryMarkingBias' ;
+
+SECONDARY_MARKING_BIAS: 'secondaryMarkingBias' ;
+
+MARKINGS_OPEN: '<Markings' ;
+
+ALTERNATE_THRESHOLD: 'alternateThreshold' ;
+
+ALTERNATE_TOUCHDOWN: 'alternateTouchdown' ;
+
+ALTERNATE_FIXED_DISTANCE: 'alternateFixedDistance' ;
+
+ALTERNATE_PRECISION: 'alternatePrecision' ;
+
+LEADING_ZERO_IDENT: 'leadingZeroIdent' ;
+
+NO_THRESHOLD_END_ARROWS: 'noThresholdEndArrows' ;
+
+EDGES: 'edges' ;
+
+THRESHOLD: 'threshold' ;
+
+FIXED_DISTANCE: 'fixedDistance' ;
+
+TOUCHDOWN: 'touchdown' ;
+
+DASHES: 'dashes' ;
+
+PRECISION: 'precision' ;
+
+EDGE_PAVEMENT: 'edgePavement' ;
+
+SINGLE_END: 'singleEnd' ;
+
+PRIMARY_CLOSED: 'primaryClosed' ;
+
+SECONDARY_CLOSED: 'secondaryClosed' ;
+
+PRIMARY_STOL: 'primaryStol' ;
+
+SECONDARY_STOL: 'secondaryStol' ;
+
+LIGHTS_OPEN: '<Lights' ;
+
+CENTER: 'center' ;
+
+EDGE: 'edge' ;
+
+CENTER_RED: 'centerRed' ;
+
+OFFSET_THRESHOLD: '<OffsetThreshold' ;
+
+BLAST_PAD: '<BlastPad' ;
+
+OVERRUN: '<Overrun' ;
+
+END: 'end' ;
+
+VASI_OPEN: '<Vasi' ;
+
+SIDE: 'side' ;
+
+BIAS_X: 'biasX' ;
+
+BIAS_Z: 'biasZ' ;
+
+SPACING: 'spacing' ;
+
+PITCH: 'pitch' ;
+
+START_OPEN: '<Start' ;
+
+//COM_OPEN: '<Com' ;
+
+FREQUENCY: 'frequency';
+
+APPROACH_LIGHTS_OPEN: '<ApproachLights' ;
+
+SYSTEM: 'system' ;
+
+STROBES: 'strobes' ;
+
+REIL: 'reil' ;
+
+END_LIGHTS: 'endLights' ;
+
+ILS_OPEN: '<Ils' ;
+
+RANGE: 'range' ;
+
+BACK_COURSE: 'backCourse' ;
+
+GLIDE_SLOPE_OPEN: '<GlideSlope' ;
+
+VISUAL_MODEL_OPEN: '<VisualModel' ;
+
+VISUAL_MODEL_CLOSE: '<\VisualModel>' ;
+
+INSTANCE_ID: 'instanceId' ;
+
+RUNWAY_START_OPEN: '<RunwayStart' ;
+
+RUNWAY_ALIAS_OPEN: '<RunwayAlias' ;
+
+HELIPAD_OPEN: '<Helipad' ;
+
+CLOSED: 'closed' ;
+
+TRANSPARENT: 'transparent' ;
+
+RED: 'red' ;
+
+GREEN: 'green' ;
+
+BLUE: 'blue' ;
+
+COM_OPEN: '<Com' ;
+
+DME_OPEN: '<Dme' ;
+
+ILS_CLOSE: '</Ils>' ;
+
+TAXIWAY_POINT_OPEN: '<TaxiwayPoint' ;
+
+INDEX: 'index' ;
+
+ORIENTATION: 'orientation' ;
+
+TAXIWAY_PARKING_OPEN: '<TaxiwayParking' ;
+
+RADIUS: 'radius' ;
+
+TEE_OFFSET_1: 'teeOffset1' ;
+
+TEE_OFFSET_2: 'teeOffset2' ;
+
+TEE_OFFSET_3: 'teeOffset3' ;
+
+TEE_OFFSET_4: 'teeOffset4' ;
+
+PUSH_BACK: 'pushBack' ;
+
+TAXI_NAME_OPEN: '<TaxiName' ;
+
+TAXIWAY_PATH_OPEN: '<TaxiwayPath' ;
+
+START: 'start' ;
+
+WEIGHT_LIMIT: 'weightLimit' ;
+
+DRAW_SURFACE: 'drawSurface' ;
+
+DRAW_DETAIL: 'drawDetail' ;
+
+LEFT_EDGE: 'leftEdge' ;
+
+RIGHT_EDGE: 'rightEdge' ;
+
+CENTER_LINE: 'centerLine' ;
+
+CENTER_LINE_LIGHTED: 'centerLineLighted' ;
+
+LEFT_EDGE_LIGHTED: 'leftEdgeLighted' ;
+
+RIGHT_EDGE_LIGHTED: 'rightEdgeLighted' ;
+
+JETWAY_OPEN: '<Jetway' ;
+
+JETWAY_CLOSE: '</Jetway>' ;
+
+GATE_NAME: 'gateName' ;
+
+PARKING_NUMBER: 'parkingNumber' ;
+
+SCENERY_OBJECT_OPEN: '<SceneryObject' ;
+
+SCENERY_OBJECT_CLOSE: '</SceneryObject>' ;
+
+ALTITUDE_IS_AGL: 'altitudeIsAgl' ;
+
+BANK: 'bank' ;
+
+IMAGE_COMPLEXITY: 'imageComplexity' ;
+
+LIBRARY_OBJECT_OPEN: '<LibraryObject' ;
+
+SCALE: 'scale' ;
+
+APRONS_OPEN: '<Aprons>' ;
+
+APRONS_CLOSE: '</Aprons>' ;
+
+//APRON_OPEN: '<Apron' ;
+
+//APRON_OPEN: '</Apron>' ;
+
+VERTEX_OPEN: '<Vertex' ;
+
+//APRON_EDGE_LIGHTS_OPEN: '<ApronEdgeLights>' ;
+
+//EDGE_LIGHTS_OPEN: '<EdgeLights>' ;
+
+//EDGE_LIGHTS_CLOSE: '</EdgeLights>' ;
+
+TAXIWAY_SIGN_OPEN: '<TaxiwaySign' ;
+
+LABEL: 'label' ;
+
+SIZE: 'size' ;
+
+JUSTIFICATION: 'justification' ;
+
+//BOUNDARY_FENCE_OPEN: '<BoundaryFence' ;
+
+PROFILE: 'profile' ;
+
+//BOUNDARY_FENCE_CLOSE: '</BoundaryFence>' ;
+
+//APPROACH_OPEN: '<Approach' ;
+
+RUNWAY: 'runway' ;
+
+SUFFIX: 'suffix' ;
+
+GPS_OVERLAY: 'gpsOverlay' ;
+
+//FIX_TYPE: 'fixType' ;
+
+//FIX_REGION: 'fixRegion' ;
+
+//FIX_IDENT: 'fixIdent' ;
+
+//ALTITUDE: 'altitude' ;
+
+MISSED_ALTITUDE: 'missedAltitude' ;
+
+//APPROACH_LEGS_OPEN: '<ApproachLegs>' ;
+
+//APPROACH_LEGS_CLOSE: '</ApproachLegs>' ;
+
+//LEG_OPEN: '<Leg' ;
+
+//RECOMMENDED_TYPE: 'recommendedType' ;
+
+//RECOMMENDED_REGION: 'recomendedRegion' ;
+
+//RECOMMENDED_IDENT: 'recomendedIdent' ;
+
+//THETA: 'theta' ;
+
+//RHO: 'rho' ;
+
+//ALTITUDE_DESCRIPTOR: 'altitudeDescriptor' ;
+
+//ALTITUDE1: 'altitude1' ;
+
+//FLY_OVER: 'flyOver' ;
+
+MAGNETIC_COURSE: 'magneticCourse' ;
+
+DISTANCE: 'distance' ;
+
+TIME: 'time' ;
+
+//ROACH_LEGS_OPEN: '<MissedApproachLegs>' ;
+
+//MISSED_APPROACH_LEGS_CLOSE: '</MissedApproachLegs>' ;
+
+//TRANSITION_OPEN: '<Transition' ;
+
+//TRANSITION_TYPE: 'transitionType' ;
+
+//TRANSITION_LEGS_OPEN: '<TransitionLegs>' ;
+
+//TRANSITION_LEGS_CLOSE: '</TransitionLegs>' ;
+
+WAYPOINT_OPEN: '<Waypoint' ;
+
+WAYPOINT_TYPE: 'waypointType' ;
+
+WAYPOINT_REGION: 'waypointRegion' ;
+
+WAYPOINT_IDENT: 'waypointIdent';
+
+WAYPOINT_CLOSE: '</Waypoint>' ;
+
+PREVIOUS_OPEN: '<Previous' ;
+
+ALTITUDE_MINIMUM: 'altitudeMinimum' ;
+
+NEXT_OPEN: '<Next' ;
+
+SCALAR: 'scalar' ;
+
+TRIGGER_HEIGHT: 'triggerHeight' ;
+
+
+
+
+WS: [ \t\r\n]+ -> skip ;
+//
+//xmsVersion  : '<?xml version="1.0" encoding="ISO-8859-1"?>' fsdata EOF;
+///*<FSData
+//   Version
+//   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+//   xsi:noNamespaceSchemaLocation="bglcomp.xsd">'
+//   Airports
+//   '</FSData>'*/        // match keyword hello followed by an identifier
+//
+//
+//fsdata : '<FSData'
+//   Version
+//   Xmls
+//   'xsi:noNamespaceSchemaLocation="bglcomp.xsd">'
+//   unFiltered
+//   '</FSData>'
+//   ;
+//
+//unFiltered: SceneryObject | Airports | Marker | unFiltered + unFiltered ;
+//
+//
+//
+//
+//Marker: [0-9];
+//
+//
+//SceneryObject: '<SceneryObject' [.*] '</SceneryObject>' -> skip;
+//
+//Version: 'version=' [\"9.0\"] ;
+//
+//Xmls:  'xmlns:xsi='[\"]'http://www.w3.org/2001/XMLSchema-instance'[\"] ;
+//
+//Algarism : [0-9] ;     //match algarisms
+//
+//Airports : [a-z]+ ;
+//
+//WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+//
 
 
 
@@ -404,3 +838,72 @@ TRIGGER_WEATHER_DATA_TYPE: 'THERMAL' |
                            'NONDIRECTIONAL_TURBULENCE' |
                            'DIRECTIONAL_TURBULENCE' |
                            'RIDGE_LIFT';
+
+
+
+////////////////////////////////////////////////////////////////
+///SINTAX///
+
+
+region: REGION EQUALS STRING48;
+city: CITY EQUALS STRING48;
+country: COUNTRY EQUALS STRING48;
+state: STATE EQUALS STRING48;
+name: nameTypes;
+nameTypes: NAME | STRING48;
+magvar: MAGVAR EQUALS MAGVAR_VALUES;
+ident: IDENT EQUALS STRING4;
+index: INDEX EQUALS INTEGER_0_TO_3999;
+biasX: BIAS_X EQUALS FLOAT;
+biasZ: BIAS_Y EQUALS FLOAT;
+heading: HEADING EQUALS HEADING_VALUES;
+lattitude: LAT EQUALS LATTITUDE_VALUES;
+longitude: LON EQUALS LONGITTUDE_VALUES;
+altitude: ALT EQUALS ALTITUDE_VALUES;
+airportTestRadius: AIRPORT_TEST_RADIUS EQUALS TRAFFICSCALLAR;
+taxiwaypointType: TYPE EQUALS TAXIWAYPOINT_TYPE;
+orientation:ORIENTATION EQUALS TAXIWAYPOINT_ORIENTATION_VALUES;
+radius:RADIUS EQUALS FLOAT;
+taxiwayparkingType:TYPE EQUALS TAXIWAY_PARKING_TYPE;
+taxiwayparkingName:NAME EQUALS TAXIWAY_PARKING_NAME;
+taxiwayparkingNumber:NUMBER EQUALS INTEGER_0_TO_3999;
+airlineCodes: AIRLINE_CODES EQUALS ALL_STRING;
+teeOffSet1:TEE_OFFSET_1 EQUALS TAXIWAY_PARKING_TEEOFFSET;
+teeOffSet2:TEE_OFFSET_2 EQUALS TAXIWAY_PARKING_TEEOFFSET;
+teeOffSet3:TEE_OFFSET_3 EQUALS TAXIWAY_PARKING_TEEOFFSET;
+teeOffSet4:TEE_OFFSET_4 EQUALS TAXIWAY_PARKING_TEEOFFSET;
+taxiwayPathType:TYPE EQUALS TAXIWAY_PATH_TYPE;
+taxiwayPathStart:START EQUALS INTEGER_0_TO_255;
+taxiwayPathEnd:END EQUALS INTEGER_0_TO_255;
+width:WIDTH EQUALS FLOAT;
+weightLimit:WEIGHT_LIMIT EQUALS INTEGER_0_TO_255;
+surface:SURFACE EQUALS TAXIWAY_PATH_SURFACE;
+drawSurface:DRAW_SURFACE EQUALS BOOLEAN;
+drawDetail:DRAW_SURFACE EQUALS BOOLEAN;
+centerLine:CENTER_LINE EQUALS BOOLEAN;
+centerLineLighted:CENTER_LINE_LIGHTED EQUALS BOOLEAN;
+leftEdge:LEFT_EDGE EQUALS BOOLEAN;
+leftEdgeLighted:LEFT_EDGE_LIGHTED EQUALS TAXIWAY_PATH_EDGE;
+rightEdge:RIGHT_EDGE EQUALS BOOLEAN;
+rightEdgeLighted:RIGHT_EDGE_LIGHTED EQUALS TAXIWAY_PATH_EDGE;
+taxiwayPathNumber:NUMBER EQUALS (TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY);
+designator:DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR;
+taxiwayPathName:NAME EQUALS INTEGER_0_TO_255;
+taxiwayNameString:NAME EQUALS STRING0_TO_8;
+taxiwayIndex:INDEX EQUALS INTEGER_0_TO_255;
+fuelType:TYPE EQUALS FUEL_TYPE;
+availability:AVAILABILITY EQUALS YES FUEL_AVAILABILITY;
+
+airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  trafficScalar
+
+taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX biasZ SIMPLE_TAG_CLOSE;
+
+taxiwayParking: TAXIWAY_PARKING_OPEN index lattitude longitude biasX biasZ heading radius taxiwayparkingType taxiwayparkingName taxiwayparkingNumber airlineCodes teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
+
+taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit surface drawSurface drawDetail centerLine centerLineLighted leftEdge leftEdgeLighted rightEdge rightEdgeLighted taxiwayPathNumber designator TaxiwayPathName TAXIWAY_PATH_NUMBER_RUNWAY;
+
+taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
+
+tower:TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE;
+
+fuel:FUEL_OPEN fuelType availability SIMPLE_TAG_CLOSE;
