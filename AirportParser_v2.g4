@@ -851,13 +851,13 @@ region: REGION EQUALS STRING48;
 city: CITY EQUALS STRING48;
 country: COUNTRY EQUALS STRING48;
 state: STATE EQUALS STRING48;
-name: nameTypes;
-nameTypes: NAME | STRING48;
+name: NAME EQUALS STRING48;
 magvar: MAGVAR EQUALS MAGVAR_VALUES;
 ident: IDENT EQUALS STRING4;
 index: INDEX EQUALS INTEGER_0_TO_3999;
 biasX: BIAS_X EQUALS FLOAT;
-biasZ: BIAS_Y EQUALS FLOAT;
+biasY: BIAS_Y EQUALS FLOAT;
+biasZ: BIAS_Z EQUALS FLOAT;
 heading: HEADING EQUALS HEADING_VALUES;
 lattitude: LAT EQUALS LATTITUDE_VALUES;
 longitude: LON EQUALS LONGITTUDE_VALUES;
@@ -896,6 +896,12 @@ taxiwayIndex:INDEX EQUALS INTEGER_0_TO_255;
 fuelType:TYPE EQUALS FUEL_TYPE;
 availability:AVAILABILITY EQUALS YES FUEL_AVAILABILITY;
 trafficScallar: TRAFFICSCALAR EQUALS PERCENTAGE;
+frequency: FREQUENCY EQUALS FLOAT;
+end: END EQUALS PRIMARY_OR_SECONDARY_END;
+ident_ils: IDENT EQUALS STRING0_TO5;
+pitch: PITCH EQUALS HEADING_VALUES;
+range: RANGE EQUALS TRAFFICSCALLAR;
+image_complexety: IMAGE_COMPLEXITY EQUALS SCENERY_OBJECT_IMAGE_COMPLEXITY;
 
 airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius trafficScallar TAG_CLOSE
  taxiwayPoint+
@@ -957,3 +963,19 @@ jetway: JETWAY_OPEN GATE_NAME EQUALS JETWAY_GATENAME PARKING_NUMBER EQUALS UNSIG
 
 JETWAY_CLOSE;
 
+
+glide_scope: GLIDE_SLOPE_OPEN lattitude longitude altitude pitch range SIMPLE_TAG_CLOSE;
+
+visual_model: VISUAL_MODEL_OPEN heading image_complexety NAME EQUALS SCENERY_OBJECT_ID TAG_CLOSE
+biasX
+biasY
+biasZ
+VISUAL_MODEL_CLOSE;
+
+dme: DME_OPEN lattitude longitude altitude range SIMPLE_TAG_CLOSE;
+
+ils: ILS_OPEN lattitude longitude altitude heading frequency (RANGE EQUALS TRAFFICSCALLAR)? ident_ils width? name? (BACK_COURSE EQUALS BOOLEAN)? TAG_CLOSE
+glide_slope*
+dme*
+visual_model*
+ILS_CLOSE;
