@@ -372,7 +372,7 @@ xmsVersion  : '<?xml version="1.0" encoding="ISO-8859-1"?>' fsdata EOF;
    '</FSData>'       // match keyword hello followed by an identifier
 */
 
-fsdata: '<FSData' (.+ | airport)* '</FSData>';
+
   /* Version
    Xmls
    'xsi:noNamespaceSchemaLocation="bglcomp.xsd">'
@@ -407,46 +407,18 @@ WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
 
 
 ////////////////////////////***********************************REGULAR EXPRESSIONS *************************/////////////////////////////////////////////////////////////////////////////
-LATTITUDE_VALUES:  (  ('-' | '+')?   (('0'..'8')?('0'..'9')   |  '90')'.'('0'..'9')*  )
-| (    ('-' | '+')?   (('0'..'8')?('0'..'9')   |  '90') '-'  ('-' | '+')?('0'..'9')+ '-'  ('-' | '+')? ('0'..'9')+ );
-
-
-LONGITTUDE_VALUES:  (  ('-' | '+')?   (   ('1'('0'..'7')('0'..'9'))  |  (('0'..'9')?('0'..'9'))   |  '180')'.'('0'..'9')*  )
-| (   ('-' | '+')?   (   ('1'('0'..'7')('0'..'9'))  |  (('0'..'9')?('0'..'9'))   |  '180') '-'  ('-' | '+')?('0'..'9')+ '-'  ('-' | '+')? ('0'..'9')+ );
-
-PERCENTAGE: ( '1'.'0' | '0'.'0'('1'..'9') | '0'.('1'..'9')('0'..'9')?);
-
-PERCENTAGE_0: PERCENTAGE | '0.0';
-
-FLOAT: ('-' | '+')?('0'..'9')+'.'('0'..'9')+;
 
 TRAFFICSCALLAR: INT('F'|'M'|'N');
 
-INT: ('-' | '+')?('0'..'9')+;
-
-UNSIGNED_INT: ('0'..'9')+;
 
 ALTITUDE_VALUES: FLOAT( 'M' | 'F')?;
 
-STRING4: (('a'..'z') | ('A'..'Z') | ('0'..'9'))  (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
-
-STRING0_TO4: (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
-
-STRING0_TO5: (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
-
-STRING48: STRING4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4; //12*4 = 48
-
-MAGVAR_VALUES: ('-' | '+')? (   ('3'('0'..'5')('0'..'9'))  |  (('0'..'2')?('0'..'9')?('0'..'9'))   |  '360');
 
 TAXIWAYPOINT_ORIENTATION_VALUES: 'FORWARD' | 'REVERSE';
 
 TAXIWAYPOINT_TYPE: 'NORMAL' | 'HOLD_SHORT' |  'ILS_HOLD_SHORT' |  'HOLD_SHORT_NO_DRAW' | 'ILS_HOLD_SHORT_NO_DRAW';
 
-INTEGER_0_TO_3999: ('0'..'3')?('0'..'9')('0'..'9')?('0'..'9');
 
-DECIMAL_PART: '.'('0'..'9')+;
-
-HEADING_VALUES: (   ('3'('0'..'5')('0'..'9')) |  (('0'..'2')?('0'..'9')?('0'..'9'))   |  '360') DECIMAL_PART?;
 
 TAXIWAY_PARKING_TYPE: 'NONE' |                      'DOCK_GA' |
 'FUEL' |                      'GATE_HEAVY' |
@@ -471,7 +443,7 @@ TAXIWAY_PARKING_NAME: 'PARKING' |
 'W_PARKING' |
 'E_PARKING';
 
-TAXIWAY_PARKING_TEEOFFSET: (('0'..'4')?('0'..'9')'.'('0'..'9') | '50.0');
+
 
 TAXIWAY_PARKING_PUSHBACK: 'NONE'|
 'BOTH' |
@@ -480,17 +452,12 @@ TAXIWAY_PARKING_PUSHBACK: 'NONE'|
 
 
 
-STRING0_TO_8: STRING0_TO4 STRING0_TO4;
 
-INTEGER_0_TO_255: (  ( ('0'..'1')?('0'..'9')?('0'..'9'))
- | ('2'(('0'..'4')('0'..'9'))
-  | ( '5'('0'..'5'))));
 
 TAXI_NAME_SIZE: 'SIZE1' | 'SIZE2' | 'SIZE3' | 'SIZE4' | 'SIZE5';
 
 LEFT_RIGHT: 'LEFT' | 'RIGHT';
 
-ALL_STRING: .*;
 
 TAXIWAY_PATH_TYPE: 'RUNWAY' |
 'PARKING' |
@@ -529,7 +496,11 @@ TAXIWAY_PATH_EDGE: 'NONE' |
 'SOLID_DASHED';
 
 
-TAXIWAY_PATH_NUMBER_RUNWAY: ( '0'('0'..'9') | (  (('0'..'2')?('0'..'9')) | '3'('0'..'6')) );
+
+
+
+
+
 
 
 TAXIWAY_PATH_NUMBER_NOT_RUNWAY: 'EAST'|
@@ -661,7 +632,8 @@ VASI_TYPE: 'PAPI2' |
 'PANELS';
 
 
-VASI_PITCH: (('0'..'9')|'10') DECIMAL_PART;
+
+
 
 VASI_SPACING: UNSIGNED_INT DECIMAL_PART;
 
@@ -671,7 +643,9 @@ NAUTICAL_OR_METER: 'N' | 'M';
 
 ILS_RANGE: UNSIGNED_INT NAUTICAL_OR_METER?;
 
-ILS_IDENT: (('a'..'z') | ('A'..'Z') | ('0'..'9'))STRING0_TO4;
+
+
+
 
 
 //////////////////RUNWAY START////////////////
@@ -686,7 +660,9 @@ RUNWAY_START_TYPE: 'RUNWAY';
 
 ///////////////MARKER/////////////////
 
-REGION: ('A'..'Z')|('0'..'9') ('A'..'Z')|('0'..'9') ;
+
+
+
 
 IDENT_VALUE: STRING0_TO5;
 
@@ -701,9 +677,8 @@ WAYPOINT_TYPE_VALUES:  'NAMED' |
 'IAF' |
 'FAF' ;
 
-WAYPOINT_REGION_VALUES: ('A'..'Z')|('0'..'9') ('A'..'Z')|('0'..'9') ;
 
-WAYPOINT_IDENT_VALUES: ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ;
+
 
 /////////////////////HELIPAD/////////////
 
@@ -726,10 +701,7 @@ GEOPOL_TYPE:    'COASTLINE' |
 
 ///////////////SCENERY OBJECT/////////
 
-DIGIT: ('0'..'A');
 
-
-SCENERY_OBJECT_ID: '{'DIGIT+ '-'DIGIT+ '-' DIGIT+ '-' DIGIT+ '-' DIGIT+ '}';
 
 SCENERY_OBJECT_IMAGE_COMPLEXITY: 'VERY_SPARSE' |
 'SPARSE' |
@@ -787,6 +759,66 @@ APPROACH_TYPE : 'GPS' |
                 'VORDME';
 
 YES_NO: 'YES' | 'NO';
+
+DIGIT: ('0'..'A');
+
+PERCENTAGE: ( '1'.'0' | '0'.'0'('1'..'9') | '0'.('1'..'9')('0'..'9')?);
+
+PERCENTAGE_0: PERCENTAGE | '0.0';
+
+
+LATTITUDE_VALUES:  (  ('-' | '+')?   (('0'..'8')?('0'..'9')   |  '90')'.'('0'..'9')*  )
+| (    ('-' | '+')?   (('0'..'8')?('0'..'9')   |  '90') '-'  ('-' | '+')?('0'..'9')+ '-'  ('-' | '+')? ('0'..'9')+ );
+
+
+LONGITTUDE_VALUES:  (  ('-' | '+')?   (   ('1'('0'..'7')('0'..'9'))  |  (('0'..'9')?('0'..'9'))   |  '180')'.'('0'..'9')*  )
+| (   ('-' | '+')?   (   ('1'('0'..'7')('0'..'9'))  |  (('0'..'9')?('0'..'9'))   |  '180') '-'  ('-' | '+')?('0'..'9')+ '-'  ('-' | '+')? ('0'..'9')+ );
+
+HEADING_VALUES: (   ('3'('0'..'5')('0'..'9')) |  (('0'..'2')?('0'..'9')?('0'..'9'))   |  '360') DECIMAL_PART?;
+
+
+MAGVAR_VALUES: ('-' | '+')? (   ('3'('0'..'5')('0'..'9'))  |  (('0'..'2')?('0'..'9')?('0'..'9'))   |  '360');
+
+TAXIWAY_PARKING_TEEOFFSET: (('0'..'4')?('0'..'9')'.'('0'..'9') | '50.0');
+
+TAXIWAY_PATH_NUMBER_RUNWAY: ( '0'('0'..'9') | (  (('0'..'2')?('0'..'9')) | '3'('0'..'6')) );
+
+VASI_PITCH: (('0'..'9')|'10') DECIMAL_PART;
+
+WAYPOINT_IDENT_VALUES: ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ;
+
+REGION: ('A'..'Z')|('0'..'9') ('A'..'Z')|('0'..'9') ;
+
+ILS_IDENT: (('a'..'z') | ('A'..'Z') | ('0'..'9'))STRING0_TO4;
+
+SCENERY_OBJECT_ID: '{'DIGIT+ '-'DIGIT+ '-' DIGIT+ '-' DIGIT+ '-' DIGIT+ '}';
+
+DECIMAL_PART: '.'('0'..'9')+;
+
+INTEGER_0_TO_255: (  ( ('0'..'1')?('0'..'9')?('0'..'9'))
+ | ('2'(('0'..'4')('0'..'9'))
+  | ( '5'('0'..'5'))));
+
+INTEGER_0_TO_3999: ('0'..'3')?('0'..'9')('0'..'9')?('0'..'9');
+
+UNSIGNED_INT: ('0'..'9')+;
+
+INT: ('-' | '+')?('0'..'9')+;
+
+FLOAT: ('-' | '+')?('0'..'9')+'.'('0'..'9')+;
+
+
+STRING48: STRING4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4; //12*4 = 48
+
+STRING0_TO_8: STRING0_TO4 STRING0_TO4;
+
+STRING0_TO5: (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
+
+STRING0_TO4: (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
+
+STRING4: (('a'..'z') | ('A'..'Z') | ('0'..'9'))  (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
+
+ALL_STRING: .*;
 
 
 ////////////////////////////////////////////////////////////////
@@ -996,3 +1028,5 @@ runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width de
 runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude heading number? designator? SIMPLE_TAG_CLOSE;
 
 runway_alias: RUNWAY_ALIAS_OPEN number designator SIMPLE_TAG_CLOSE;
+
+fsdata: '<FSData' (ALL_STRING | airport)* '</FSData>';
