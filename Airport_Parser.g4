@@ -1,4 +1,4 @@
-lexer grammar AirportParser_v2;
+grammar Airport_Parser;
 
 
 //airports: data + EOF;
@@ -160,6 +160,8 @@ SIDE: 'side' ;
 
 BIAS_X: 'biasX' ;
 
+BIAS_Y: 'biasY' ;
+
 BIAS_Z: 'biasZ' ;
 
 SPACING: 'spacing' ;
@@ -192,7 +194,7 @@ GLIDE_SLOPE_OPEN: '<GlideSlope' ;
 
 VISUAL_MODEL_OPEN: '<VisualModel' ;
 
-VISUAL_MODEL_CLOSE: '<\VisualModel>' ;
+VISUAL_MODEL_CLOSE: '</VisualModel>' ;
 
 INSTANCE_ID: 'instanceId' ;
 
@@ -284,6 +286,8 @@ TAXIWAY_SIGN_OPEN: '<TaxiwaySign' ;
 
 LABEL: 'label' ;
 
+STATE: 'state' ;
+
 SIZE: 'size' ;
 
 JUSTIFICATION: 'justification' ;
@@ -358,46 +362,44 @@ TRIGGER_HEIGHT: 'triggerHeight' ;
 
 
 
+/*
+xmsVersion  : '<?xml version="1.0" encoding="ISO-8859-1"?>' fsdata EOF;
+/*<FSData
+   Version
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:noNamespaceSchemaLocation="bglcomp.xsd">'
+   Airports
+   '</FSData>'       // match keyword hello followed by an identifier
+*/
 
-WS: [ \t\r\n]+ -> skip ;
-//
-//xmsVersion  : '<?xml version="1.0" encoding="ISO-8859-1"?>' fsdata EOF;
-///*<FSData
-//   Version
-//   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-//   xsi:noNamespaceSchemaLocation="bglcomp.xsd">'
-//   Airports
-//   '</FSData>'*/        // match keyword hello followed by an identifier
-//
-//
-//fsdata : '<FSData'
-//   Version
-//   Xmls
-//   'xsi:noNamespaceSchemaLocation="bglcomp.xsd">'
-//   unFiltered
-//   '</FSData>'
-//   ;
-//
-//unFiltered: SceneryObject | Airports | Marker | unFiltered + unFiltered ;
-//
-//
-//
-//
-//Marker: [0-9];
-//
-//
-//SceneryObject: '<SceneryObject' [.*] '</SceneryObject>' -> skip;
-//
-//Version: 'version=' [\"9.0\"] ;
-//
-//Xmls:  'xmlns:xsi='[\"]'http://www.w3.org/2001/XMLSchema-instance'[\"] ;
-//
-//Algarism : [0-9] ;     //match algarisms
-//
-//Airports : [a-z]+ ;
-//
-//WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
-//
+fsdata: '<FSData' (.+ | airport)* '</FSData>';
+  /* Version
+   Xmls
+   'xsi:noNamespaceSchemaLocation="bglcomp.xsd">'
+   unFiltered
+   '</FSData>'
+   ;
+
+unFiltered: SceneryObject | Airports | Marker | unFiltered + unFiltered ;
+
+*/
+/*
+
+Marker: [0-9];
+
+
+SceneryObject: '<SceneryObject' [.*] '</SceneryObject>' -> skip;
+
+Version: 'version=' [\"9.0\"] ;
+
+Xmls:  'xmlns:xsi='[\"]'http://www.w3.org/2001/XMLSchema-instance'[\"] ;
+
+Algarism : [0-9] ;     //match algarisms
+
+Airports : [a-z]+ ;
+*/
+WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+
 
 
 
@@ -714,14 +716,6 @@ HELIPAD_TYPE: 'NONE' |
 
 
 
-NAME: STRING0_TO_8 ;
-
-///////////////Previous/////////////////
-
-
-ALTITUDE_MINIMUM: FLOAT;
-
-
 ///////////////GEOPOL/////////////////
 
 
@@ -792,13 +786,13 @@ APPROACH_TYPE : 'GPS' |
                 'VOR'|
                 'VORDME';
 
+YES_NO: 'YES' | 'NO';
 
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
-
 
 region: REGION EQUALS STRING48;
 city: CITY EQUALS STRING48;
@@ -847,7 +841,7 @@ taxiwayPathName:NAME EQUALS INTEGER_0_TO_255;
 taxiwayNameString:NAME EQUALS STRING0_TO_8;
 taxiwayIndex:INDEX EQUALS INTEGER_0_TO_255;
 fuelType:TYPE EQUALS FUEL_TYPE;
-availability:AVAILABILITY EQUALS YES FUEL_AVAILABILITY;
+availability:AVAILABILITY EQUALS FUEL_AVAILABILITY;
 trafficScallar: TRAFFICSCALAR EQUALS PERCENTAGE;
 frequency: FREQUENCY EQUALS FLOAT;
 end: END EQUALS PRIMARY_OR_SECONDARY_END;
@@ -947,22 +941,11 @@ airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude al
             tower*
             services*
             runway*
-            runwayAlias*
+            runway_alias*
             helipad*
-            start*
+            runway_start*
           AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  TRAFFICSCALAR
 
- taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX biasZ SIMPLE_TAG_CLOSE;
-
- taxiwayParking: TAXIWAY_PARKING_OPEN index lattitude longitude biasX biasZ heading radius taxiwayparkingType taxiwayparkingName taxiwayparkingNumber airlineCodes teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
-
- taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit surface drawSurface drawDetail centerLine centerLineLighted leftEdge leftEdgeLighted rightEdge rightEdgeLighted taxiwayPathNumber designator TaxiwayPathName TAXIWAY_PATH_NUMBER_RUNWAY;
-
- taxiName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
-
- tower:TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE;
-
- fuel:FUEL_OPEN fuelType availability SIMPLE_TAG_CLOSE;
 
  vertex: VERTEX_OPEN (biasX biasZ |longitude lattitude) SIMPLE_TAG_CLOSE;
 
@@ -974,19 +957,17 @@ airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude al
 
  helipad: HELIPAD_OPEN lattitude longitude altitude surface heading length? width helipad_type closed? transparent? red? green? blue? SIMPLE_TAG_CLOSE;
 
- glide_scope: GLIDE_SLOPE_OPEN lattitude longitude altitude pitch range SIMPLE_TAG_CLOSE;
+ glide_slope: GLIDE_SLOPE_OPEN lattitude longitude altitude pitch range SIMPLE_TAG_CLOSE;
 
  visual_model: VISUAL_MODEL_OPEN heading image_complexety NAME EQUALS SCENERY_OBJECT_ID TAG_CLOSE biasX biasY biasZ VISUAL_MODEL_CLOSE;
 
  dme: DME_OPEN lattitude longitude altitude range SIMPLE_TAG_CLOSE;
 
-airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  trafficScalar
-
 taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX biasZ SIMPLE_TAG_CLOSE;
 
 taxiwayParking: TAXIWAY_PARKING_OPEN index lattitude longitude biasX biasZ heading radius taxiwayparkingType taxiwayparkingName taxiwayparkingNumber airlineCodes teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
 
-taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit surface drawSurface drawDetail centerLine centerLineLighted leftEdge leftEdgeLighted rightEdge rightEdgeLighted taxiwayPathNumber designator TaxiwayPathName TAXIWAY_PATH_NUMBER_RUNWAY;
+taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit surface drawSurface drawDetail centerLine centerLineLighted leftEdge leftEdgeLighted rightEdge rightEdgeLighted taxiwayPathNumber designator taxiwayPathName TAXIWAY_PATH_NUMBER_RUNWAY;
 
 taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
 
@@ -1012,6 +993,6 @@ ils: ILS_OPEN lattitude longitude altitude heading frequency range? ident_ils wi
 
 runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width designator? primaryDesignator secondaryDesignator patternAltitude? primaryLanding? primaryPattern? secondaryTakeoff? secondaryTakeoff? secondaryLanding? secondaryPattern? primaryMarkingBias secondaryMarkingBias TAG_CLOSE markings? lights? offsetThreshold? blastPad? RUNWAY_CLOSE;
 
-runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude heading end? SIMPLE_TAG_CLOSE;
+runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude heading number? designator? SIMPLE_TAG_CLOSE;
 
 runway_alias: RUNWAY_ALIAS_OPEN number designator SIMPLE_TAG_CLOSE;
