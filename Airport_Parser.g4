@@ -212,8 +212,6 @@ GREEN: 'green' ;
 
 BLUE: 'blue' ;
 
-COM_OPEN: '<Com' ;
-
 DME_OPEN: '<Dme' ;
 
 ILS_CLOSE: '</Ils>' ;
@@ -262,10 +260,6 @@ LEFT_EDGE_LIGHTED: 'leftEdgeLighted' ;
 
 RIGHT_EDGE_LIGHTED: 'rightEdgeLighted' ;
 
-JETWAY_OPEN: '<Jetway' ;
-
-JETWAY_CLOSE: '</Jetway>' ;
-
 GATE_NAME: 'gateName' ;
 
 PARKING_NUMBER: 'parkingNumber' ;
@@ -284,21 +278,7 @@ LIBRARY_OBJECT_OPEN: '<LibraryObject' ;
 
 SCALE: 'scale' ;
 
-APRONS_OPEN: '<Aprons>' ;
-
-APRONS_CLOSE: '</Aprons>' ;
-
-//APRON_OPEN: '<Apron' ;
-
-//APRON_OPEN: '</Apron>' ;
-
 VERTEX_OPEN: '<Vertex' ;
-
-//APRON_EDGE_LIGHTS_OPEN: '<ApronEdgeLights>' ;
-
-//EDGE_LIGHTS_OPEN: '<EdgeLights>' ;
-
-//EDGE_LIGHTS_CLOSE: '</EdgeLights>' ;
 
 TAXIWAY_SIGN_OPEN: '<TaxiwaySign' ;
 
@@ -308,13 +288,7 @@ SIZE: 'size' ;
 
 JUSTIFICATION: 'justification' ;
 
-//BOUNDARY_FENCE_OPEN: '<BoundaryFence' ;
-
 PROFILE: 'profile' ;
-
-//BOUNDARY_FENCE_CLOSE: '</BoundaryFence>' ;
-
-//APPROACH_OPEN: '<Approach' ;
 
 RUNWAY: 'runway' ;
 
@@ -371,16 +345,6 @@ TIME: 'time' ;
 //TRANSITION_LEGS_OPEN: '<TransitionLegs>' ;
 
 //TRANSITION_LEGS_CLOSE: '</TransitionLegs>' ;
-
-WAYPOINT_OPEN: '<Waypoint' ;
-
-WAYPOINT_TYPE: 'waypointType' ;
-
-WAYPOINT_REGION: 'waypointRegion' ;
-
-WAYPOINT_IDENT: 'waypointIdent';
-
-WAYPOINT_CLOSE: '</Waypoint>' ;
 
 PREVIOUS_OPEN: '<Previous' ;
 
@@ -619,7 +583,7 @@ RUNWAY_SURFACE: 'ASPHALT' |
 
 RUNWAY_NUMBER: TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY;
 
-///////////////////////MARKINGS <3/////////////////////
+///////////////////////MARKINGS /////////////////////
 
 
 ////////////////////LIGHTS////////////
@@ -750,30 +714,6 @@ HELIPAD_TYPE: 'NONE' |
 
 
 
-
-
-////////////////////JETWAY////////////////
-
-JETWAY_GATENAME: 'PARKING' |
-'DOCK' |
-'GATE' |
-'GATE_' ('A'..'Z') |
-'NONE' |
-'N_PARKING' |
-'NE_PARKING' |
-'NW_PARKING' |
-'SE_PARKING' |
-'S_PARKING' |
-'SW_PARKING' |
-'W_PARKING' |
-'E_PARKING';
-
-///////////////ROUTE/////////////////
-
-ROUTE_TYPE: 'VICTOR' |
-'JET' |
-'BOTH' ;
-
 NAME: STRING0_TO_8 ;
 
 ///////////////Previous/////////////////
@@ -831,24 +771,6 @@ FUEL_AVAILABILITY: 'YES' |
 
 TRIGGER__TYPE: 'REFUEL_REPAIR' |
 'WEATHER';
-
-COM_TYPE: 'APPROACH'|
-          'ASOS'|
-          'ATIS'|
-          'AWOS'|
-          'CENTER'|
-          'CLEARANCE'|
-          'CLEARANCE_PRE_TAXI'|
-          'CTAF'|
-          'DEPARTURE'|
-          'FSS'|
-          'GROUND'|
-          'MULTICOM'|
-          'REMOTE_CLEARANCE_DELIVERY'|
-          'TOWER'|
-          'UNICOM';
-
-
 
 ///////////////////TRIGGER WEATHER DATA////////////
 
@@ -970,6 +892,7 @@ primaryClosed : PRIMARY_CLOSED EQUALS BOOLEAN;
 secondaryClosed : SECONDARY_CLOSED EQUALS BOOLEAN;
 primaryStol : PRIMARY_STOL EQUALS BOOLEAN;
 secondaryStol : SECONDARY_STOL EQUALS BOOLEAN;
+backCourse: BACK_COURSE EQUALS BOOLEAN;
 
 //Lights
 center: CENTER EQUALS LIGHTS_VALUES;
@@ -1000,8 +923,6 @@ red: RED EQUALS INTEGER_0_TO_255;
 green: GREEN EQUALS INTEGER_0_TO_255;
 blue: BLUE EQUALS INTEGER_0_TO_255;
 
-//COM
-com_type: TYPE EQUALS COM_TYPE;
 
 //APPROACH
 approach_runway: RUNWAY EQUALS (TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY);
@@ -1018,26 +939,18 @@ approach_type: TYPE EQUALS APPROACH_TYPE;
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-
-
-
-
 airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius trafficScallar TAG_CLOSE
-taxiwayPoint+
-taxiwayParking+
-taxiwayName+
-taxiwayPath+
-tower*
-services*
-runway*
-runwayAlias*
-aprons*
-taxiwaySign*
-waypoint*
-helipad*
-start*
-jetway*
- AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  trafficScalar
+            taxiwayPoint+
+            taxiwayParking+
+            taxiwayName+
+            taxiwayPath+
+            tower*
+            services*
+            runway*
+            runwayAlias*
+            helipad*
+            start*
+          AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  TRAFFICSCALAR
 
  taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX biasZ SIMPLE_TAG_CLOSE;
 
@@ -1045,7 +958,7 @@ jetway*
 
  taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit surface drawSurface drawDetail centerLine centerLineLighted leftEdge leftEdgeLighted rightEdge rightEdgeLighted taxiwayPathNumber designator TaxiwayPathName TAXIWAY_PATH_NUMBER_RUNWAY;
 
- taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
+ taxiName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
 
  tower:TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE;
 
@@ -1059,28 +972,13 @@ jetway*
 
  services: SERVICES_OPEN TAG_CLOSE fuel* SERVICES_CLOSE;
 
- taxiwaySign: TAXIWAY_SIGN_OPEN lattitude longitude heading LABEL EQUALS ALL_STRING (JUSTIFICATION EQUALS LEFT_RIGHT)? SIZE EQUALS TAXI_NAME_SIZE SIMPLE_TAG_CLOSE;
-
- aprons: APRONS_OPEN TAG_CLOSE APRONS_CLOSE;
-
- waypoint: WAYPOINT_OPEN lattitude longitude WAYPOINT_TYPE EQUALS WAYPOINT_TYPE_VALUES magvar WAYPOINT_REGION EQUALS WAYPOINT_REGION_VALUES WAYPOINT_IDENT EQUALS WAYPOINT_IDENT_VALUES TAG_CLOSE WAYPOINT_CLOSE;
-
  helipad: HELIPAD_OPEN lattitude longitude altitude surface heading length? width helipad_type closed? transparent? red? green? blue? SIMPLE_TAG_CLOSE;
-
- start: START_OPEN start_type? lattitude longitude altitude heading (NUMBER EQUALS (TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY))? designator? SIMPLE_TAG_CLOSE;
-
- jetway: JETWAY_OPEN GATE_NAME EQUALS JETWAY_GATENAME PARKING_NUMBER EQUALS UNSIGNED_INT TAG_CLOSE JETWAY_CLOSE;
 
  glide_scope: GLIDE_SLOPE_OPEN lattitude longitude altitude pitch range SIMPLE_TAG_CLOSE;
 
  visual_model: VISUAL_MODEL_OPEN heading image_complexety NAME EQUALS SCENERY_OBJECT_ID TAG_CLOSE biasX biasY biasZ VISUAL_MODEL_CLOSE;
 
  dme: DME_OPEN lattitude longitude altitude range SIMPLE_TAG_CLOSE;
-
- ils: ILS_OPEN lattitude longitude altitude heading frequency (RANGE EQUALS TRAFFICSCALLAR)? ident_ils width? name? (BACK_COURSE EQUALS BOOLEAN)? TAG_CLOSE glide_slope* dme* visual_model* ILS_CLOSE;
-
-
-//RunwayStart
 
 airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  trafficScalar
 
@@ -1096,7 +994,6 @@ tower:TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE;
 
 fuel:FUEL_OPEN fuelType availability SIMPLE_TAG_CLOSE;
 
-//
 markings: MARKINGS_OPEN alternateThreshold alternateTouchdown alternateFixedDistance alternatePrecision leadingZeroIdent noThresholdEndArrows edges threshold fixed touchdown dashes ident_Marking precision edgePavement singleEnd primaryClosed secondaryClosed primaryStol secondaryStol SIMPLE_TAG_CLOSE;
 
 lights: LIGHTS_OPEN center edge centerRed SIMPLE_TAG_CLOSE;
@@ -1111,15 +1008,10 @@ approachLights: APPROACH_LIGHTS_OPEN end system? strobes? reil? touchdown? endLi
 
 vasi: VASI_OPEN end vasiType side biasX biasZ spacing pitch TAG_CLOSE;
 
+ils: ILS_OPEN lattitude longitude altitude heading frequency range? ident_ils width? name? backCourse? TAG_CLOSE glide_slope* dme* visual_model* ILS_CLOSE;
+
 runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width designator? primaryDesignator secondaryDesignator patternAltitude? primaryLanding? primaryPattern? secondaryTakeoff? secondaryTakeoff? secondaryLanding? secondaryPattern? primaryMarkingBias secondaryMarkingBias TAG_CLOSE markings? lights? offsetThreshold? blastPad? RUNWAY_CLOSE;
 
-//
 runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude heading end? SIMPLE_TAG_CLOSE;
 
 runway_alias: RUNWAY_ALIAS_OPEN number designator SIMPLE_TAG_CLOSE;
-
-start: START_OPEN start_type? lattitude longitude altitude heading number? designator? SIMPLE_TAG_CLOSE;
-
-com: COM_OPEN frequency com_type name SIMPLE_TAG_CLOSE;
-
-approach: APPROACH_OPEN approach_type runway? designator? suffix? gpsOverlay? fixType fixIdent altitude heading missedAltitude TAG_CLOSE;
