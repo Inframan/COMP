@@ -486,7 +486,7 @@ GEOPOL_TYPE:    'COASTLINE' |
 FUEL_AVAILABILITY:  YES_NO | 'UNKNOWN' | 'PRIOR_REQUEST';
 
 
-FLOAT: ('-' | '+')?  ( ('0'..'9')+ '.' ('0'..'9')+ | ('0'..'9')+ );
+FLOAT: ('-' | '+')?  ('0'..'9')+ ('.' ('0'..'9')+)? ;
 
 FUEL_TYPE: FLOAT |
            'MOGAS'|
@@ -503,7 +503,7 @@ ALTITUDE_VALUES: FLOAT MESURE?;
 
 MESURE: ('M' | 'F' | 'N');
 
-STRING: (('a'..'z') | ('A'..'Z') | ('0'..'9')) (('a'..'z') | ('A'..'Z') | ('0'..'9') | ' ')*;
+STRING: (('a'..'z') | ('A'..'Z') | ('0'..'9')) (('a'..'z') | ('A'..'Z') | ('0'..'9') | ' ' )*;
 
 ALL_STRING: ( STRING | '-' | '{' | '}' | ',' )+ ;
 
@@ -527,7 +527,7 @@ biasX: BIAS_X EQUALS FLOAT;
 biasY: BIAS_Y EQUALS FLOAT;
 biasZ: BIAS_Z EQUALS FLOAT;
 heading: HEADING EQUALS FLOAT;
-lattitude: LAT EQUALS FLOAT;
+lattitude: LAT EQUALS ALL_STRING;
 longitude: LON EQUALS FLOAT;
 altitude: ALT EQUALS ALTITUDE_VALUES;
 airportTestRadius: AIRPORT_TEST_RADIUS EQUALS FLOAT MESURE;
@@ -545,7 +545,7 @@ teeOffSet4:TEE_OFFSET_4 EQUALS FLOAT;
 taxiwayPathType:TYPE EQUALS TAXIWAY_PATH_TYPE;
 taxiwayPathStart:START EQUALS FLOAT;
 taxiwayPathEnd:END EQUALS FLOAT;
-width:WIDTH EQUALS FLOAT;
+width:WIDTH EQUALS ALTITUDE_VALUES;
 weightLimit:WEIGHT_LIMIT EQUALS FLOAT;
 surface:SURFACE EQUALS SURFACE_VALUES;
 drawSurface:DRAW_SURFACE EQUALS BOOLEAN;
@@ -576,7 +576,7 @@ length: LENGTH EQUALS FLOAT MESURE;
 number: NUMBER EQUALS (FLOAT | DIRECTION);
 primaryDesignator: PRIMARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
 secondaryDesignator: SECONDARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
-patternAltitude : PATTERN_ALTITUDE EQUALS FLOAT MESURE;
+patternAltitude : PATTERN_ALTITUDE EQUALS ALTITUDE_VALUES;
 primaryTakeoff : PRIMARY_TAKE_OFF EQUALS (BOOLEAN | YES_NO);
 primaryLanding  : PRIMARY_LANDING EQUALS BOOLEAN;
 primaryPattern : PRIMARY_PATTERN EQUALS LEFT_RIGHT;
@@ -692,23 +692,23 @@ fuel: FUEL_OPEN fuel_type availability SIMPLE_TAG_CLOSE;
 
 ils: ILS_OPEN lattitude longitude altitude heading frequency range? ident_ils width? name? backCourse? TAG_CLOSE glide_slope* dme* visual_model* ILS_CLOSE;
 
-runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width designator? primaryDesignator secondaryDesignator patternAltitude? primaryLanding? primaryPattern? secondaryTakeoff? secondaryTakeoff? secondaryLanding? secondaryPattern? primaryMarkingBias secondaryMarkingBias TAG_CLOSE markings? lights? offsetThreshold? blastPad? RUNWAY_CLOSE;
+runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width number designator? (primaryDesignator | secondaryDesignator | patternAltitude? | primaryLanding? | primaryPattern? | secondaryTakeoff? | secondaryTakeoff? | secondaryLanding? | secondaryPattern? | primaryMarkingBias | secondaryMarkingBias )* TAG_CLOSE markings? lights? offsetThreshold? blastPad? RUNWAY_CLOSE;
 
 runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude heading number? designator? SIMPLE_TAG_CLOSE;
 
 runway_alias: RUNWAY_ALIAS_OPEN number designator SIMPLE_TAG_CLOSE;
 
-airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius trafficScallar TAG_CLOSE
-            taxiwayPoint+
-            taxiwayParking+
-            taxiwayName+
-            taxiwayPath+
-            tower*
-            services*
-            runway*
-            runway_alias*
-            helipad*
-            runway_start*
+airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? (ident | airportTestRadius |trafficScallar)* TAG_CLOSE
+         (   taxiwayPoint+ 
+        |    taxiwayParking+
+        |    taxiwayName+
+        |    taxiwayPath+
+        |    tower*
+        |    services*
+        |    runway*
+        |    runway_alias*
+        |    helipad*
+        |   runway_start* )+
           AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  TRAFFICSCALAR
 
 fsdata: '<FSData' (ALL_STRING | airport)* '</FSData>';
