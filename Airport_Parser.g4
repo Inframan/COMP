@@ -708,17 +708,18 @@ runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude headin
 
 runway_alias: RUNWAY_ALIAS_OPEN number designator SIMPLE_TAG_CLOSE;
 
-airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? (ident | airportTestRadius |trafficScallar)* TAG_CLOSE
-         (   taxiwayPoint+ 
-        |    taxiwayParking+
-        |    taxiwayName+
-        |    taxiwayPath+
-        |    tower*
-        |    services*
-        |    runway*
-        |    runway_alias*
-        |    helipad*
-        |   runway_start* )+
+airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? trafficScallar airportTestRadius ident    TAG_CLOSE
+          taxiwayPoint* 
+            taxiwayParking*
+            taxiwayName*
+            taxiwayPath*
+            (
+            tower
+           | services
+           | runway
+           | runway_alias
+           | helipad
+           | runway_start )* 
           AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  TRAFFICSCALAR
 
 fsdata: '<FSData' (ALL_STRING | airport)* '</FSData>';
