@@ -418,12 +418,6 @@ WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
 
 ////////////////////////////***********************************REGULAR EXPRESSIONS *************************/////////////////////////////////////////////////////////////////////////////
 
-TRAFFICSCALLAR: INT('F'|'M'|'N');
-
-
-ALTITUDE_VALUES: FLOAT( 'M' | 'F')?;
-
-
 TAXIWAYPOINT_ORIENTATION_VALUES: 'FORWARD' | 'REVERSE';
 
 TAXIWAYPOINT_TYPE: 'NORMAL' | 'HOLD_SHORT' |  'ILS_HOLD_SHORT' |  'HOLD_SHORT_NO_DRAW' | 'ILS_HOLD_SHORT_NO_DRAW';
@@ -724,6 +718,10 @@ APPROACH_TYPE : 'GPS' |
 
 DIGIT: ('0'..'A');
 
+
+
+
+
 PERCENTAGE: ( '1'.'0' | '0'.'0'('1'..'9') | '0'.('1'..'9')('0'..'9')?);
 
 PERCENTAGE_0: PERCENTAGE | '0.0';
@@ -754,6 +752,14 @@ REGION: ('A'..'Z')|('0'..'9') ('A'..'Z')|('0'..'9') ;
 ILS_IDENT: (('a'..'z') | ('A'..'Z') | ('0'..'9'))STRING0_TO4;
 
 SCENERY_OBJECT_ID: '{'DIGIT+ '-'DIGIT+ '-' DIGIT+ '-' DIGIT+ '-' DIGIT+ '}';
+
+
+TRAFFICSCALLAR: INT('F'|'M'|'N');
+
+
+ALTITUDE_VALUES: FLOAT( 'M' | 'F')?;
+
+
 
 DECIMAL_PART: '.'('0'..'9')+;
 
