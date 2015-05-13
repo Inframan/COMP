@@ -1,4 +1,4 @@
-// Generated from E:/IntellijWorkspace/XML2SDL/src\Airport_Parser.g4 by ANTLR 4.5
+// Generated from /home/fatia/Documentos/Feup/COMP/Airport_Parser.g4 by ANTLR 4.5
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -7,16 +7,6 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  * {@link Airport_ParserParser}.
  */
 public interface Airport_ParserListener extends ParseTreeListener {
-	/**
-	 * Enter a parse tree produced by {@link Airport_ParserParser#fsdata}.
-	 * @param ctx the parse tree
-	 */
-	void enterFsdata(@NotNull Airport_ParserParser.FsdataContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Airport_ParserParser#fsdata}.
-	 * @param ctx the parse tree
-	 */
-	void exitFsdata(@NotNull Airport_ParserParser.FsdataContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#region}.
 	 * @param ctx the parse tree
@@ -67,6 +57,16 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitName(@NotNull Airport_ParserParser.NameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Airport_ParserParser#instanceId}.
+	 * @param ctx the parse tree
+	 */
+	void enterInstanceId(@NotNull Airport_ParserParser.InstanceIdContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Airport_ParserParser#instanceId}.
+	 * @param ctx the parse tree
+	 */
+	void exitInstanceId(@NotNull Airport_ParserParser.InstanceIdContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#magvar}.
 	 * @param ctx the parse tree
@@ -478,16 +478,6 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 */
 	void exitTaxiwayIndex(@NotNull Airport_ParserParser.TaxiwayIndexContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Airport_ParserParser#fuelType}.
-	 * @param ctx the parse tree
-	 */
-	void enterFuelType(@NotNull Airport_ParserParser.FuelTypeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Airport_ParserParser#fuelType}.
-	 * @param ctx the parse tree
-	 */
-	void exitFuelType(@NotNull Airport_ParserParser.FuelTypeContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#availability}.
 	 * @param ctx the parse tree
 	 */
@@ -567,6 +557,16 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitImage_complexety(@NotNull Airport_ParserParser.Image_complexetyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Airport_ParserParser#fuel_type}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuel_type(@NotNull Airport_ParserParser.Fuel_typeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Airport_ParserParser#fuel_type}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuel_type(@NotNull Airport_ParserParser.Fuel_typeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#length}.
 	 * @param ctx the parse tree
@@ -1008,16 +1008,6 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 */
 	void exitRunway_type(@NotNull Airport_ParserParser.Runway_typeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Airport_ParserParser#start_type}.
-	 * @param ctx the parse tree
-	 */
-	void enterStart_type(@NotNull Airport_ParserParser.Start_typeContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Airport_ParserParser#start_type}.
-	 * @param ctx the parse tree
-	 */
-	void exitStart_type(@NotNull Airport_ParserParser.Start_typeContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#helipad_type}.
 	 * @param ctx the parse tree
 	 */
@@ -1088,15 +1078,15 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 */
 	void exitApproach_runway(@NotNull Airport_ParserParser.Approach_runwayContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Airport_ParserParser#approach_type}.
+	 * Enter a parse tree produced by {@link Airport_ParserParser#scalar}.
 	 * @param ctx the parse tree
 	 */
-	void enterApproach_type(@NotNull Airport_ParserParser.Approach_typeContext ctx);
+	void enterScalar(@NotNull Airport_ParserParser.ScalarContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link Airport_ParserParser#approach_type}.
+	 * Exit a parse tree produced by {@link Airport_ParserParser#scalar}.
 	 * @param ctx the parse tree
 	 */
-	void exitApproach_type(@NotNull Airport_ParserParser.Approach_typeContext ctx);
+	void exitScalar(@NotNull Airport_ParserParser.ScalarContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#airport}.
 	 * @param ctx the parse tree
@@ -1117,26 +1107,6 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVertex(@NotNull Airport_ParserParser.VertexContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Airport_ParserParser#triggerWeatherData}.
-	 * @param ctx the parse tree
-	 */
-	void enterTriggerWeatherData(@NotNull Airport_ParserParser.TriggerWeatherDataContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Airport_ParserParser#triggerWeatherData}.
-	 * @param ctx the parse tree
-	 */
-	void exitTriggerWeatherData(@NotNull Airport_ParserParser.TriggerWeatherDataContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Airport_ParserParser#trigger}.
-	 * @param ctx the parse tree
-	 */
-	void enterTrigger(@NotNull Airport_ParserParser.TriggerContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Airport_ParserParser#trigger}.
-	 * @param ctx the parse tree
-	 */
-	void exitTrigger(@NotNull Airport_ParserParser.TriggerContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#services}.
 	 * @param ctx the parse tree
@@ -1167,16 +1137,6 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitGlide_slope(@NotNull Airport_ParserParser.Glide_slopeContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Airport_ParserParser#visual_model}.
-	 * @param ctx the parse tree
-	 */
-	void enterVisual_model(@NotNull Airport_ParserParser.Visual_modelContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Airport_ParserParser#visual_model}.
-	 * @param ctx the parse tree
-	 */
-	void exitVisual_model(@NotNull Airport_ParserParser.Visual_modelContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#dme}.
 	 * @param ctx the parse tree
@@ -1237,16 +1197,6 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTower(@NotNull Airport_ParserParser.TowerContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link Airport_ParserParser#fuel}.
-	 * @param ctx the parse tree
-	 */
-	void enterFuel(@NotNull Airport_ParserParser.FuelContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Airport_ParserParser#fuel}.
-	 * @param ctx the parse tree
-	 */
-	void exitFuel(@NotNull Airport_ParserParser.FuelContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#markings}.
 	 * @param ctx the parse tree
@@ -1318,6 +1268,26 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 */
 	void exitVasi(@NotNull Airport_ParserParser.VasiContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link Airport_ParserParser#visual_model}.
+	 * @param ctx the parse tree
+	 */
+	void enterVisual_model(@NotNull Airport_ParserParser.Visual_modelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Airport_ParserParser#visual_model}.
+	 * @param ctx the parse tree
+	 */
+	void exitVisual_model(@NotNull Airport_ParserParser.Visual_modelContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Airport_ParserParser#fuel}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuel(@NotNull Airport_ParserParser.FuelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Airport_ParserParser#fuel}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuel(@NotNull Airport_ParserParser.FuelContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#ils}.
 	 * @param ctx the parse tree
 	 */
@@ -1357,4 +1327,14 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRunway_alias(@NotNull Airport_ParserParser.Runway_aliasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Airport_ParserParser#fsdata}.
+	 * @param ctx the parse tree
+	 */
+	void enterFsdata(@NotNull Airport_ParserParser.FsdataContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Airport_ParserParser#fsdata}.
+	 * @param ctx the parse tree
+	 */
+	void exitFsdata(@NotNull Airport_ParserParser.FsdataContext ctx);
 }

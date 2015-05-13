@@ -1,30 +1,12 @@
 grammar Airport_Parser;
 
-
-//airports: data + EOF;
-/*
-data: AIRPORT_OPEN + airporAttributeAnaliser + children + AIRPORT_CLOSE;
-
-airporAttributeAnaliser: ;
-
-children: ;
-*/
-
 EQUALS: '=' ;
 
 SIMPLE_TAG_CLOSE: '/>' ;
 
 TAG_CLOSE: '>' ;
 
-METERS_OR_FEET: 'M' | 'F';
-
 YES_NO: 'YES' | 'NO';
-
-
-FUEL_AVAILABILITY: 'YES' |
-'NO' |
-'UNKNOWN' |
-'PRIOR_REQUEST';
 
 AIRPORT_OPEN:  '<Airport' {ignoreWord=false;} ;
 
@@ -314,42 +296,6 @@ SCALAR: 'scalar' ;
 
 TRIGGER_HEIGHT: 'triggerHeight' ;
 
-/*
-xmsVersion  : '<?xml version="1.0" encoding="ISO-8859-1"?>' fsdata EOF;
-/*<FSData
-   Version
-   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-   xsi:noNamespaceSchemaLocation="bglcomp.xsd">'
-   Airports
-   '</FSData>'       // match keyword hello followed by an identifier
-*/
-
-
-  /* Version
-   Xmls
-   'xsi:noNamespaceSchemaLocation="bglcomp.xsd">'
-   unFiltered
-   '</FSData>'
-   ;
-
-unFiltered: SceneryObject | Airports | Marker | unFiltered + unFiltered ;
-
-*/
-/*
-
-Marker: [0-9];
-
-
-SceneryObject: '<SceneryObject' [.*] '</SceneryObject>' -> skip;
-
-Version: 'version=' [\"9.0\"] ;
-
-Xmls:  'xmlns:xsi='[\"]'http://www.w3.org/2001/XMLSchema-instance'[\"] ;
-
-Algarism : [0-9] ;     //match algarisms
-
-Airports : [a-z]+ ;
-*/
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
 
 
@@ -361,110 +307,115 @@ TAXIWAYPOINT_TYPE: 'NORMAL' | 'HOLD_SHORT' |  'ILS_HOLD_SHORT' |  'HOLD_SHORT_NO
 
 
 
-TAXIWAY_PARKING_TYPE: 'NONE' |                      'DOCK_GA' |
-'FUEL' |                      'GATE_HEAVY' |
-'GATE_MEDIUM' |                      'GATE_SMALL' |
-'RAMP_CARGO' |                      'RAMP_GA' |
-'RAMP_GA_LARGE' |                      'RAMP_GA_MEDIUM' |
-'RAMP_GA_SMALL' |                      'RAMP_MIL_CARGO' |
-'RAMP_MIL_COMBAT' |                      'VEHICLE';
+TAXIWAY_PARKING_TYPE: 'NONE' |                      
+                      'DOCK_GA' |
+                      'FUEL' |                      
+                      'GATE_HEAVY' |
+                      'GATE_MEDIUM' |                      
+                      'GATE_SMALL' |
+                      'RAMP_CARGO' |                      
+                      'RAMP_GA' |
+                      'RAMP_GA_LARGE' |                      
+                      'RAMP_GA_MEDIUM' |
+                      'RAMP_GA_SMALL' |                      
+                      'RAMP_MIL_CARGO' |
+                      'RAMP_MIL_COMBAT' |                      
+                      'VEHICLE';
 
 
 TAXIWAY_PARKING_NAME: 'PARKING' |
-'DOCK' |
-'GATE' |
-'GATE_'('A'..'Z') |
-'NONE' |
-'N_PARKING' |
-'NE_PARKING' |
-'NW_PARKING' |
-'SE_PARKING' |
-'S_PARKING' |
-'SW_PARKING' |
-'W_PARKING' |
-'E_PARKING';
+                      'DOCK' |
+                      'GATE' |
+                      'GATE_'('A'..'Z') |
+                      'NONE' |
+                      'N_PARKING' |
+                      'NE_PARKING' |
+                      'NW_PARKING' |
+                      'SE_PARKING' |
+                      'S_PARKING' |
+                      'SW_PARKING' |
+                      'W_PARKING' |
+                      'E_PARKING';
 
 TAXIWAY_PARKING_PUSHBACK: 'NONE'|
-'BOTH' |
-'LEFT' |
-'RIGHT';
+                          'BOTH' |
+                          'LEFT' |
+                          'RIGHT';
 
 TAXI_NAME_SIZE: 'SIZE1' | 'SIZE2' | 'SIZE3' | 'SIZE4' | 'SIZE5';
 
 LEFT_RIGHT: 'LEFT' | 'RIGHT';
 
 
-TAXIWAY_PATH_TYPE: 'RUNWAY' |
-'PARKING' |
-'TAXI' |
-'PATH' |
-'CLOSED' |
-'VEHICLE';
+TAXIWAY_PATH_TYPE:  'RUNWAY' |
+                    'PARKING' |
+                    'TAXI' |
+                    'PATH' |
+                    'CLOSED' |
+                    'VEHICLE';
 
 BOOLEAN: 'TRUE' | 'FALSE';
 
-TAXIWAY_PATH_EDGE: 'NONE' |
-'SOLID' |
-'DASHED' |
-'SOLID_DASHED';
+TAXIWAY_PATH_EDGE:  'NONE' |
+                    'SOLID' |
+                    'DASHED' |
+                    'SOLID_DASHED';
 
 
-DIRECTION: 'EAST'|
-'NORTH' |
-'NORTHEAST' |
-'NORTHWEST' |
-'SOUTH' |
-'SOUTHEAST' |
-'SOUTHWEST' |
-'WEST';
+DIRECTION:  'EAST'|
+            'NORTH' |
+            'NORTHEAST' |
+            'NORTHWEST' |
+            'SOUTH' |
+            'SOUTHEAST' |
+            'SOUTHWEST' |
+            'WEST';
 
 TAXIWAY_PATH_NUMBER_DESIGNATOR: 'NONE' |
-'C' |
-'CENTER' |
-'L' |
-'LEFT' |
-'R' |
-'RIGHT' |
-'W' |
-'WATER' |
-'A' |
-'B';
+                                'C' |
+                                'CENTER' |
+                                'L' |
+                                'LEFT' |
+                                'R' |
+                                'RIGHT' |
+                                'W' |
+                                'WATER' |
+                                'A' |
+                                'B';
 
 /////////////RUNWAY/////////////////
 
-SURFACE: 'ASPHALT' |
-'BITUMINOUS' |
-'BRICK' |
-'CLAY' |
-'CEMENT' |
-'CONCRETE' |
-'CORAL' |
-'DIRT' |
-'GRASS' |
-'GRAVEL' |
-'ICE' |
-'MACADAM' |
-'OIL_TREATED' |
-'PLANKS' |
-'SAND' |
-'SHALE' |
-'SNOW' |
-'STEEL_MATS' |
-'TARMAC' |
-'UNKNOWN' |
-'WATER';
+SURFACE_VALUES:  'ASPHALT' |
+          'BITUMINOUS' |
+          'BRICK' |
+          'CLAY' |
+          'CEMENT' |
+          'CONCRETE' |
+          'CORAL' |
+          'DIRT' |
+          'GRASS' |
+          'GRAVEL' |
+          'ICE' |
+          'MACADAM' |
+          'OIL_TREATED' |
+          'PLANKS' |
+          'SAND' |
+          'SHALE' |
+          'SNOW' |
+          'STEEL_MATS' |
+          'TARMAC' |
+          'UNKNOWN' |
+          'WATER';
 
 
 RUNWAY_NUMBER: FLOAT | DIRECTION;
 
-///////////////////////MARKINGS /////////////////////
-
 
 ////////////////////LIGHTS////////////
-LIGHTS_VALUES: 'NONE' |
-'LOW' |
-'MEDIUM' |
-'HIGH';
+LIGHTS_VALUES:  'NONE' |
+                'LOW' |
+                'MEDIUM' |
+                'HIGH';
 
 
 ///////////////OFFSET THREASHHOLD AND BLAST PAD AND OVERRUN///////////////
@@ -477,55 +428,52 @@ PRIMARY_OR_SECONDARY_END: 'PRIMARY' |
 //////////////APPROACHLIGHTS////////
 
 APPROACH_LIGHTS_SYSTEM: 'NONE' |
-'ALSF1' |
-'ALSF2' |
-'CALVERT' |
-'CALVERT2' |
-'MALS' |
-'MALSF' |
-'MALSR' |
-'ODALS' |
-'RAIL' |
-'SALS' |
-'SALSF' |
-'SSALF' |
-'SSALR' |
-'SSALS';
+                        'ALSF1' |
+                        'ALSF2' |
+                        'CALVERT' |
+                        'CALVERT2' |
+                        'MALS' |
+                        'MALSF' |
+                        'MALSR' |
+                        'ODALS' |
+                        'RAIL' |
+                        'SALS' |
+                        'SALSF' |
+                        'SSALF' |
+                        'SSALR' |
+                        'SSALS';
 
 ////////////VASI//////////
 
-VASI_TYPE: 'PAPI2' |
-'PAPI4' |
-'PVASI' |
-'TRICOLOR' |
-'TVASI' |
-'VASI21' |
-'VASI22' |
-'VASI23' |
-'VASI31' |
-'VASI32' |
-'VASI33' |
-'BALL' |
-'APAP' |
-'PANELS';
+VASI_TYPE:  'PAPI2' |
+            'PAPI4' |
+            'PVASI' |
+            'TRICOLOR' |
+            'TVASI' |
+            'VASI21' |
+            'VASI22' |
+            'VASI23' |
+            'VASI31' |
+            'VASI32' |
+            'VASI33' |
+            'BALL' |
+            'APAP' |
+            'PANELS';
 
-
-VASI_SPACING: FLOAT;
-
-//////////////////////////////ILS///////////////////////
-
-NAUTICAL_OR_METER: 'N' | 'M';
-
-ILS_RANGE: FLOAT NAUTICAL_OR_METER?;
-
-
-//////////////////RUNWAY START////////////////
-RUNWAY_START_TYPE: 'RUNWAY';
-
-
-//////////////////////////////////////////////////////////////
-//////////////////FATIA///////////////////////////////////////
-//////////////////////////////////////////////////////////////
+FUEL_TYPE: '73'|
+           '87'|
+           '100'|
+           '130'|
+           '145'|
+           'MOGAS'|
+           'JET'|
+           'JETA'|
+           'JETA1'|
+           'JETAP'|
+           'JETB'|
+           'JET4'|
+           'JET5'|
+           'UNKNOWN';
 
 
 /////////////////////HELIPAD/////////////
@@ -544,7 +492,7 @@ GEOPOL_TYPE:    'COASTLINE' |
 'BOUNDARY' |
 'DASHED_BOUNDARY' ;
 
-
+FUEL_AVAILABILITY:  YES_NO | 'UNKNOWN' | 'PRIOR_REQUEST';
 
 ALTITUDE_VALUES: FLOAT MESURE?;
 
@@ -567,7 +515,8 @@ region: REGION EQUALS STRING;
 city: CITY EQUALS STRING;
 country: COUNTRY EQUALS STRING;
 state: STATE EQUALS STRING;
-name: NAME EQUALS STRING;
+name: NAME EQUALS ALL_STRING;
+instanceId: INSTANCE_ID EQUALS ALL_STRING;
 magvar: MAGVAR EQUALS FLOAT;
 ident: IDENT EQUALS STRING;
 index: INDEX EQUALS FLOAT;
@@ -595,7 +544,7 @@ taxiwayPathStart:START EQUALS FLOAT;
 taxiwayPathEnd:END EQUALS FLOAT;
 width:WIDTH EQUALS FLOAT;
 weightLimit:WEIGHT_LIMIT EQUALS FLOAT;
-surface:SURFACE EQUALS SURFACE;
+surface:SURFACE EQUALS SURFACE_VALUES;
 drawSurface:DRAW_SURFACE EQUALS BOOLEAN;
 drawDetail:DRAW_SURFACE EQUALS BOOLEAN;
 centerLine:CENTER_LINE EQUALS BOOLEAN;
@@ -617,14 +566,14 @@ ident_ils: IDENT EQUALS STRING;
 pitch: PITCH EQUALS FLOAT;
 range: RANGE EQUALS FLOAT MESURE;
 image_complexety: IMAGE_COMPLEXITY EQUALS SCENERY_OBJECT_IMAGE_COMPLEXITY;
-
+fuel_type: TYPE EQUALS FUEL_TYPE;
 
 //
-length: LENGTH EQUALS FLOAT METERS_OR_FEET;
+length: LENGTH EQUALS FLOAT MESURE;
 number: NUMBER EQUALS (FLOAT | DIRECTION);
 primaryDesignator: PRIMARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
 secondaryDesignator: SECONDARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
-patternAltitude : PATTERN_ALTITUDE EQUALS FLOAT METERS_OR_FEET;
+patternAltitude : PATTERN_ALTITUDE EQUALS FLOAT MESURE;
 primaryTakeoff : PRIMARY_TAKE_OFF EQUALS (BOOLEAN | YES_NO);
 primaryLanding  : PRIMARY_LANDING EQUALS BOOLEAN;
 primaryPattern : PRIMARY_PATTERN EQUALS LEFT_RIGHT;
@@ -670,10 +619,10 @@ endLights: END_LIGHTS EQUALS BOOLEAN;
 //VASI
 vasiType:TYPE EQUALS VASI_TYPE;
 side: SIDE EQUALS LEFT_RIGHT;
-spacing: SPACING EQUALS FLOAT METERS_OR_FEET?;
+spacing: SPACING EQUALS FLOAT MESURE?;
 
 //RUNWAYSTART
-runway_type: TYPE EQUALS RUNWAY_START_TYPE;
+runway_type: TYPE EQUALS TAXIWAY_PATH_TYPE;
 
 //HELIPAD
 helipad_type: TYPE EQUALS HELIPAD_TYPE;
@@ -735,8 +684,6 @@ taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
 
 tower:TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE;
 
-fuel:FUEL_OPEN fuelType availability SIMPLE_TAG_CLOSE;
-
 markings: MARKINGS_OPEN alternateThreshold alternateTouchdown alternateFixedDistance alternatePrecision leadingZeroIdent noThresholdEndArrows edges threshold fixed touchdown dashes ident_Marking precision edgePavement singleEnd primaryClosed secondaryClosed primaryStol secondaryStol SIMPLE_TAG_CLOSE;
 
 lights: LIGHTS_OPEN center edge centerRed SIMPLE_TAG_CLOSE;
@@ -750,6 +697,10 @@ overrun: OVERRUN end length width? surface? SIMPLE_TAG_CLOSE;
 approachLights: APPROACH_LIGHTS_OPEN end system? strobes? reil? touchdown? endLights? SIMPLE_TAG_CLOSE;
 
 vasi: VASI_OPEN end vasiType side biasX biasZ spacing pitch TAG_CLOSE;
+
+visual_model: VISUAL_MODEL_OPEN heading? image_complexety? name instanceId SIMPLE_TAG_CLOSE;
+
+fuel: FUEL_OPEN fuel_type availability SIMPLE_TAG_CLOSE;
 
 ils: ILS_OPEN lattitude longitude altitude heading frequency range? ident_ils width? name? backCourse? TAG_CLOSE glide_slope* dme* visual_model* ILS_CLOSE;
 

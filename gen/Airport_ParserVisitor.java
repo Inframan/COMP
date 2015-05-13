@@ -1,4 +1,4 @@
-// Generated from E:/IntellijWorkspace/XML2SDL/src\Airport_Parser.g4 by ANTLR 4.5
+// Generated from /home/fatia/Documentos/Feup/COMP/Airport_Parser.g4 by ANTLR 4.5
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
@@ -10,12 +10,6 @@ import org.antlr.v4.runtime.tree.ParseTreeVisitor;
  * operations with no return type.
  */
 public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
-	/**
-	 * Visit a parse tree produced by {@link Airport_ParserParser#fsdata}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFsdata(@NotNull Airport_ParserParser.FsdataContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#region}.
 	 * @param ctx the parse tree
@@ -46,6 +40,12 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitName(@NotNull Airport_ParserParser.NameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Airport_ParserParser#instanceId}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInstanceId(@NotNull Airport_ParserParser.InstanceIdContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#magvar}.
 	 * @param ctx the parse tree
@@ -293,12 +293,6 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTaxiwayIndex(@NotNull Airport_ParserParser.TaxiwayIndexContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Airport_ParserParser#fuelType}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFuelType(@NotNull Airport_ParserParser.FuelTypeContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#availability}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -346,6 +340,12 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitImage_complexety(@NotNull Airport_ParserParser.Image_complexetyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Airport_ParserParser#fuel_type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuel_type(@NotNull Airport_ParserParser.Fuel_typeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#length}.
 	 * @param ctx the parse tree
@@ -611,12 +611,6 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRunway_type(@NotNull Airport_ParserParser.Runway_typeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Airport_ParserParser#start_type}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStart_type(@NotNull Airport_ParserParser.Start_typeContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#helipad_type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -659,11 +653,11 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitApproach_runway(@NotNull Airport_ParserParser.Approach_runwayContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link Airport_ParserParser#approach_type}.
+	 * Visit a parse tree produced by {@link Airport_ParserParser#scalar}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitApproach_type(@NotNull Airport_ParserParser.Approach_typeContext ctx);
+	T visitScalar(@NotNull Airport_ParserParser.ScalarContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#airport}.
 	 * @param ctx the parse tree
@@ -676,18 +670,6 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitVertex(@NotNull Airport_ParserParser.VertexContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link Airport_ParserParser#triggerWeatherData}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTriggerWeatherData(@NotNull Airport_ParserParser.TriggerWeatherDataContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link Airport_ParserParser#trigger}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitTrigger(@NotNull Airport_ParserParser.TriggerContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#services}.
 	 * @param ctx the parse tree
@@ -706,12 +688,6 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitGlide_slope(@NotNull Airport_ParserParser.Glide_slopeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link Airport_ParserParser#visual_model}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitVisual_model(@NotNull Airport_ParserParser.Visual_modelContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#dme}.
 	 * @param ctx the parse tree
@@ -748,12 +724,6 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTower(@NotNull Airport_ParserParser.TowerContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link Airport_ParserParser#fuel}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitFuel(@NotNull Airport_ParserParser.FuelContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#markings}.
 	 * @param ctx the parse tree
@@ -797,6 +767,18 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitVasi(@NotNull Airport_ParserParser.VasiContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link Airport_ParserParser#visual_model}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVisual_model(@NotNull Airport_ParserParser.Visual_modelContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Airport_ParserParser#fuel}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuel(@NotNull Airport_ParserParser.FuelContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link Airport_ParserParser#ils}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -820,4 +802,10 @@ public interface Airport_ParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRunway_alias(@NotNull Airport_ParserParser.Runway_aliasContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link Airport_ParserParser#fsdata}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFsdata(@NotNull Airport_ParserParser.FsdataContext ctx);
 }
