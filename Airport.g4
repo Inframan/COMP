@@ -30,6 +30,8 @@ AIRPORT_OPEN:  '<Airport' {ignoreWord=false;} ;
 
 AIRPORT_CLOSE: '</Airport>' {ignoreWord=true;} ;
 
+REGION: 'region' ;
+
 AIRLINE_CODES: 'airlineCodes';
 
 COUNTRY: 'country' ;
@@ -407,7 +409,7 @@ TAXIWAY_PATH_EDGE: 'NONE' |
 'SOLID_DASHED';
 
 
-TAXIWAY_PATH_NUMBER_NOT_RUNWAY: 'EAST'|
+DIRECTION: 'EAST'|
 'NORTH' |
 'NORTHEAST' |
 'NORTHWEST' |
@@ -453,7 +455,7 @@ SURFACE: 'ASPHALT' |
 'WATER';
 
 
-RUNWAY_NUMBER: TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY;
+RUNWAY_NUMBER: FLOAT | DIRECTION;
 
 ///////////////////////MARKINGS /////////////////////
 
@@ -508,13 +510,13 @@ VASI_TYPE: 'PAPI2' |
 'PANELS';
 
 
-VASI_SPACING: UNSIGNED_INT DECIMAL_PART;
+VASI_SPACING: FLOAT;
 
 //////////////////////////////ILS///////////////////////
 
 NAUTICAL_OR_METER: 'N' | 'M';
 
-ILS_RANGE: UNSIGNED_INT NAUTICAL_OR_METER?;
+ILS_RANGE: FLOAT NAUTICAL_OR_METER?;
 
 
 //////////////////RUNWAY START////////////////
@@ -524,10 +526,6 @@ RUNWAY_START_TYPE: 'RUNWAY';
 //////////////////////////////////////////////////////////////
 //////////////////FATIA///////////////////////////////////////
 //////////////////////////////////////////////////////////////
-
-///////////////MARKER/////////////////
-
-IDENT_VALUE: STRING0_TO5;
 
 
 /////////////////////HELIPAD/////////////
@@ -547,112 +545,56 @@ GEOPOL_TYPE:    'COASTLINE' |
 'DASHED_BOUNDARY' ;
 
 
-DIGIT: ('0'..'A');
 
-PERCENTAGE: ( '1'.'0' | '0'.'0'('1'..'9') | '0'.('1'..'9')('0'..'9')?);
+ALTITUDE_VALUES: FLOAT MESURE?;
 
-PERCENTAGE_0: PERCENTAGE | '0.0';
+MESURE: ('M' | 'F' | 'N');
 
+FLOAT: ('-' | '+')?  ( ('0'..'9')+'.'('0'..'9')+ | ('0'..'9')+);  
 
-LATTITUDE_VALUES:  (  ('-' | '+')?   (('0'..'8')?('0'..'9')   |  '90')'.'('0'..'9')*  )
-| (    ('-' | '+')?   (('0'..'8')?('0'..'9')   |  '90') '-'  ('-' | '+')?('0'..'9')+ '-'  ('-' | '+')? ('0'..'9')+ );
-
-
-LONGITTUDE_VALUES:  (  ('-' | '+')?   (   ('1'('0'..'7')('0'..'9'))  |  (('0'..'9')?('0'..'9'))   |  '180')'.'('0'..'9')*  )
-| (   ('-' | '+')?   (   ('1'('0'..'7')('0'..'9'))  |  (('0'..'9')?('0'..'9'))   |  '180') '-'  ('-' | '+')?('0'..'9')+ '-'  ('-' | '+')? ('0'..'9')+ );
-
-HEADING_VALUES: (   ('3'('0'..'5')('0'..'9')) |  (('0'..'2')?('0'..'9')?('0'..'9'))   |  '360') DECIMAL_PART?;
-
-
-MAGVAR_VALUES: ('-' | '+')? (   ('3'('0'..'5')('0'..'9'))  |  (('0'..'2')?('0'..'9')?('0'..'9'))   |  '360');
-
-TAXIWAY_PARKING_TEEOFFSET: (('0'..'4')?('0'..'9')'.'('0'..'9') | '50.0');
-
-TAXIWAY_PATH_NUMBER_RUNWAY: ( '0'('0'..'9') | (  (('0'..'2')?('0'..'9')) | '3'('0'..'6')) );
-
-VASI_PITCH: (('0'..'9')|'10') DECIMAL_PART;
-
-WAYPOINT_IDENT_VALUES: ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ('A'..'Z') ;
-
-REGION: ('A'..'Z')|('0'..'9') ('A'..'Z')|('0'..'9') ;
-
-ILS_IDENT: (('a'..'z') | ('A'..'Z') | ('0'..'9'))STRING0_TO4;
-
-SCENERY_OBJECT_ID: '{'DIGIT+ '-'DIGIT+ '-' DIGIT+ '-' DIGIT+ '-' DIGIT+ '}';
-
-
-TRAFFICSCALLAR: INT('F'|'M'|'N');
-
-
-ALTITUDE_VALUES: FLOAT( 'M' | 'F')?;
-
-
-
-DECIMAL_PART: '.'('0'..'9')+;
-
-INTEGER_0_TO_255: (  ( ('0'..'1')?('0'..'9')?('0'..'9'))
- | ('2'(('0'..'4')('0'..'9'))
-  | ( '5'('0'..'5'))));
-
-INTEGER_0_TO_3999: ('0'..'3')?('0'..'9')('0'..'9')?('0'..'9');
-
-UNSIGNED_INT: ('0'..'9')+;
-
-INT: ('-' | '+')?('0'..'9')+;
-
-FLOAT: ('-' | '+')?('0'..'9')+'.'('0'..'9')+;
-
-
-STRING48: STRING4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4 STRING0_TO4; //12*4 = 48
-
-STRING0_TO_8: STRING0_TO4 STRING0_TO4;
-
-STRING0_TO5: (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
-
-STRING0_TO4: (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
-
-STRING4: (('a'..'z') | ('A'..'Z') | ('0'..'9'))  (('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?(('a'..'z') | ('A'..'Z') | ('0'..'9'))?;
+STRING: (('a'..'z') | ('A'..'Z') | ('0'..'9')) (('a'..'z') | ('A'..'Z') | ('0'..'9') | ' ')*;
 
 ALL_STRING: .*;
 
 
+
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-region: REGION EQUALS STRING48;
-city: CITY EQUALS STRING48;
-country: COUNTRY EQUALS STRING48;
-state: STATE EQUALS STRING48;
-name: NAME EQUALS STRING48;
-magvar: MAGVAR EQUALS MAGVAR_VALUES;
-ident: IDENT EQUALS STRING4;
-index: INDEX EQUALS INTEGER_0_TO_3999;
+region: REGION EQUALS STRING;
+city: CITY EQUALS STRING;
+country: COUNTRY EQUALS STRING;
+state: STATE EQUALS STRING;
+name: NAME EQUALS STRING;
+magvar: MAGVAR EQUALS FLOAT;
+ident: IDENT EQUALS STRING;
+index: INDEX EQUALS FLOAT;
 biasX: BIAS_X EQUALS FLOAT;
 biasY: BIAS_Y EQUALS FLOAT;
 biasZ: BIAS_Z EQUALS FLOAT;
-heading: HEADING EQUALS HEADING_VALUES;
-lattitude: LAT EQUALS LATTITUDE_VALUES;
-longitude: LON EQUALS LONGITTUDE_VALUES;
-altitude: ALT EQUALS ALTITUDE_VALUES;
-airportTestRadius: AIRPORT_TEST_RADIUS EQUALS TRAFFICSCALLAR;
-taxiwaypointType: TYPE EQUALS TAXIWAYPOINT_TYPE;
+heading: HEADING EQUALS FLOAT;
+lattitude: LAT EQUALS FLOAT;
+longitude: LON EQUALS FLOAT;
+altitude: ALT EQUALS FLOAT;
+airportTestRadius: AIRPORT_TEST_RADIUS EQUALS FLOAT MESURE;
+taxiwaypointType: TYPE EQUALS TAXIWAYPOFLOAT_TYPE;
 orientation:ORIENTATION EQUALS TAXIWAYPOINT_ORIENTATION_VALUES;
 radius:RADIUS EQUALS FLOAT;
 taxiwayparkingType:TYPE EQUALS TAXIWAY_PARKING_TYPE;
 taxiwayparkingName:NAME EQUALS TAXIWAY_PARKING_NAME;
-taxiwayparkingNumber:NUMBER EQUALS INTEGER_0_TO_3999;
+taxiwayparkingNumber:NUMBER EQUALS FLOAT;
 airlineCodes: AIRLINE_CODES EQUALS ALL_STRING;
-teeOffSet1:TEE_OFFSET_1 EQUALS TAXIWAY_PARKING_TEEOFFSET;
-teeOffSet2:TEE_OFFSET_2 EQUALS TAXIWAY_PARKING_TEEOFFSET;
-teeOffSet3:TEE_OFFSET_3 EQUALS TAXIWAY_PARKING_TEEOFFSET;
-teeOffSet4:TEE_OFFSET_4 EQUALS TAXIWAY_PARKING_TEEOFFSET;
+teeOffSet1:TEE_OFFSET_1 EQUALS FLOAT;
+teeOffSet2:TEE_OFFSET_2 EQUALS FLOAT;
+teeOffSet3:TEE_OFFSET_3 EQUALS FLOAT;
+teeOffSet4:TEE_OFFSET_4 EQUALS FLOAT;
 taxiwayPathType:TYPE EQUALS TAXIWAY_PATH_TYPE;
-taxiwayPathStart:START EQUALS INTEGER_0_TO_255;
-taxiwayPathEnd:END EQUALS INTEGER_0_TO_255;
+taxiwayPathStart:START EQUALS FLOAT;
+taxiwayPathEnd:END EQUALS FLOAT;
 width:WIDTH EQUALS FLOAT;
-weightLimit:WEIGHT_LIMIT EQUALS INTEGER_0_TO_255;
+weightLimit:WEIGHT_LIMIT EQUALS FLOAT;
 surface:SURFACE EQUALS SURFACE;
 drawSurface:DRAW_SURFACE EQUALS BOOLEAN;
 drawDetail:DRAW_SURFACE EQUALS BOOLEAN;
@@ -662,24 +604,24 @@ leftEdge:LEFT_EDGE EQUALS BOOLEAN;
 leftEdgeLighted:LEFT_EDGE_LIGHTED EQUALS TAXIWAY_PATH_EDGE;
 rightEdge:RIGHT_EDGE EQUALS BOOLEAN;
 rightEdgeLighted:RIGHT_EDGE_LIGHTED EQUALS TAXIWAY_PATH_EDGE;
-taxiwayPathNumber:NUMBER EQUALS (TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY);
+taxiwayPathNumber:NUMBER EQUALS (FLOAT | DIRECTION);
 designator:DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR;
-taxiwayPathName:NAME EQUALS INTEGER_0_TO_255;
-taxiwayNameString:NAME EQUALS STRING0_TO_8;
-taxiwayIndex:INDEX EQUALS INTEGER_0_TO_255;
+taxiwayPathName:NAME EQUALS FLOAT;
+taxiwayNameString:NAME EQUALS STRING;
+taxiwayIndex:INDEX EQUALS FLOAT;
 availability:AVAILABILITY EQUALS FUEL_AVAILABILITY;
-trafficScallar: TRAFFICSCALAR EQUALS PERCENTAGE;
+trafficScallar: TRAFFICSCALAR EQUALS FLOAT;
 frequency: FREQUENCY EQUALS FLOAT;
 end: END EQUALS PRIMARY_OR_SECONDARY_END;
-ident_ils: IDENT EQUALS STRING0_TO5;
-pitch: PITCH EQUALS HEADING_VALUES;
-range: RANGE EQUALS TRAFFICSCALLAR;
+ident_ils: IDENT EQUALS STRING;
+pitch: PITCH EQUALS FLOAT;
+range: RANGE EQUALS FLOAT MESURE;
 image_complexety: IMAGE_COMPLEXITY EQUALS SCENERY_OBJECT_IMAGE_COMPLEXITY;
 
 
 //
 length: LENGTH EQUALS FLOAT METERS_OR_FEET;
-number: NUMBER EQUALS (TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY);
+number: NUMBER EQUALS (FLOAT | DIRECTION);
 primaryDesignator: PRIMARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
 secondaryDesignator: SECONDARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
 patternAltitude : PATTERN_ALTITUDE EQUALS FLOAT METERS_OR_FEET;
@@ -689,8 +631,8 @@ primaryPattern : PRIMARY_PATTERN EQUALS LEFT_RIGHT;
 secondaryTakeoff : SECONDARY_TAKE_OFF EQUALS BOOLEAN;
 secondaryLanding : SECONDARY_LANDING EQUALS BOOLEAN;
 secondaryPattern : SECONDARY_PATTERN EQUALS LEFT_RIGHT;
-primaryMarkingBias : PRIMARY_MARKING_BIAS EQUALS TRAFFICSCALLAR;
-secondaryMarkingBias : SECONDARY_MARKING_BIAS EQUALS TRAFFICSCALLAR;
+primaryMarkingBias : PRIMARY_MARKING_BIAS EQUALS FLOAT MESURE;
+secondaryMarkingBias : SECONDARY_MARKING_BIAS EQUALS FLOAT MESURE;
 
 //Markings
 alternateThreshold : ALTERNATE_THRESHOLD EQUALS BOOLEAN;
@@ -721,7 +663,7 @@ centerRed: CENTER_RED EQUALS BOOLEAN;
 
 // ApproachLights
 system: SYSTEM EQUALS APPROACH_LIGHTS_SYSTEM;
-strobes: STROBES EQUALS UNSIGNED_INT;
+strobes: STROBES EQUALS FLOAT;
 reil: REIL EQUALS BOOLEAN;
 endLights: END_LIGHTS EQUALS BOOLEAN;
 
@@ -737,16 +679,16 @@ runway_type: TYPE EQUALS RUNWAY_START_TYPE;
 helipad_type: TYPE EQUALS HELIPAD_TYPE;
 closed: CLOSED EQUALS BOOLEAN;
 transparent: TRANSPARENT EQUALS BOOLEAN;
-red: RED EQUALS INTEGER_0_TO_255;
-green: GREEN EQUALS INTEGER_0_TO_255;
-blue: BLUE EQUALS INTEGER_0_TO_255;
+red: RED EQUALS FLOAT;
+green: GREEN EQUALS FLOAT;
+blue: BLUE EQUALS FLOAT;
 
 
 //APPROACH
-approach_runway: RUNWAY EQUALS (TAXIWAY_PATH_NUMBER_RUNWAY | TAXIWAY_PATH_NUMBER_NOT_RUNWAY);
+approach_runway: RUNWAY EQUALS (FLOAT | DIRECTION);
 approach_type: TYPE EQUALS APPROACH_TYPE;
 
-scalar: SCALAR EQUALS PERCENTAGE_0;
+scalar: SCALAR EQUALS FLOAT;
 
 
 ////////////////////////////////////////////////////////////////
@@ -781,15 +723,13 @@ airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude al
 
  glide_slope: GLIDE_SLOPE_OPEN lattitude longitude altitude pitch range SIMPLE_TAG_CLOSE;
 
- visual_model: VISUAL_MODEL_OPEN heading image_complexety NAME EQUALS SCENERY_OBJECT_ID TAG_CLOSE biasX biasY biasZ VISUAL_MODEL_CLOSE;
-
  dme: DME_OPEN lattitude longitude altitude range SIMPLE_TAG_CLOSE;
 
 taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX biasZ SIMPLE_TAG_CLOSE;
 
 taxiwayParking: TAXIWAY_PARKING_OPEN index lattitude longitude biasX biasZ heading radius taxiwayparkingType taxiwayparkingName taxiwayparkingNumber airlineCodes teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
 
-taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit surface drawSurface drawDetail centerLine centerLineLighted leftEdge leftEdgeLighted rightEdge rightEdgeLighted taxiwayPathNumber designator taxiwayPathName TAXIWAY_PATH_NUMBER_RUNWAY;
+taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit surface drawSurface drawDetail centerLine centerLineLighted leftEdge leftEdgeLighted rightEdge rightEdgeLighted taxiwayPathNumber designator taxiwayPathName FLOAT;
 
 taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
 
