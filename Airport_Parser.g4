@@ -1,5 +1,7 @@
 grammar Airport_Parser;
 
+WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+
 EQUALS: '=' ;
 
 SIMPLE_TAG_CLOSE: '/>' ;
@@ -296,8 +298,6 @@ SCALAR: 'scalar' ;
 
 TRIGGER_HEIGHT: 'triggerHeight' ;
 
-WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
-
 
 ////////////////////////////***********************************REGULAR EXPRESSIONS *************************/////////////////////////////////////////////////////////////////////////////
 
@@ -460,21 +460,6 @@ VASI_TYPE:  'PAPI2' |
             'APAP' |
             'PANELS';
 
-FUEL_TYPE: '73'|
-           '87'|
-           '100'|
-           '130'|
-           '145'|
-           'MOGAS'|
-           'JET'|
-           'JETA'|
-           'JETA1'|
-           'JETAP'|
-           'JETB'|
-           'JET4'|
-           'JET5'|
-           'UNKNOWN';
-
 
 /////////////////////HELIPAD/////////////
 
@@ -494,22 +479,33 @@ SCENERY_OBJECT_IMAGE_COMPLEXITY: 'VERY_SPARSE' |
                                  'DENSE' |
                                  'VERY_DENSE';
 
-
 GEOPOL_TYPE:    'COASTLINE' |
 'BOUNDARY' |
 'DASHED_BOUNDARY' ;
 
 FUEL_AVAILABILITY:  YES_NO | 'UNKNOWN' | 'PRIOR_REQUEST';
 
+
+FLOAT: ('-' | '+')?  ( ('0'..'9')+ '.' ('0'..'9')+ | ('0'..'9')+ );
+
+FUEL_TYPE: FLOAT |
+           'MOGAS'|
+           'JET'|
+           'JETA'|
+           'JETA1'|
+           'JETAP'|
+           'JETB'|
+           'JET4'|
+           'JET5'|
+           'UNKNOWN';
+
 ALTITUDE_VALUES: FLOAT MESURE?;
 
 MESURE: ('M' | 'F' | 'N');
 
-FLOAT: ('-' | '+')?  ( ('0'..'9')+'.'('0'..'9')+ | ('0'..'9')+);  
-
 STRING: (('a'..'z') | ('A'..'Z') | ('0'..'9')) (('a'..'z') | ('A'..'Z') | ('0'..'9') | ' ')*;
 
-ALL_STRING: .*;
+ALL_STRING: ( STRING | '-' | '{' | '}' | ',' )+ ;
 
 
 
@@ -522,7 +518,7 @@ region: REGION EQUALS STRING;
 city: CITY EQUALS STRING;
 country: COUNTRY EQUALS STRING;
 state: STATE EQUALS STRING;
-name: NAME EQUALS ALL_STRING;
+name: NAME EQUALS STRING;
 instanceId: INSTANCE_ID EQUALS ALL_STRING;
 magvar: MAGVAR EQUALS FLOAT;
 ident: IDENT EQUALS STRING;
@@ -533,7 +529,7 @@ biasZ: BIAS_Z EQUALS FLOAT;
 heading: HEADING EQUALS FLOAT;
 lattitude: LAT EQUALS FLOAT;
 longitude: LON EQUALS FLOAT;
-altitude: ALT EQUALS FLOAT;
+altitude: ALT EQUALS ALTITUDE_VALUES;
 airportTestRadius: AIRPORT_TEST_RADIUS EQUALS FLOAT MESURE;
 taxiwaypointType: TYPE EQUALS TAXIWAYPOINT_TYPE;
 orientation:ORIENTATION EQUALS TAXIWAYPOINT_ORIENTATION_VALUES;
@@ -656,20 +652,6 @@ scalar: SCALAR EQUALS FLOAT;
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius trafficScallar TAG_CLOSE
-            taxiwayPoint+
-            taxiwayParking+
-            taxiwayName+
-            taxiwayPath+
-            tower*
-            services*
-            runway*
-            runway_alias*
-            helipad*
-            runway_start*
-          AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  TRAFFICSCALAR
-
-
  vertex: VERTEX_OPEN (biasX biasZ |longitude lattitude) SIMPLE_TAG_CLOSE;
 
  services: SERVICES_OPEN TAG_CLOSE fuel* SERVICES_CLOSE;
@@ -715,5 +697,18 @@ runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width de
 runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude heading number? designator? SIMPLE_TAG_CLOSE;
 
 runway_alias: RUNWAY_ALIAS_OPEN number designator SIMPLE_TAG_CLOSE;
+
+airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? ident airportTestRadius trafficScallar TAG_CLOSE
+            taxiwayPoint+
+            taxiwayParking+
+            taxiwayName+
+            taxiwayPath+
+            tower*
+            services*
+            runway*
+            runway_alias*
+            helipad*
+            runway_start*
+          AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  TRAFFICSCALAR
 
 fsdata: '<FSData' (ALL_STRING | airport)* '</FSData>';
