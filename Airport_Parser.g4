@@ -583,8 +583,8 @@ primaryPattern : PRIMARY_PATTERN EQUALS LEFT_RIGHT;
 secondaryTakeoff : SECONDARY_TAKE_OFF EQUALS BOOLEAN;
 secondaryLanding : SECONDARY_LANDING EQUALS BOOLEAN;
 secondaryPattern : SECONDARY_PATTERN EQUALS LEFT_RIGHT;
-primaryMarkingBias : PRIMARY_MARKING_BIAS EQUALS FLOAT MESURE;
-secondaryMarkingBias : SECONDARY_MARKING_BIAS EQUALS FLOAT MESURE;
+primaryMarkingBias : PRIMARY_MARKING_BIAS EQUALS ALTITUDE_VALUES;
+secondaryMarkingBias : SECONDARY_MARKING_BIAS EQUALS ALTITUDE_VALUES;
 
 //Markings
 alternateThreshold : ALTERNATE_THRESHOLD EQUALS BOOLEAN;
@@ -684,7 +684,7 @@ overrun: OVERRUN end length width? surface? SIMPLE_TAG_CLOSE;
 
 approachLights: APPROACH_LIGHTS_OPEN end system? strobes? reil? touchdown? endLights? SIMPLE_TAG_CLOSE;
 
-vasi: VASI_OPEN end vasiType side biasX biasZ spacing pitch TAG_CLOSE;
+vasi: VASI_OPEN end vasiType side biasX biasZ spacing pitch SIMPLE_TAG_CLOSE;
 
 visual_model: VISUAL_MODEL_OPEN heading? image_complexety? name instanceId SIMPLE_TAG_CLOSE;
 
@@ -692,7 +692,17 @@ fuel: FUEL_OPEN fuel_type availability SIMPLE_TAG_CLOSE;
 
 ils: ILS_OPEN lattitude longitude altitude heading frequency range? ident_ils width? name? backCourse? TAG_CLOSE glide_slope* dme* visual_model* ILS_CLOSE;
 
-runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width number designator? (primaryDesignator | secondaryDesignator | patternAltitude? | primaryLanding? | primaryPattern? | secondaryTakeoff? | secondaryTakeoff? | secondaryLanding? | secondaryPattern? | primaryMarkingBias | secondaryMarkingBias )* TAG_CLOSE markings? lights? offsetThreshold? blastPad? RUNWAY_CLOSE;
+runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width number (designator | primaryDesignator  secondaryDesignator)?
+			  patternAltitude?
+			  primaryTakeoff?  
+			  primaryLanding? 
+			  primaryPattern? 
+			  secondaryTakeoff? 
+			  secondaryLanding? 
+			  secondaryPattern? 
+			  primaryMarkingBias? 
+			  secondaryMarkingBias?		
+	 TAG_CLOSE markings? lights? offsetThreshold? blastPad? vasi* RUNWAY_CLOSE;
 
 runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude heading number? designator? SIMPLE_TAG_CLOSE;
 
