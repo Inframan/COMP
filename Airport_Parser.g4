@@ -8,8 +8,6 @@ SIMPLE_TAG_CLOSE: '/>' ;
 
 TAG_CLOSE: '>' ;
 
-YES_NO: 'YES' | 'NO';
-
 AIRPORT_OPEN:  '<Airport' {ignoreWord=false;} ;
 
 AIRPORT_CLOSE: '</Airport>' {ignoreWord=true;} ;
@@ -301,345 +299,140 @@ TRIGGER_HEIGHT: 'triggerHeight' ;
 
 ////////////////////////////***********************************REGULAR EXPRESSIONS *************************/////////////////////////////////////////////////////////////////////////////
 
-TAXIWAYPOINT_ORIENTATION_VALUES: 'FORWARD' | 'REVERSE';
 
-TAXIWAYPOINT_TYPE: 'NORMAL' | 'HOLD_SHORT' |  'ILS_HOLD_SHORT' |  'HOLD_SHORT_NO_DRAW' | 'ILS_HOLD_SHORT_NO_DRAW';
-
-
-
-TAXIWAY_PARKING_TYPE: 'NONE' |                      
-                      'DOCK_GA' |
-                      'FUEL' |                      
-                      'GATE_HEAVY' |
-                      'GATE_MEDIUM' |                      
-                      'GATE_SMALL' |
-                      'RAMP_CARGO' |                      
-                      'RAMP_GA' |
-                      'RAMP_GA_LARGE' |                      
-                      'RAMP_GA_MEDIUM' |
-                      'RAMP_GA_SMALL' |                      
-                      'RAMP_MIL_CARGO' |
-                      'RAMP_MIL_COMBAT' |                      
-                      'VEHICLE';
-
-
-TAXIWAY_PARKING_NAME: 'PARKING' |
-                      'DOCK' |
-                      'GATE' |
-                      'GATE_'('A'..'Z') |
-                      'NONE' |
-                      'N_PARKING' |
-                      'NE_PARKING' |
-                      'NW_PARKING' |
-                      'SE_PARKING' |
-                      'S_PARKING' |
-                      'SW_PARKING' |
-                      'W_PARKING' |
-                      'E_PARKING';
-
-TAXIWAY_PARKING_PUSHBACK: 'NONE'|
-                          'BOTH' |
-                          'LEFT' |
-                          'RIGHT';
-
-TAXI_NAME_SIZE: 'SIZE1' | 'SIZE2' | 'SIZE3' | 'SIZE4' | 'SIZE5';
-
-LEFT_RIGHT: 'LEFT' | 'RIGHT';
-
-
-TAXIWAY_PATH_TYPE:  'RUNWAY' |
-                    'PARKING' |
-                    'TAXI' |
-                    'PATH' |
-                    'CLOSED' |
-                    'VEHICLE';
-
-BOOLEAN: 'TRUE' | 'FALSE';
-
-TAXIWAY_PATH_EDGE:  'NONE' |
-                    'SOLID' |
-                    'DASHED' |
-                    'SOLID_DASHED';
-
-
-DIRECTION:  'EAST'|
-            'NORTH' |
-            'NORTHEAST' |
-            'NORTHWEST' |
-            'SOUTH' |
-            'SOUTHEAST' |
-            'SOUTHWEST' |
-            'WEST';
-
-TAXIWAY_PATH_NUMBER_DESIGNATOR: 'NONE' |
-                                'C' |
-                                'CENTER' |
-                                'L' |
-                                'LEFT' |
-                                'R' |
-                                'RIGHT' |
-                                'W' |
-                                'WATER' |
-                                'A' |
-                                'B';
-
-/////////////RUNWAY/////////////////
-
-SURFACE_VALUES:  'ASPHALT' |
-          'BITUMINOUS' |
-          'BRICK' |
-          'CLAY' |
-          'CEMENT' |
-          'CONCRETE' |
-          'CORAL' |
-          'DIRT' |
-          'GRASS' |
-          'GRAVEL' |
-          'ICE' |
-          'MACADAM' |
-          'OIL_TREATED' |
-          'PLANKS' |
-          'SAND' |
-          'SHALE' |
-          'SNOW' |
-          'STEEL_MATS' |
-          'TARMAC' |
-          'UNKNOWN' |
-          'WATER';
-
-
-RUNWAY_NUMBER: FLOAT | DIRECTION;
-
-
-////////////////////LIGHTS////////////
-LIGHTS_VALUES:  'NONE' |
-                'LOW' |
-                'MEDIUM' |
-                'HIGH';
-
-
-///////////////OFFSET THREASHHOLD AND BLAST PAD AND OVERRUN///////////////
-
-
-PRIMARY_OR_SECONDARY_END: 'PRIMARY' |
-'SECONDARY';
-
-
-//////////////APPROACHLIGHTS////////
-
-APPROACH_LIGHTS_SYSTEM: 'NONE' |
-                        'ALSF1' |
-                        'ALSF2' |
-                        'CALVERT' |
-                        'CALVERT2' |
-                        'MALS' |
-                        'MALSF' |
-                        'MALSR' |
-                        'ODALS' |
-                        'RAIL' |
-                        'SALS' |
-                        'SALSF' |
-                        'SSALF' |
-                        'SSALR' |
-                        'SSALS';
-
-////////////VASI//////////
-
-VASI_TYPE:  'PAPI2' |
-            'PAPI4' |
-            'PVASI' |
-            'TRICOLOR' |
-            'TVASI' |
-            'VASI21' |
-            'VASI22' |
-            'VASI23' |
-            'VASI31' |
-            'VASI32' |
-            'VASI33' |
-            'BALL' |
-            'APAP' |
-            'PANELS';
-
-
-/////////////////////HELIPAD/////////////
-
-
-HELIPAD_TYPE: 'NONE' |
-'CIRCLE' |
-'H' |
-'MEDICAL' |
-'SQUARE';
-
-///////////////GEOPOL/////////////////
-
-
-SCENERY_OBJECT_IMAGE_COMPLEXITY: 'VERY_SPARSE' |
-                                 'SPARSE' |
-                                 'NORMAL' |
-                                 'DENSE' |
-                                 'VERY_DENSE';
-
-GEOPOL_TYPE:    'COASTLINE' |
-'BOUNDARY' |
-'DASHED_BOUNDARY' ;
-
-FUEL_AVAILABILITY:  YES_NO | 'UNKNOWN' | 'PRIOR_REQUEST';
-
-
-FLOAT: ('-' | '+')?  ('0'..'9')+ ('.' ('0'..'9')+)? ;
-
-FUEL_TYPE: FLOAT |
-           'MOGAS'|
-           'JET'|
-           'JETA'|
-           'JETA1'|
-           'JETAP'|
-           'JETB'|
-           'JET4'|
-           'JET5'|
-           'UNKNOWN';
-
-ALTITUDE_VALUES: FLOAT MESURE?;
-
-MESURE: ('M' | 'F' | 'N');
-
-STRING: (('a'..'z') | ('A'..'Z') | ('0'..'9')) (('a'..'z') | ('A'..'Z') | ('0'..'9') | ' ' )*;
-
-ALL_STRING: ( STRING | '-' | '{' | '}' | ',' )+ ;
-
-
+VALUE: (('a'..'z') | ('A'..'Z') | ('0'..'9') | '.' | '-' | '+' | '{' | '}' | ',' | ' ')+ ;
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
 
-region: REGION EQUALS STRING;
-city: CITY EQUALS STRING;
-country: COUNTRY EQUALS STRING;
-state: STATE EQUALS STRING;
-name: NAME EQUALS STRING;
-instanceId: INSTANCE_ID EQUALS ALL_STRING;
-magvar: MAGVAR EQUALS FLOAT;
-ident: IDENT EQUALS STRING;
-index: INDEX EQUALS FLOAT;
-biasX: BIAS_X EQUALS FLOAT;
-biasY: BIAS_Y EQUALS FLOAT;
-biasZ: BIAS_Z EQUALS FLOAT;
-heading: HEADING EQUALS FLOAT;
-lattitude: LAT EQUALS ALL_STRING;
-longitude: LON EQUALS FLOAT;
-altitude: ALT EQUALS ALTITUDE_VALUES;
-airportTestRadius: AIRPORT_TEST_RADIUS EQUALS FLOAT MESURE;
-taxiwaypointType: TYPE EQUALS TAXIWAYPOINT_TYPE;
-orientation:ORIENTATION EQUALS TAXIWAYPOINT_ORIENTATION_VALUES;
-radius:RADIUS EQUALS FLOAT;
-taxiwayparkingType:TYPE EQUALS TAXIWAY_PARKING_TYPE;
-taxiwayparkingName:NAME EQUALS TAXIWAY_PARKING_NAME;
-taxiwayparkingNumber:NUMBER EQUALS FLOAT;
-airlineCodes: AIRLINE_CODES EQUALS ALL_STRING;
-teeOffSet1:TEE_OFFSET_1 EQUALS FLOAT;
-teeOffSet2:TEE_OFFSET_2 EQUALS FLOAT;
-teeOffSet3:TEE_OFFSET_3 EQUALS FLOAT;
-teeOffSet4:TEE_OFFSET_4 EQUALS FLOAT;
-taxiwayPathType:TYPE EQUALS TAXIWAY_PATH_TYPE;
-taxiwayPathStart:START EQUALS FLOAT;
-taxiwayPathEnd:END EQUALS FLOAT;
-width:WIDTH EQUALS ALTITUDE_VALUES;
-weightLimit:WEIGHT_LIMIT EQUALS FLOAT;
-surface:SURFACE EQUALS SURFACE_VALUES;
-drawSurface:DRAW_SURFACE EQUALS BOOLEAN;
-drawDetail:DRAW_SURFACE EQUALS BOOLEAN;
-centerLine:CENTER_LINE EQUALS BOOLEAN;
-centerLineLighted:CENTER_LINE_LIGHTED EQUALS BOOLEAN;
-leftEdge:LEFT_EDGE EQUALS BOOLEAN;
-leftEdgeLighted:LEFT_EDGE_LIGHTED EQUALS TAXIWAY_PATH_EDGE;
-rightEdge:RIGHT_EDGE EQUALS BOOLEAN;
-rightEdgeLighted:RIGHT_EDGE_LIGHTED EQUALS TAXIWAY_PATH_EDGE;
-taxiwayPathNumber:NUMBER EQUALS (FLOAT | DIRECTION);
-designator:DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR;
-taxiwayPathName:NAME EQUALS FLOAT;
-taxiwayNameString:NAME EQUALS STRING;
-taxiwayIndex:INDEX EQUALS FLOAT;
-availability:AVAILABILITY EQUALS FUEL_AVAILABILITY;
-trafficScallar: TRAFFICSCALAR EQUALS FLOAT;
-frequency: FREQUENCY EQUALS FLOAT;
-end: END EQUALS PRIMARY_OR_SECONDARY_END;
-ident_ils: IDENT EQUALS STRING;
-pitch: PITCH EQUALS FLOAT;
-range: RANGE EQUALS FLOAT MESURE;
-image_complexety: IMAGE_COMPLEXITY EQUALS SCENERY_OBJECT_IMAGE_COMPLEXITY;
-fuel_type: TYPE EQUALS FUEL_TYPE;
+region: REGION EQUALS VALUE;
+city: CITY EQUALS VALUE;
+country: COUNTRY EQUALS VALUE;
+state: STATE EQUALS VALUE;
+name: NAME EQUALS VALUE;
+instanceId: INSTANCE_ID EQUALS VALUE;
+magvar: MAGVAR EQUALS VALUE;
+ident: IDENT EQUALS VALUE;
+index: INDEX EQUALS VALUE;
+biasX: BIAS_X EQUALS VALUE;
+biasY: BIAS_Y EQUALS VALUE;
+biasZ: BIAS_Z EQUALS VALUE;
+heading: HEADING EQUALS VALUE;
+lattitude: LAT EQUALS VALUE;
+longitude: LON EQUALS VALUE;
+altitude: ALT EQUALS VALUE;
+airportTestRadius: AIRPORT_TEST_RADIUS EQUALS VALUE;
+taxiwaypointType: TYPE EQUALS VALUE;
+orientation:ORIENTATION EQUALS VALUE;
+radius:RADIUS EQUALS VALUE;
+taxiwayparkingType:TYPE EQUALS VALUE;
+taxiwayparkingName:NAME EQUALS VALUE;
+taxiwayparkingNumber:NUMBER EQUALS VALUE;
+airlineCodes: AIRLINE_CODES EQUALS VALUE;
+teeOffSet1:TEE_OFFSET_1 EQUALS VALUE;
+teeOffSet2:TEE_OFFSET_2 EQUALS VALUE;
+teeOffSet3:TEE_OFFSET_3 EQUALS VALUE;
+teeOffSet4:TEE_OFFSET_4 EQUALS VALUE;
+taxiwayPathType:TYPE EQUALS VALUE;
+taxiwayPathStart:START EQUALS VALUE;
+taxiwayPathEnd:END EQUALS VALUE;
+width:WIDTH EQUALS VALUE;
+weightLimit:WEIGHT_LIMIT EQUALS VALUE;
+surface:SURFACE EQUALS VALUE;
+drawSurface:DRAW_SURFACE EQUALS VALUE;
+drawDetail:DRAW_SURFACE EQUALS VALUE;
+centerLine:CENTER_LINE EQUALS VALUE;
+centerLineLighted:CENTER_LINE_LIGHTED EQUALS VALUE;
+leftEdge:LEFT_EDGE EQUALS VALUE;
+leftEdgeLighted:LEFT_EDGE_LIGHTED EQUALS VALUE;
+rightEdge:RIGHT_EDGE EQUALS VALUE;
+rightEdgeLighted:RIGHT_EDGE_LIGHTED EQUALS VALUE;
+taxiwayPathNumber:NUMBER EQUALS VALUE;
+designator:DESIGNATOR EQUALS VALUE;
+taxiwayPathName:NAME EQUALS VALUE;
+taxiwayNameString:NAME EQUALS VALUE;
+taxiwayIndex:INDEX EQUALS VALUE;
+availability:AVAILABILITY EQUALS VALUE;
+trafficScallar: TRAFFICSCALAR EQUALS VALUE;
+frequency: FREQUENCY EQUALS VALUE;
+end: END EQUALS VALUE;
+ident_ils: IDENT EQUALS VALUE;
+pitch: PITCH EQUALS VALUE;
+range: RANGE EQUALS VALUE;
+image_complexety: IMAGE_COMPLEXITY EQUALS VALUE;
+fuel_type: TYPE EQUALS VALUE;
 
 //
-length: LENGTH EQUALS FLOAT MESURE;
-number: NUMBER EQUALS (FLOAT | DIRECTION);
-primaryDesignator: PRIMARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
-secondaryDesignator: SECONDARY_DESIGNATOR EQUALS TAXIWAY_PATH_NUMBER_DESIGNATOR ;
-patternAltitude : PATTERN_ALTITUDE EQUALS ALTITUDE_VALUES;
-primaryTakeoff : PRIMARY_TAKE_OFF EQUALS (BOOLEAN | YES_NO);
-primaryLanding  : PRIMARY_LANDING EQUALS BOOLEAN;
-primaryPattern : PRIMARY_PATTERN EQUALS LEFT_RIGHT;
-secondaryTakeoff : SECONDARY_TAKE_OFF EQUALS BOOLEAN;
-secondaryLanding : SECONDARY_LANDING EQUALS BOOLEAN;
-secondaryPattern : SECONDARY_PATTERN EQUALS LEFT_RIGHT;
-primaryMarkingBias : PRIMARY_MARKING_BIAS EQUALS ALTITUDE_VALUES;
-secondaryMarkingBias : SECONDARY_MARKING_BIAS EQUALS ALTITUDE_VALUES;
+length: LENGTH EQUALS VALUE;
+number: NUMBER EQUALS VALUE;
+primaryDesignator: PRIMARY_DESIGNATOR EQUALS VALUE ;
+secondaryDesignator: SECONDARY_DESIGNATOR EQUALS VALUE ;
+patternAltitude : PATTERN_ALTITUDE EQUALS VALUE;
+primaryTakeoff : PRIMARY_TAKE_OFF EQUALS VALUE;
+primaryLanding  : PRIMARY_LANDING EQUALS VALUE;
+primaryPattern : PRIMARY_PATTERN EQUALS VALUE;
+secondaryTakeoff : SECONDARY_TAKE_OFF EQUALS VALUE;
+secondaryLanding : SECONDARY_LANDING EQUALS VALUE;
+secondaryPattern : SECONDARY_PATTERN EQUALS VALUE;
+primaryMarkingBias : PRIMARY_MARKING_BIAS EQUALS VALUE;
+secondaryMarkingBias : SECONDARY_MARKING_BIAS EQUALS VALUE;
 
 //Markings
-alternateThreshold : ALTERNATE_THRESHOLD EQUALS BOOLEAN;
-alternateTouchdown : ALTERNATE_TOUCHDOWN EQUALS BOOLEAN;
-alternateFixedDistance : ALTERNATE_FIXED_DISTANCE EQUALS BOOLEAN;
-alternatePrecision : ALTERNATE_PRECISION EQUALS BOOLEAN;
-leadingZeroIdent : LEADING_ZERO_IDENT EQUALS BOOLEAN;
-noThresholdEndArrows : NO_THRESHOLD_END_ARROWS EQUALS BOOLEAN;
-edges : EDGES EQUALS BOOLEAN;
-threshold : THRESHOLD EQUALS BOOLEAN;
-fixed : FIXED_DISTANCE EQUALS BOOLEAN;
-touchdown : TOUCHDOWN EQUALS BOOLEAN;
-dashes : DASHES EQUALS BOOLEAN;
-ident_Marking : IDENT EQUALS BOOLEAN ;
-precision : PRECISION EQUALS BOOLEAN;
-edgePavement : EDGE_PAVEMENT EQUALS BOOLEAN;
-singleEnd : SINGLE_END EQUALS BOOLEAN;
-primaryClosed : PRIMARY_CLOSED EQUALS BOOLEAN;
-secondaryClosed : SECONDARY_CLOSED EQUALS BOOLEAN;
-primaryStol : PRIMARY_STOL EQUALS BOOLEAN;
-secondaryStol : SECONDARY_STOL EQUALS BOOLEAN;
-backCourse: BACK_COURSE EQUALS BOOLEAN;
+alternateThreshold : ALTERNATE_THRESHOLD EQUALS VALUE;
+alternateTouchdown : ALTERNATE_TOUCHDOWN EQUALS VALUE;
+alternateFixedDistance : ALTERNATE_FIXED_DISTANCE EQUALS VALUE;
+alternatePrecision : ALTERNATE_PRECISION EQUALS VALUE;
+leadingZeroIdent : LEADING_ZERO_IDENT EQUALS VALUE;
+noThresholdEndArrows : NO_THRESHOLD_END_ARROWS EQUALS VALUE;
+edges : EDGES EQUALS VALUE;
+threshold : THRESHOLD EQUALS VALUE;
+fixed : FIXED_DISTANCE EQUALS VALUE;
+touchdown : TOUCHDOWN EQUALS VALUE;
+dashes : DASHES EQUALS VALUE;
+ident_Marking : IDENT EQUALS VALUE ;
+precision : PRECISION EQUALS VALUE;
+edgePavement : EDGE_PAVEMENT EQUALS VALUE;
+singleEnd : SINGLE_END EQUALS VALUE;
+primaryClosed : PRIMARY_CLOSED EQUALS VALUE;
+secondaryClosed : SECONDARY_CLOSED EQUALS VALUE;
+primaryStol : PRIMARY_STOL EQUALS VALUE;
+secondaryStol : SECONDARY_STOL EQUALS VALUE;
+backCourse: BACK_COURSE EQUALS VALUE;
 
 //Lights
-center: CENTER EQUALS LIGHTS_VALUES;
-edge: EDGE EQUALS LIGHTS_VALUES;
-centerRed: CENTER_RED EQUALS BOOLEAN;
+center: CENTER EQUALS VALUE;
+edge: EDGE EQUALS VALUE;
+centerRed: CENTER_RED EQUALS VALUE;
 
 // ApproachLights
-system: SYSTEM EQUALS APPROACH_LIGHTS_SYSTEM;
-strobes: STROBES EQUALS FLOAT;
-reil: REIL EQUALS BOOLEAN;
-endLights: END_LIGHTS EQUALS BOOLEAN;
+system: SYSTEM EQUALS VALUE;
+strobes: STROBES EQUALS VALUE;
+reil: REIL EQUALS VALUE;
+endLights: END_LIGHTS EQUALS VALUE;
 
 //VASI
-vasiType:TYPE EQUALS VASI_TYPE;
-side: SIDE EQUALS LEFT_RIGHT;
-spacing: SPACING EQUALS FLOAT MESURE?;
+vasiType:TYPE EQUALS VALUE;
+side: SIDE EQUALS VALUE;
+spacing: SPACING EQUALS VALUE;
 
 //RUNWAYSTART
-runway_type: TYPE EQUALS TAXIWAY_PATH_TYPE;
+runway_type: TYPE EQUALS VALUE;
 
 //HELIPAD
-helipad_type: TYPE EQUALS HELIPAD_TYPE;
-closed: CLOSED EQUALS BOOLEAN;
-transparent: TRANSPARENT EQUALS BOOLEAN;
-red: RED EQUALS FLOAT;
-green: GREEN EQUALS FLOAT;
-blue: BLUE EQUALS FLOAT;
+helipad_type: TYPE EQUALS VALUE;
+closed: CLOSED EQUALS VALUE;
+transparent: TRANSPARENT EQUALS VALUE;
+red: RED EQUALS VALUE;
+green: GREEN EQUALS VALUE;
+blue: BLUE EQUALS VALUE;
 
 
 //APPROACH
-approach_runway: RUNWAY EQUALS (FLOAT | DIRECTION);
+approach_runway: RUNWAY EQUALS VALUE;
 
-scalar: SCALAR EQUALS FLOAT;
+scalar: SCALAR EQUALS VALUE;
 
 
 ////////////////////////////////////////////////////////////////
@@ -709,17 +502,17 @@ runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude headin
 runway_alias: RUNWAY_ALIAS_OPEN number designator SIMPLE_TAG_CLOSE;
 
 airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? trafficScallar airportTestRadius ident    TAG_CLOSE
-          taxiwayPoint* 
+            taxiwayPoint*
             taxiwayParking*
             taxiwayName*
             taxiwayPath*
-            (
-            tower
-           | services
-           | runway
-           | runway_alias
-           | helipad
-           | runway_start )* 
+            (  tower
+               | services
+               | runway
+               | runway_alias
+               | helipad
+               | runway_start
+            )*
           AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  TRAFFICSCALAR
 
 fsdata: '<FSData' (ALL_STRING | airport)* '</FSData>';

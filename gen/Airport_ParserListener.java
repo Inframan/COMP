@@ -1088,16 +1088,6 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 */
 	void exitScalar(@NotNull Airport_ParserParser.ScalarContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link Airport_ParserParser#airport}.
-	 * @param ctx the parse tree
-	 */
-	void enterAirport(@NotNull Airport_ParserParser.AirportContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Airport_ParserParser#airport}.
-	 * @param ctx the parse tree
-	 */
-	void exitAirport(@NotNull Airport_ParserParser.AirportContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#vertex}.
 	 * @param ctx the parse tree
 	 */
@@ -1327,6 +1317,16 @@ public interface Airport_ParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRunway_alias(@NotNull Airport_ParserParser.Runway_aliasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link Airport_ParserParser#airport}.
+	 * @param ctx the parse tree
+	 */
+	void enterAirport(@NotNull Airport_ParserParser.AirportContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Airport_ParserParser#airport}.
+	 * @param ctx the parse tree
+	 */
+	void exitAirport(@NotNull Airport_ParserParser.AirportContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link Airport_ParserParser#fsdata}.
 	 * @param ctx the parse tree

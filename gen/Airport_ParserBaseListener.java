@@ -1312,18 +1312,6 @@ public class Airport_ParserBaseListener implements Airport_ParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAirport(@NotNull Airport_ParserParser.AirportContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitAirport(@NotNull Airport_ParserParser.AirportContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterVertex(@NotNull Airport_ParserParser.VertexContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1595,6 +1583,18 @@ public class Airport_ParserBaseListener implements Airport_ParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRunway_alias(@NotNull Airport_ParserParser.Runway_aliasContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAirport(@NotNull Airport_ParserParser.AirportContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAirport(@NotNull Airport_ParserParser.AirportContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
