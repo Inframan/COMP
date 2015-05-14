@@ -20,6 +20,7 @@ NDB: ('<Ndb' .*? '/>')->skip;
 COMMENTS: ('<!--' .*? '-->')->skip;
 XML_SPEC: ('<?xml' .*? '?>')->skip;
 SCENERY_OBJECT: ('<SceneryObject' .*? '</SceneryObject>')->skip;
+MARKER: ('<Marker' .*? '/>')->skip;
 FSDATA_OPEN: ('<FSData' .*? '>')->skip;
 FSDATA_CLOSE: ('</FSData>')->skip;
 
@@ -320,7 +321,7 @@ TRIGGER_HEIGHT: 'triggerHeight' ;
 ////////////////////////////***********************************REGULAR EXPRESSIONS *************************/////////////////////////////////////////////////////////////////////////////
 
 
-VALUE: (('a'..'z') | ('A'..'Z') | ('0'..'9') | '.' | '-' | '+' | '{' | '}' | ',' | ' ' | '/' | '_' )+ ;
+VALUE: (('a'..'z') | ('A'..'Z') | ('0'..'9') | '.' | '-' | '+' | '{' | '}' | ',' | ' ' | '/' | '_')+ ;
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -350,6 +351,7 @@ radius:RADIUS EQUALS VALUE;
 taxiwayparkingType:TYPE EQUALS VALUE;
 taxiwayparkingName:NAME EQUALS VALUE;
 taxiwayparkingNumber:NUMBER EQUALS VALUE;
+push_back: PUSH_BACK EQUALS VALUE;
 airlineCodes: AIRLINE_CODES EQUALS VALUE;
 teeOffSet1:TEE_OFFSET_1 EQUALS VALUE;
 teeOffSet2:TEE_OFFSET_2 EQUALS VALUE;
@@ -372,7 +374,7 @@ rightEdgeLighted:RIGHT_EDGE_LIGHTED EQUALS VALUE;
 taxiwayPathNumber:NUMBER EQUALS VALUE;
 designator:DESIGNATOR EQUALS VALUE;
 taxiwayPathName:NAME EQUALS VALUE;
-taxiwayNameString:NAME EQUALS VALUE;
+taxiwayNameString:NAME EQUALS VALUE?;
 taxiwayIndex:INDEX EQUALS VALUE;
 availability:AVAILABILITY EQUALS VALUE;
 trafficScallar: TRAFFICSCALAR EQUALS VALUE;
@@ -478,12 +480,12 @@ scalar: SCALAR EQUALS VALUE;
 taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX* biasZ* SIMPLE_TAG_CLOSE;
 
 taxiwayParking: TAXIWAY_PARKING_OPEN index lattitude longitude biasX? biasZ? heading radius
-taxiwayparkingType taxiwayparkingName taxiwayparkingNumber airlineCodes? teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
+    taxiwayparkingType taxiwayparkingName taxiwayparkingNumber push_back airlineCodes? teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
 
 taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit drawSurface
     drawDetail surface taxiwayPathName  centerLine? centerLineLighted? taxiwayPathNumber?   designator? leftEdge? leftEdgeLighted? rightEdge? rightEdgeLighted? SIMPLE_TAG_CLOSE;
 
-taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
+taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayNameString? SIMPLE_TAG_CLOSE;
 
 tower: (TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE|  TOWER_OPEN lattitude longitude altitude TAG_CLOSE TOWER_CLOSE ) ;
 
