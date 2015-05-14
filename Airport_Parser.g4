@@ -1,6 +1,28 @@
 grammar Airport_Parser;
 
+
+
+//Skydiving
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+
+APPROACH: ('<Approach' .*? '>' .*? '</Approach>')->skip;
+APRONS: ('<Aprons>' .*? '</Aprons>')->skip;
+JETWAY: ('<Jetway>' .*? '<Jetway>')->skip;
+APRON_EDGE_LIGHTS: ('<ApronEdgeLights>' .*? '</ApronEdgeLights>')->skip;
+START_NODE: ('<Start' .*? '/>')->skip;
+COM: ('<Com' .*? '/>')->skip;
+DELETE_AIRPORT: ('<DeleteAirport' .*? '>' .*? '</DeleteAirport>')->skip;
+BLAST_FENCE: ('<BlastFence' .*? '>' .*? '</BlastFence>')->skip;
+TAXIWAY_SIGN: ('<TaxiwaySign' .*? '/>')->skip;
+BOUNDARY_FENCE: ('<BoundaryFence' .*? '>' .*? '</BoundaryFence>')->skip;
+WAY_POINT: ('<Waypoint' .*? '>' .*? '</Waypoint>')->skip;
+NDB: ('<Ndb' .*? '/>')->skip;
+COMMENTS: ('<!--' .*? '-->')->skip;
+XML_SPEC: ('<?xml' .*? '?>')->skip;
+SCENERY_OBJECT: ('<SceneryObject' .*? '</SceneryObject>')->skip;
+FSDATA_OPEN: ('<FSData' .*? '>')->skip;
+FSDATA_CLOSE: ('</FSData>')->skip;
+
 
 EQUALS: '=' ;
 
@@ -160,6 +182,8 @@ PITCH: 'pitch' ;
 
 START_OPEN: '<Start' ;
 
+START: 'start';
+
 FREQUENCY: 'frequency';
 
 APPROACH_LIGHTS_OPEN: '<ApproachLights' ;
@@ -230,8 +254,6 @@ TAXI_NAME_OPEN: '<TaxiName' ;
 
 TAXIWAY_PATH_OPEN: '<TaxiwayPath' ;
 
-START: 'start' ;
-
 WEIGHT_LIMIT: 'weightLimit' ;
 
 DRAW_SURFACE: 'drawSurface' ;
@@ -295,12 +317,10 @@ ALTITUDE_MINIMUM: 'altitudeMinimum' ;
 SCALAR: 'scalar' ;
 
 TRIGGER_HEIGHT: 'triggerHeight' ;
-
-
 ////////////////////////////***********************************REGULAR EXPRESSIONS *************************/////////////////////////////////////////////////////////////////////////////
 
 
-VALUE: (('a'..'z') | ('A'..'Z') | ('0'..'9') | '.' | '-' | '+' | '{' | '}' | ',' | ' ')+ ;
+VALUE: (('a'..'z') | ('A'..'Z') | ('0'..'9') | '.' | '-' | '+' | '{' | '}' | ',' | ' ' | '/' | '_' )+ ;
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -342,7 +362,7 @@ width:WIDTH EQUALS VALUE;
 weightLimit:WEIGHT_LIMIT EQUALS VALUE;
 surface:SURFACE EQUALS VALUE;
 drawSurface:DRAW_SURFACE EQUALS VALUE;
-drawDetail:DRAW_SURFACE EQUALS VALUE;
+drawDetail:DRAW_DETAIL EQUALS VALUE;
 centerLine:CENTER_LINE EQUALS VALUE;
 centerLineLighted:CENTER_LINE_LIGHTED EQUALS VALUE;
 leftEdge:LEFT_EDGE EQUALS VALUE;
@@ -455,15 +475,17 @@ scalar: SCALAR EQUALS VALUE;
 
  dme: DME_OPEN lattitude longitude altitude range SIMPLE_TAG_CLOSE;
 
-taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX biasZ SIMPLE_TAG_CLOSE;
+taxiwayPoint:TAXIWAY_POINT_OPEN index taxiwaypointType orientation? lattitude longitude biasX* biasZ* SIMPLE_TAG_CLOSE;
 
-taxiwayParking: TAXIWAY_PARKING_OPEN index lattitude longitude biasX biasZ heading radius taxiwayparkingType taxiwayparkingName taxiwayparkingNumber airlineCodes teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
+taxiwayParking: TAXIWAY_PARKING_OPEN index lattitude longitude biasX? biasZ? heading radius
+taxiwayparkingType taxiwayparkingName taxiwayparkingNumber airlineCodes? teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
 
-taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit surface drawSurface drawDetail centerLine centerLineLighted leftEdge leftEdgeLighted rightEdge rightEdgeLighted taxiwayPathNumber designator taxiwayPathName FLOAT;
+taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit drawSurface
+    drawDetail surface taxiwayPathName  centerLine? centerLineLighted? taxiwayPathNumber?   designator? leftEdge? leftEdgeLighted? rightEdge? rightEdgeLighted? SIMPLE_TAG_CLOSE;
 
 taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayName SIMPLE_TAG_CLOSE;
 
-tower:TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE;
+tower: (TOWER_OPEN lattitude longitude altitude SIMPLE_TAG_CLOSE|  TOWER_OPEN lattitude longitude altitude TAG_CLOSE TOWER_CLOSE ) ;
 
 markings: MARKINGS_OPEN alternateThreshold alternateTouchdown alternateFixedDistance alternatePrecision leadingZeroIdent noThresholdEndArrows edges threshold fixed touchdown dashes ident_Marking precision edgePavement singleEnd primaryClosed secondaryClosed primaryStol secondaryStol SIMPLE_TAG_CLOSE;
 
@@ -483,7 +505,7 @@ visual_model: VISUAL_MODEL_OPEN heading? image_complexety? name instanceId SIMPL
 
 fuel: FUEL_OPEN fuel_type availability SIMPLE_TAG_CLOSE;
 
-ils: ILS_OPEN lattitude longitude altitude heading frequency range? ident_ils width? name? backCourse? TAG_CLOSE glide_slope* dme* visual_model* ILS_CLOSE;
+ils: ILS_OPEN lattitude longitude altitude heading frequency end range? magvar ident_ils width? name? backCourse? TAG_CLOSE glide_slope* dme* visual_model* ILS_CLOSE;
 
 runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width number (designator | primaryDesignator  secondaryDesignator)?
 			  patternAltitude?
@@ -494,25 +516,25 @@ runway: RUNWAY_OPEN lattitude longitude altitude surface heading length width nu
 			  secondaryLanding? 
 			  secondaryPattern? 
 			  primaryMarkingBias? 
-			  secondaryMarkingBias?		
-	 TAG_CLOSE markings? lights? offsetThreshold? blastPad? vasi* RUNWAY_CLOSE;
+			  secondaryMarkingBias?
+	 TAG_CLOSE markings? lights?  offsetThreshold* blastPad* overrun? approachLights* vasi* ils* RUNWAY_CLOSE;
 
 runway_start: RUNWAY_START_OPEN runway_type? lattitude longitude altitude heading number? designator? SIMPLE_TAG_CLOSE;
 
 runway_alias: RUNWAY_ALIAS_OPEN number designator SIMPLE_TAG_CLOSE;
 
+taxinodes: taxiwayPoint+ taxiwayParking+ taxiwayName+ taxiwayPath+;
+
 airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude altitude magvar? trafficScallar airportTestRadius ident    TAG_CLOSE
-            taxiwayPoint*
-            taxiwayParking*
-            taxiwayName*
-            taxiwayPath*
+
             (  tower
                | services
                | runway
                | runway_alias
                | helipad
                | runway_start
+               |taxinodes
             )*
           AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  TRAFFICSCALAR
 
-fsdata: '<FSData' (ALL_STRING | airport)* '</FSData>';
+airports: airport*;
