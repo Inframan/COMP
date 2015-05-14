@@ -537,6 +537,6 @@ airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude al
                | runway_start
                |taxinodes
             )*
-          AIRPORT_CLOSE;  //EXPRESSOES: falta airportTestRadius e  TRAFFICSCALAR
+          AIRPORT_CLOSE;
 
 airports: airport*;

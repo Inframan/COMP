@@ -1,4 +1,4 @@
-// Generated from /home/fatia/Documentos/Feup/COMP/Airport_Parser.g4 by ANTLR 4.5
+// Generated from /home/fatia/Área de Trabalho/COMP/Airport_Parser.g4 by ANTLR 4.5
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
