@@ -9,3 +9,9 @@
 .idea/vcs.xml
 .idea/copyright/profiles_settings.xml
 COMP.iml
+gen/Airport_Parser.tokens
+gen/Airport_ParserBaseListener.java
+gen/Airport_ParserParser.java
+gen/Airport_ParserListener.java
+gen/Airport_ParserLexer.tokens
+gen/Airport_ParserLexer.java
