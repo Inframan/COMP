@@ -321,7 +321,7 @@ TRIGGER_HEIGHT: 'triggerHeight' ;
 ////////////////////////////***********************************REGULAR EXPRESSIONS *************************/////////////////////////////////////////////////////////////////////////////
 
 
-VALUE: (('a'..'z') | ('A'..'Z') | ('0'..'9') | '.' | '-' | '+' | '{' | '}' | ',' | ' ' | '/' | '_')+ ;
+VALUE: '\"' (('a'..'z') | ('A'..'Z') | ('0'..'9') | '.' | '-' | '+' | '{' | '}' | ',' | ' ' | '/' | '_')* '\"';
 
 ////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////
@@ -374,7 +374,7 @@ rightEdgeLighted:RIGHT_EDGE_LIGHTED EQUALS VALUE;
 taxiwayPathNumber:NUMBER EQUALS VALUE;
 designator:DESIGNATOR EQUALS VALUE;
 taxiwayPathName:NAME EQUALS VALUE;
-taxiwayNameString:NAME EQUALS VALUE?;
+taxiwayNameString:NAME EQUALS VALUE;
 taxiwayIndex:INDEX EQUALS VALUE;
 availability:AVAILABILITY EQUALS VALUE;
 trafficScallar: TRAFFICSCALAR EQUALS VALUE;
@@ -483,7 +483,7 @@ taxiwayParking: TAXIWAY_PARKING_OPEN index lattitude longitude biasX? biasZ? hea
     taxiwayparkingType taxiwayparkingName taxiwayparkingNumber push_back airlineCodes? teeOffSet1? teeOffSet2? teeOffSet3? teeOffSet4? SIMPLE_TAG_CLOSE;
 
 taxiwayPath: TAXIWAY_PATH_OPEN taxiwayPathType taxiwayPathStart taxiwayPathEnd width weightLimit drawSurface
-    drawDetail surface taxiwayPathName  centerLine? centerLineLighted? taxiwayPathNumber?   designator? leftEdge? leftEdgeLighted? rightEdge? rightEdgeLighted? SIMPLE_TAG_CLOSE;
+    drawDetail surface taxiwayPathName?  centerLine? centerLineLighted? taxiwayPathNumber?   designator? leftEdge? leftEdgeLighted? rightEdge? rightEdgeLighted? SIMPLE_TAG_CLOSE;
 
 taxiwayName:TAXI_NAME_OPEN taxiwayIndex taxiwayNameString? SIMPLE_TAG_CLOSE;
 
