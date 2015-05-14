@@ -56,6 +56,14 @@ public class Listener extends Airport_ParserBaseListener {
     }
 
     @Override
+    public void enterSurface(Airport_ParserParser.SurfaceContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "ASPHALT" && val  != "BITUMINOUS" && val  != "BRICK" && val != "CLAY" && val != "CEMENT" && val != "CONCRETE" && val != "CORAL" && val != "DIRT" && val != "GRASS" && val != "GRAVEL" && val != "ICE" && val != "MACADAM" && val != "OIL_TREATED" && val != "PLANKS" && val != "SAND" && val != "SHALE" && val != "SNOW" && val != "STEEL_MATS" && val != "TARMAC" && val != "UNKNOWN" && val != "WATER")
+            System.out.println("Error: Surface value not expected! Got " + val);
+    }
+
+    @Override
     public void enterLeftEdgeLighted(Airport_ParserParser.LeftEdgeLightedContext ctx) {
         String str = ctx.getText();
         String val = str.split("=")[1];
@@ -85,6 +93,126 @@ public class Listener extends Airport_ParserBaseListener {
         String val = str.split("=")[1];
         if (val != "EAST" && val  != "NORTH" && val  != "NORTHEAST" && val != "NORTHWEST" && val != "SOUTH" && val != "SOUTHEAST" && val != "SOUTHWEST" && val != "WEST")
             System.out.println("Error: Number value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterDesignator(Airport_ParserParser.DesignatorContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "NONE" && val  != "C" && val  != "CENTER" && val != "L" && val != "LEFT" && val != "R" && val != "RIGHT" && val != "W" && val != "WATER" && val != "A" && val != "B")
+            System.out.println("Error: Designator value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterPrimaryDesignator(Airport_ParserParser.PrimaryDesignatorContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "NONE" && val  != "C" && val  != "CENTER" && val != "L" && val != "LEFT" && val != "R" && val != "RIGHT" && val != "W" && val != "WATER" && val != "A" && val != "B")
+            System.out.println("Error: PrimaryDesignator value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterSecondaryDesignator(Airport_ParserParser.SecondaryDesignatorContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "NONE" && val  != "C" && val  != "CENTER" && val != "L" && val != "LEFT" && val != "R" && val != "RIGHT" && val != "W" && val != "WATER" && val != "A" && val != "B")
+            System.out.println("Error: SecondaryDesignator value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterLength(Airport_ParserParser.LengthContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "M" && val  != "F" )
+            System.out.println("Error: Length value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterPatternAltitude(Airport_ParserParser.PatternAltitudeContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "M" && val  != "F" )
+            System.out.println("Error: PatternAltitude value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterSpacing(Airport_ParserParser.SpacingContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "M" && val  != "F" )
+            System.out.println("Error: Spacing value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterHelipad(Airport_ParserParser.HelipadContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "M" && val  != "F" )
+            System.out.println("Error: Helipad value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterCenter(Airport_ParserParser.CenterContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "NONE" && val  != "LOW" && val  != "MEDIUM" && val  != "HIGH")
+            System.out.println("Error: Center value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterEdge(Airport_ParserParser.EdgeContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "NONE" && val  != "LOW" && val  != "MEDIUM" && val  != "HIGH")
+            System.out.println("Error: Edge value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterEnd(Airport_ParserParser.EndContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "PRIMARY" && val  != "SECONDARY")
+            System.out.println("Error: End value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterSystem(Airport_ParserParser.SystemContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "NONE" && val  != "ALSF1" && val  != "ALSF2" && val  != "CALVERT" && val  != "CALVERT2" && val  != "MALS" && val  != "MALSF" && val  != "MALSR" && val  != "ODALS" && val  != "RAIL" && val  != "SALS" && val  != "SALSF" && val  != "SSALF" && val  != "SSALR" && val  != "SSALS")
+            System.out.println("Error: System value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterVasiType(Airport_ParserParser.VasiTypeContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "PAPI2" && val  != "PAPI4" && val  != "PVASI" && val  != "TRICOLOR" && val  != "TVASI" && val  != "VASI21" && val  != "VASI22" && val  != "VASI23" && val  != "VASI31" && val  != "VASI32" && val  != "VASI33" && val  != "BALL" && val  != "APAP" && val  != "PANELS")
+            System.out.println("Error: VasiType value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterRunway_start(Airport_ParserParser.Runway_startContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "RUNWAY")
+            System.out.println("Error: Runway_start value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterImage_complexety(Airport_ParserParser.Image_complexetyContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "VERY_SPARSE" && val  != "SPARSE" && val  != "NORMAL" && val  != "DENSE" && val  != "VERY_DENSE")
+            System.out.println("Error: Image_complexety value not expected! Got " + val);
+    }
+
+    @Override
+    public void enterFuel_type(Airport_ParserParser.Fuel_typeContext ctx) {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if (val != "73" && val  != "87" && val  != "100" && val  != "130" && val  != "145" && val  != "MOGAS" && val  != "JET" && val  != "JETA" && val  != "JETA1" && val  != "JETAP" && val  != "JETB" && val  != "JET4" && val  != "JET5" && val  != "UNKNOWN")
+            System.out.println("Error: Fuel_type value not expected! Got " + val);
     }
 
 
