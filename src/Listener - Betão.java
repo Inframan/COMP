@@ -1,11 +1,12 @@
-import java.lang.Object
-import java.util.regex.*
+import java.lang.Object;
+import java.util.regex.*;
 
 public class Listener extends Airport_ParserBaseListener {
 	
 	Pattern ident = [A-Za-Z]{0,5};
 	Pattern floatnumber = [+-]?[0-9]+('.'[0-9]+)?;
-	Pattern heading = [0-360]('.'[0-9]+)?
+	Pattern heading = [0-360]('.'[0-9]+)?;
+	Pattern range = [0-9]+[FMN];
 	
     @Override
     public void enterLattitude(Airport_ParserParser.LattitudeContext ctx) {
@@ -66,31 +67,35 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#leftEdge}.
     	 * @param ctx the parse tree
     	 */
-    	void enterLeftEdge(@NotNull Airport_ParserParser.LeftEdgeContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#leftEdge}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterLeftEdge(@NotNull Airport_ParserParser.LeftEdgeContext ctx){
+    		String str = ctx.getText();
+    		boolean val = boolean.parseDouble(str.split("=")[1]);
+        	if (val == null)
+        		System.out.println("Error: LeftEdge value not expected! Got " + val);
+    	}
     	void exitLeftEdge(@NotNull Airport_ParserParser.LeftEdgeContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#rightEdgeLighted}.
     	 * @param ctx the parse tree
     	 */
-    	void enterRightEdgeLighted(@NotNull Airport_ParserParser.RightEdgeLightedContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#rightEdgeLighted}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterRightEdgeLighted(@NotNull Airport_ParserParser.RightEdgeLightedContext ctx){
+    		String str = ctx.getText();
+    		boolean val = boolean.parseDouble(str.split("=")[1]);
+        	if (val == null)
+        		System.out.println("Error: RightEdgeLighted value not expected! Got " + val);
+    	}
     	void exitRightEdgeLighted(@NotNull Airport_ParserParser.RightEdgeLightedContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#taxiwayPathStart}.
     	 * @param ctx the parse tree
     	 */
-    	void enterTaxiwayPathStart(@NotNull Airport_ParserParser.TaxiwayPathStartContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#taxiwayPathStart}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterTaxiwayPathStart(@NotNull Airport_ParserParser.TaxiwayPathStartContext ctx)
+    	{
+            String str = ctx.getText();
+            Double val = Double.parseDouble(str.split("=")[1]);
+            if (val >= 255 || val < 0)
+                System.out.println("Error: TaxiwayPathStart value not expected! Got " + val);
+        }
     	void exitTaxiwayPathStart(@NotNull Airport_ParserParser.TaxiwayPathStartContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#ident}.
@@ -168,11 +173,13 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#pitch}.
     	 * @param ctx the parse tree
     	 */
-    	void enterPitch(@NotNull Airport_ParserParser.PitchContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#pitch}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterPitch(@NotNull Airport_ParserParser.PitchContext ctx) 
+    	{ 
+    		String str = ctx.getText();
+    		String val = str.split("=")[1];
+    		if(!val.matches(ident))
+    			System.out.println("Error: Pitch value not expected! Got " + val);
+    }
     	void exitPitch(@NotNull Airport_ParserParser.PitchContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#runway_alias}.
@@ -401,11 +408,12 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#range}.
     	 * @param ctx the parse tree
     	 */
-    	void enterRange(@NotNull Airport_ParserParser.RangeContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#range}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterRange(@NotNull Airport_ParserParser.RangeContext ctx){
+            String str = ctx.getText();
+            String val = str.split("=")[1];
+            if(!val.matches(range))
+                System.out.println("Error: Range value not expected! Got " + val);
+        }
     	void exitRange(@NotNull Airport_ParserParser.RangeContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#taxiwayparkingName}.
@@ -581,7 +589,7 @@ public class Listener extends Airport_ParserBaseListener {
             String str = ctx.getText();
             Double val = Double.parseDouble(str.split("=")[1]);
             if (val >= 90 || val <= -90)
-                System.out.println("Error: Index value not expected! Got " + val);
+                System.out.println("Error: lattitude value not expected! Got " + val);
         }
     	void exitLattitude(@NotNull Airport_ParserParser.LattitudeContext ctx);
     	/**
@@ -649,11 +657,13 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#width}.
     	 * @param ctx the parse tree
     	 */
-    	void enterWidth(@NotNull Airport_ParserParser.WidthContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#width}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterWidth(@NotNull Airport_ParserParser.WidthContext ctx)
+    	{
+            String str = ctx.getText();
+            String val = str.split("=")[1];
+            if(!val.matches(floatnumber))
+                System.out.println("Error: width value not expected! Got " + val);
+        }
     	void exitWidth(@NotNull Airport_ParserParser.WidthContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#closed}.
@@ -669,11 +679,12 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#centerLineLighted}.
     	 * @param ctx the parse tree
     	 */
-    	void enterCenterLineLighted(@NotNull Airport_ParserParser.CenterLineLightedContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#centerLineLighted}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterCenterLineLighted(@NotNull Airport_ParserParser.CenterLineLightedContext ctx){
+    		String str = ctx.getText();
+    		boolean val = boolean.parseDouble(str.split("=")[1]);
+        	if (val == null)
+        		System.out.println("Error: CenterLineLighted value not expected! Got " + val);
+    	}
     	void exitCenterLineLighted(@NotNull Airport_ParserParser.CenterLineLightedContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#endLights}.
@@ -739,31 +750,34 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#rightEdge}.
     	 * @param ctx the parse tree
     	 */
-    	void enterRightEdge(@NotNull Airport_ParserParser.RightEdgeContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#rightEdge}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterRightEdge(@NotNull Airport_ParserParser.RightEdgeContext ctx){
+    		String str = ctx.getText();
+    		boolean val = boolean.parseDouble(str.split("=")[1]);
+        	if (val == null)
+        		System.out.println("Error: RightEdge value not expected! Got " + val);
+    	}
     	void exitRightEdge(@NotNull Airport_ParserParser.RightEdgeContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#frequency}.
     	 * @param ctx the parse tree
     	 */
-    	void enterFrequency(@NotNull Airport_ParserParser.FrequencyContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#frequency}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterFrequency(@NotNull Airport_ParserParser.FrequencyContext ctx){
+            String str = ctx.getText();
+            String val = str.split("=")[1];
+            if(!val.matches(floatnumber))
+                System.out.println("Error: Frequency value not expected! Got " + val);
+        }
     	void exitFrequency(@NotNull Airport_ParserParser.FrequencyContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#teeOffSet3}.
     	 * @param ctx the parse tree
     	 */
-    	void enterTeeOffSet3(@NotNull Airport_ParserParser.TeeOffSet3Context ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#teeOffSet3}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterTeeOffSet3(@NotNull Airport_ParserParser.TeeOffSet3Context ctx) {
+            String str = ctx.getText();
+            Double val = Double.parseDouble(str.split("=")[1]);
+            if (val >= 0.0 || val <= 50.0)
+                System.out.println("Error: TeeOffSet3 value not expected! Got " + val);
+        }
     	void exitTeeOffSet3(@NotNull Airport_ParserParser.TeeOffSet3Context ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#red}.
@@ -779,11 +793,12 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#teeOffSet4}.
     	 * @param ctx the parse tree
     	 */
-    	void enterTeeOffSet4(@NotNull Airport_ParserParser.TeeOffSet4Context ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#teeOffSet4}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterTeeOffSet4(@NotNull Airport_ParserParser.TeeOffSet4Context ctx){
+            String str = ctx.getText();
+            Double val = Double.parseDouble(str.split("=")[1]);
+            if (val >= 0.0 || val <= 50.0)
+                System.out.println("Error: TeeOffSet4 value not expected! Got " + val);
+        }
     	void exitTeeOffSet4(@NotNull Airport_ParserParser.TeeOffSet4Context ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#edge}.
@@ -799,21 +814,23 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#teeOffSet1}.
     	 * @param ctx the parse tree
     	 */
-    	void enterTeeOffSet1(@NotNull Airport_ParserParser.TeeOffSet1Context ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#teeOffSet1}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterTeeOffSet1(@NotNull Airport_ParserParser.TeeOffSet1Context ctx){
+            String str = ctx.getText();
+            Double val = Double.parseDouble(str.split("=")[1]);
+            if (val >= 0.0 || val <= 50.0)
+                System.out.println("Error: TeeOffSet1 value not expected! Got " + val);
+        }
     	void exitTeeOffSet1(@NotNull Airport_ParserParser.TeeOffSet1Context ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#teeOffSet2}.
     	 * @param ctx the parse tree
     	 */
-    	void enterTeeOffSet2(@NotNull Airport_ParserParser.TeeOffSet2Context ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#teeOffSet2}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterTeeOffSet2(@NotNull Airport_ParserParser.TeeOffSet2Context ctx){
+            String str = ctx.getText();
+            Double val = Double.parseDouble(str.split("=")[1]);
+            if (val >= 0.0 || val <= 50.0)
+                System.out.println("Error: TeeOffSet2 value not expected! Got " + val);
+        }
     	void exitTeeOffSet2(@NotNull Airport_ParserParser.TeeOffSet2Context ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#taxiwayPathType}.
@@ -873,7 +890,7 @@ public class Listener extends Airport_ParserBaseListener {
             String str = ctx.getText();
             Double val = Double.parseDouble(str.split("=")[1]);
             if (val >= 180 || val <= -180)
-                System.out.println("Error: Index value not expected! Got " + val);
+                System.out.println("Error: Longitude value not expected! Got " + val);
         }
     	void exitLongitude(@NotNull Airport_ParserParser.LongitudeContext ctx);
     	/**
@@ -950,11 +967,12 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#drawSurface}.
     	 * @param ctx the parse tree
     	 */
-    	void enterDrawSurface(@NotNull Airport_ParserParser.DrawSurfaceContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#drawSurface}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterDrawSurface(@NotNull Airport_ParserParser.DrawSurfaceContext ctx)	{
+            String str = ctx.getText();
+            boolean val = boolean.parseDouble(str.split("=")[1]);
+            if (val == null)
+                System.out.println("Error: drawSurface value not expected! Got " + val);
+        }
     	void exitDrawSurface(@NotNull Airport_ParserParser.DrawSurfaceContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#airports}.
@@ -1060,11 +1078,13 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#ident_ils}.
     	 * @param ctx the parse tree
     	 */
-    	void enterIdent_ils(@NotNull Airport_ParserParser.Ident_ilsContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#ident_ils}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterIdent_ils(@NotNull Airport_ParserParser.Ident_ilsContext ctx) {
+            String str = ctx.getText();
+            String val = str.split("=")[1];
+            if(!val.matches(ident))
+                System.out.println("Error: Ident_ils value not expected! Got " + val);
+        }
+    	
     	void exitIdent_ils(@NotNull Airport_ParserParser.Ident_ilsContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#primaryLanding}.
@@ -1130,11 +1150,12 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#centerLine}.
     	 * @param ctx the parse tree
     	 */
-    	void enterCenterLine(@NotNull Airport_ParserParser.CenterLineContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#centerLine}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterCenterLine(@NotNull Airport_ParserParser.CenterLineContext ctx){
+    		String str = ctx.getText();
+    		boolean val = boolean.parseDouble(str.split("=")[1]);
+        	if (val == null)
+        		System.out.println("Error: CenterLine value not expected! Got " + val);
+    	}
     	void exitCenterLine(@NotNull Airport_ParserParser.CenterLineContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#touchdown}.
@@ -1240,21 +1261,23 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#drawDetail}.
     	 * @param ctx the parse tree
     	 */
-    	void enterDrawDetail(@NotNull Airport_ParserParser.DrawDetailContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#drawDetail}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterDrawDetail(@NotNull Airport_ParserParser.DrawDetailContext ctx)  {
+    		String str = ctx.getText();
+    		boolean val = boolean.parseDouble(str.split("=")[1]);
+        	if (val == null)
+        		System.out.println("Error: DrawDetail value not expected! Got " + val);
+    	}
     	void exitDrawDetail(@NotNull Airport_ParserParser.DrawDetailContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#taxiwayPathEnd}.
     	 * @param ctx the parse tree
     	 */
-    	void enterTaxiwayPathEnd(@NotNull Airport_ParserParser.TaxiwayPathEndContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#taxiwayPathEnd}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterTaxiwayPathEnd(@NotNull Airport_ParserParser.TaxiwayPathEndContext ctx)	{
+            String str = ctx.getText();
+            Double val = Double.parseDouble(str.split("=")[1]);
+            if (val >= 255 || val < 0)
+                System.out.println("Error: TaxiwayPathEnd value not expected! Got " + val);
+        }
     	void exitTaxiwayPathEnd(@NotNull Airport_ParserParser.TaxiwayPathEndContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#secondaryMarkingBias}.
@@ -1320,11 +1343,12 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#leftEdgeLighted}.
     	 * @param ctx the parse tree
     	 */
-    	void enterLeftEdgeLighted(@NotNull Airport_ParserParser.LeftEdgeLightedContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#leftEdgeLighted}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterLeftEdgeLighted(@NotNull Airport_ParserParser.LeftEdgeLightedContext ctx){
+    		String str = ctx.getText();
+    		boolean val = boolean.parseDouble(str.split("=")[1]);
+        	if (val == null)
+        		System.out.println("Error: LeftEdgeLighted value not expected! Got " + val);
+    	}
     	void exitLeftEdgeLighted(@NotNull Airport_ParserParser.LeftEdgeLightedContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#image_complexety}.
@@ -1340,11 +1364,12 @@ public class Listener extends Airport_ParserBaseListener {
     	 * Enter a parse tree produced by {@link Airport_ParserParser#weightLimit}.
     	 * @param ctx the parse tree
     	 */
-    	void enterWeightLimit(@NotNull Airport_ParserParser.WeightLimitContext ctx);
-    	/**
-    	 * Exit a parse tree produced by {@link Airport_ParserParser#weightLimit}.
-    	 * @param ctx the parse tree
-    	 */
+    	void enterWeightLimit(@NotNull Airport_ParserParser.WeightLimitContext ctx)	{
+            String str = ctx.getText();
+            Double val = Double.parseDouble(str.split("=")[1]);
+            if (val >= 255 || val < 0)
+                System.out.println("Error: WeightLimit value not expected! Got " + val);
+        }
     	void exitWeightLimit(@NotNull Airport_ParserParser.WeightLimitContext ctx);
     	/**
     	 * Enter a parse tree produced by {@link Airport_ParserParser#glide_slope}.
