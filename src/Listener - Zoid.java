@@ -2,9 +2,11 @@ import java.lang.Object
 import java.util.regex.*
 
 public class Listener extends Airport_ParserBaseListener {
-    Pattern ident = Pattern.compile("[A-Za-Z]{0,5}");
-    Pattern floatnumber = Pattern.compile("[+-]?[0-9]+('.'[0-9]+)?");
-    Pattern heading = Pattern.compile("[0-360]('.'[0-9]+)?");
+    Pattern string8 = [A-Za-z0-9]{0,8};
+    Pattern floatnumber = [+-]?[0-9]+('.'[0-9]+)?;
+    Pattern heading = [0-360]('.'[0-9]+)?;
+    Pattern range = [0-9]+[FMN];
+
 
 
     /**
@@ -95,6 +97,23 @@ public class Listener extends Airport_ParserBaseListener {
 
     }
 
+    @Override public void enterTaxiwayPathName(@NotNull Airport_ParserParser.TaxiwayPathNameContext ctx)
+    {
+        String str = ctx.getText();
+        int val = Integer.parseInt(str.split("=")[1]);
+        if(val < 0 || val > 255)
+            System.out.println("Error: Name value out of bounds! Expected [0,255] but got " + val);
 
+    }
+
+
+    @Override public void enterTaxiwayNameString(@NotNull Airport_ParserParser.TaxiwayNameStringContext ctx)
+    {
+        String str = ctx.getText();
+        String val = str.split("=")[1];
+        if(!val.matches(string8))
+            System.out.println("Error: taxiwayNameString Name value not expected! Got " + val);
+
+    }
 
 }

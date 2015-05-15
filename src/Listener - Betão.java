@@ -3,7 +3,7 @@ import java.util.regex.*;
 
 public class Listener extends Airport_ParserBaseListener {
 	
-	Pattern ident = [A-Za-Z]{0,5};
+	Pattern ident = [A-Za-z]{0,5};
 	Pattern floatnumber = [+-]?[0-9]+('.'[0-9]+)?;
 	Pattern heading = [0-360]('.'[0-9]+)?;
 	Pattern range = [0-9]+[FMN];
