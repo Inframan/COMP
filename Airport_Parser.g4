@@ -31,9 +31,9 @@ SIMPLE_TAG_CLOSE: '/>' ;
 
 TAG_CLOSE: '>' ;
 
-AIRPORT_OPEN:  '<Airport' {ignoreWord=false;} ;
+AIRPORT_OPEN:  '<Airport';
 
-AIRPORT_CLOSE: '</Airport>' {ignoreWord=true;} ;
+AIRPORT_CLOSE: '</Airport>';
 
 REGION: 'region' ;
 

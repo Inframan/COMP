@@ -8,20 +8,25 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.tool.Grammar;
 
+import java.util.Scanner;
+
 
 public class Main {
 
     public static void main(String[] Args){
 
     	 try {
+             Scanner sc = new Scanner(System.in);
              Grammar g = Grammar.load("Airport_Parser.g4");
-             LexerInterpreter lexer = g.createLexerInterpreter(new ANTLRFileStream(args[0]));
+             LexerInterpreter lexer = g.createLexerInterpreter(new ANTLRFileStream(sc.next()));
              CommonTokenStream tokens = new CommonTokenStream(lexer);
-             CompParser parser = new CompParser(tokens);
-             ParseTree t = parser.start();
+             Airport_ParserParser parser = new Airport_ParserParser(tokens);
+             ParseTree t = parser.airports();
              ParseTreeWalker walker = new ParseTreeWalker();
              Listener listener = new Listener();
              walker.walk(listener, t);
+
+             sc.close();
          } catch (Exception e) {
              e.printStackTrace();
          }
