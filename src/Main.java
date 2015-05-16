@@ -16,17 +16,27 @@ public class Main {
     public static void main(String[] Args){
 
     	 try {
-             Scanner sc = new Scanner(System.in);
-             Grammar g = Grammar.load("Airport_Parser.g4");
-             LexerInterpreter lexer = g.createLexerInterpreter(new ANTLRFileStream(sc.next()));
-             CommonTokenStream tokens = new CommonTokenStream(lexer);
-             Airport_ParserParser parser = new Airport_ParserParser(tokens);
-             ParseTree t = parser.airports();
-             ParseTreeWalker walker = new ParseTreeWalker();
-             Listener listener = new Listener();
-             walker.walk(listener, t);
-
-             sc.close();
+            
+		String inputFile = null;
+		if(args.length > 0) inputFile = args[0];
+		InputStream is = System.in;
+		if(inputFile != null) is = new FileInputStream(inputFile);
+		
+		ANTLRInputStream input = new ANTLRInputStream(is);
+		
+		Airport_ParserLexer lexer = new Airport_ParserLexer(input);
+		
+		CommonTokenStream tokens = new CommonTokenStream(lexer);
+		
+		Airport_ParserParser parser = new Airport_ParserParser(tokens);
+		
+		ParserRuleContext tree = parser.startpoint(); // parse
+		
+		System.out.println(tree.toStringTree(parser)); // print LISP-style tree
+		ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
+														
+		Airport_ParserListener extractor = new Airport_ParserListener();
+		walker.walk(extractor, tree); // initiate walk of tree with listener
          } catch (Exception e) {
              e.printStackTrace();
          }
