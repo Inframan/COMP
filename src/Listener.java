@@ -1,9 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.*;
 
 import org.antlr.v4.runtime.ParserRuleContext;
-import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -43,7 +41,7 @@ public class Listener extends Airport_ParserBaseListener {
 	Integer servicesCounter = 0;
 	private Integer runwayAliasCounter =0;
 	private Integer helipadCounter =0;
-	private Integer dmeCounter;
+	private Integer dmeCounter = 0;
 
 
 	String receivingAttributs = ""; //serve para saber a que atributo se vai adicionar o name
@@ -73,8 +71,10 @@ public class Listener extends Airport_ParserBaseListener {
 	Map<String,Map<String,String>> dmeAttributs = new HashMap<String,Map<String,String>>();
 	Map<String,Map<String,String>> fuelAttributs = new HashMap<String,Map<String,String>>();
 
-
-
+	Map<String,String> airportElements = new HashMap<String,String>();
+	Map<String,String> runwayElements = new HashMap<String,String>();
+	private Map<String,String>  ilsElements = new HashMap<String,String>();
+	private Map<String, String> servicesElements = new HashMap<String,String>();
 
 	@Override public void enterTaxiwayIndex(  Airport_ParserParser.TaxiwayIndexContext ctx) { }
 	/**
@@ -97,7 +97,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTaxiwayName(  Airport_ParserParser.TaxiwayNameContext ctx) { }
+	@Override public void exitTaxiwayName(  Airport_ParserParser.TaxiwayNameContext ctx) { 
+		airportElements.put("TaxiwayName"+taxiNameCounter.toString(), "Airport"+airportCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -190,7 +193,9 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitApproachLights(  Airport_ParserParser.ApproachLightsContext ctx) { }
+	@Override public void exitApproachLights(  Airport_ParserParser.ApproachLightsContext ctx) {
+		runwayElements.put("ApproachLights"+approachLightsCounter.toString(), "Runway"+runwayCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -229,13 +234,19 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRunway_alias(  Airport_ParserParser.Runway_aliasContext ctx) { }
+	@Override public void enterRunway_alias(  Airport_ParserParser.Runway_aliasContext ctx) { 
+		
+		runwayAliasCounter++;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRunway_alias(  Airport_ParserParser.Runway_aliasContext ctx) { }
+	@Override public void exitRunway_alias(  Airport_ParserParser.Runway_aliasContext ctx) { 
+		airportElements.put("Runway_alias"+runwayAliasCounter.toString(), "Airport"+airportCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -246,7 +257,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHelipad(  Airport_ParserParser.HelipadContext ctx) { }
+	@Override public void exitHelipad(  Airport_ParserParser.HelipadContext ctx) { 
+		airportElements.put("Helipad"+helipadCounter.toString(), "Airport"+airportCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -261,7 +275,9 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBlastPad(  Airport_ParserParser.BlastPadContext ctx) { }
+	@Override public void exitBlastPad(  Airport_ParserParser.BlastPadContext ctx) {
+		runwayElements.put("BlastPad"+blastPadCounter.toString(), "Runway"+runwayCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -354,7 +370,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRunway_start(  Airport_ParserParser.Runway_startContext ctx) { }
+	@Override public void exitRunway_start(  Airport_ParserParser.Runway_startContext ctx) { 
+		airportElements.put("Runway_start"+runwayStartCounter.toString(), "Airport"+airportCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -446,7 +465,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOffsetThreshold(  Airport_ParserParser.OffsetThresholdContext ctx) { }
+	@Override public void exitOffsetThreshold(  Airport_ParserParser.OffsetThresholdContext ctx) {
+		runwayElements.put("OffsetThreshold"+offsetThresholdCounter.toString(), "Runway"+runwayCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -624,7 +646,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTaxiwayPoint(  Airport_ParserParser.TaxiwayPointContext ctx) { }
+	@Override public void exitTaxiwayPoint(  Airport_ParserParser.TaxiwayPointContext ctx) { 
+		airportElements.put("TaxiwayPoint"+taxiwayPointCounter.toString(), "Airport"+airportCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -639,7 +664,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLights(  Airport_ParserParser.LightsContext ctx) { }
+	@Override public void exitLights(  Airport_ParserParser.LightsContext ctx) { 
+		runwayElements.put("Lights"+lightsCounter.toString(), "Runway"+runwayCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -698,7 +726,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitServices(  Airport_ParserParser.ServicesContext ctx) { }
+	@Override public void exitServices(  Airport_ParserParser.ServicesContext ctx) {
+		
+		airportElements.put("Services"+servicesCounter.toString(), "Airport"+airportCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -746,7 +777,9 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVasi(  Airport_ParserParser.VasiContext ctx) { }
+	@Override public void exitVasi(  Airport_ParserParser.VasiContext ctx) {
+		runwayElements.put("Vasi"+vasiCounter.toString(), "Runway"+runwayCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -834,7 +867,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFuel(  Airport_ParserParser.FuelContext ctx) { }
+	@Override public void exitFuel(  Airport_ParserParser.FuelContext ctx) {
+		
+		servicesElements.put("Fuel"+fuelCounter.toString(),"Services"+servicesCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1027,7 +1063,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTower(  Airport_ParserParser.TowerContext ctx) { }
+	@Override public void exitTower(  Airport_ParserParser.TowerContext ctx) { 
+		
+		airportElements.put("Tower"+towerCounter.toString(), "Airport"+airportCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1065,7 +1104,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMarkings(  Airport_ParserParser.MarkingsContext ctx) { }
+	@Override public void exitMarkings(  Airport_ParserParser.MarkingsContext ctx) { 
+		runwayElements.put("Markings"+markingsCounter.toString(), "Runway"+runwayCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1082,13 +1124,20 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRunway(  Airport_ParserParser.RunwayContext ctx) { }
+	
+	@Override public void enterRunway(  Airport_ParserParser.RunwayContext ctx) { 
+		runwayCounter++;
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRunway(  Airport_ParserParser.RunwayContext ctx) { }
+	@Override public void exitRunway(  Airport_ParserParser.RunwayContext ctx) { 
+		airportElements.put("Runway"+runwayCounter.toString(), "Airport"+airportCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1130,14 +1179,16 @@ public class Listener extends Airport_ParserBaseListener {
 	 */
 	@Override public void enterIls(  Airport_ParserParser.IlsContext ctx) { 
 		ilsCounter++;
-		receivingAttributs = "ils";
+		receivingAttributs = "Ils";
 	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIls(  Airport_ParserParser.IlsContext ctx) { }
+	@Override public void exitIls(  Airport_ParserParser.IlsContext ctx) { 
+		runwayElements.put("Ils"+ilsCounter.toString(), "Runway"+runwayCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1263,7 +1314,9 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOverrun(  Airport_ParserParser.OverrunContext ctx) { }
+	@Override public void exitOverrun(  Airport_ParserParser.OverrunContext ctx) {
+		runwayElements.put("Overrun"+overrunCounter.toString(), "Runway"+runwayCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1300,7 +1353,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTaxiwayParking(  Airport_ParserParser.TaxiwayParkingContext ctx) { }
+	@Override public void exitTaxiwayParking(  Airport_ParserParser.TaxiwayParkingContext ctx) {
+		
+		airportElements.put("TaxiwayParking"+taxiwayParkingCounter.toString(), "Airport"+airportCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1394,7 +1450,9 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVisual_model(  Airport_ParserParser.Visual_modelContext ctx) { }
+	@Override public void exitVisual_model(  Airport_ParserParser.Visual_modelContext ctx) { 
+		ilsElements.put("Visual_model"+visualModelCounter.toString(), "Ils"+ilsCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1530,7 +1588,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTaxiwayPath(  Airport_ParserParser.TaxiwayPathContext ctx) { }
+	@Override public void exitTaxiwayPath(  Airport_ParserParser.TaxiwayPathContext ctx) { 
+		airportElements.put("TaxiwayPath"+taxiwayPathCounter.toString(), "Airport"+airportCounter.toString());
+		
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1577,7 +1638,9 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGlide_slope(  Airport_ParserParser.Glide_slopeContext ctx) { }
+	@Override public void exitGlide_slope(  Airport_ParserParser.Glide_slopeContext ctx) {
+		ilsElements.put("Glide_slope"+glideSlopeCounter.toString(), "Ils"+ilsCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1625,7 +1688,9 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDme(  Airport_ParserParser.DmeContext ctx) { }
+	@Override public void exitDme(  Airport_ParserParser.DmeContext ctx) { 
+		ilsElements.put("Dme"+dmeCounter.toString(), "Ils"+ilsCounter.toString());
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1919,7 +1984,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
 				if(val.equals("00"))
-						addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 			if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST" )&& !val.equals("NORTHWEST") && !val.equals("SOUTH") && !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST") && !val.equals("WEST"))
 				if(val.startsWith("0")) {
 					int value = Integer.parseInt(val);
@@ -2006,6 +2071,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override
 	public void enterHelipad(Airport_ParserParser.HelipadContext ctx) {
+		helipadCounter++;
 		receivingAttributs = "Helipad";
 		String str = ctx.getText();
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterHelipad value not expected! Val was: " + val);else
@@ -2068,6 +2134,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override
 	public void enterRunway_start(Airport_ParserParser.Runway_startContext ctx) {
+		runwayStartCounter++;
 		String str = ctx.getText();
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterRunway_start value not expected! Val was: " + val);else
 			if (!val.equals("RUNWAY"))
@@ -2100,7 +2167,6 @@ public class Listener extends Airport_ParserBaseListener {
 	public void enterTaxiwayPathStart(Airport_ParserParser.TaxiwayPathStartContext ctx)
 	{
 		String str = ctx.getText();
-		String[] split = str.split("=");
 		try{
 			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 			if (val >= 255 || val < 0)
@@ -2123,7 +2189,7 @@ public class Listener extends Airport_ParserBaseListener {
 				System.out.println("Error: Ident value not expected! Got " + val);
 			else//valid value
 			{
-					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);	
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);	
 
 			}
 	}
@@ -2803,7 +2869,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override public void enterAirport( Airport_ParserParser.AirportContext ctx)
 	{
-		receivingAttributs = "airport";
+		receivingAttributs = "Airport";
 		airportCounter++;
 	}
 
@@ -2841,68 +2907,202 @@ public class Listener extends Airport_ParserBaseListener {
 		value.put(attName,attValue);
 		switch (receivingAttributs) {
 		case "Airport":
-			airportAttributs.put("Airport"+airportCounter.toString(), value);
+			if(airportAttributs.containsKey("Airport"+airportCounter.toString()))
+			{
+				value = airportAttributs.get("Airport"+airportCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				airportAttributs.put("Airport"+airportCounter.toString(), value);
 			break;
 		case "Tower":
-			towerAttributs.put("Tower"+towerCounter.toString(), value);
+			if(towerAttributs.containsKey("Tower"+towerCounter.toString()))
+			{
+				value = towerAttributs.get("Tower"+towerCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				towerAttributs.put("Tower"+towerCounter.toString(), value);
 			break;
 		case "Runway":
-			runwayAttributs.put("Runway"+runwayCounter.toString(), value);
+			if(runwayAttributs.containsKey("Runway"+runwayCounter.toString().toString()))
+			{
+				value = runwayAttributs.get("Runway"+runwayCounter.toString().toString());
+				value.put(attName, attValue);
+			}
+			else
+				runwayAttributs.put("Runway"+runwayCounter.toString(), value);
 			break;
 		case "Runway_alias":
-			runwayAliasAttributs.put("Runway_alias"+runwayAliasCounter.toString(), value);
+			if(runwayAliasAttributs.containsKey("Runway_alias"+runwayAliasCounter.toString()))
+			{
+				value = runwayAliasAttributs.get("Runway_alias"+runwayAliasCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				runwayAliasAttributs.put("Runway_alias"+runwayAliasCounter.toString(), value);
 			break;
 		case "Helipad":
-			helipadAttributs.put("Helipad"+helipadCounter .toString(), value);
+			if(helipadAttributs.containsKey("Helipad"+helipadCounter .toString()))
+			{
+				value = helipadAttributs.get("Helipad"+helipadCounter .toString());
+				value.put(attName, attValue);
+			}
+			else
+				helipadAttributs.put("Helipad"+helipadCounter .toString(), value);
 			break;
 		case "Runway_start":
-			runway_startAttributs.put("Runway_start"+runwayStartCounter.toString(), value);
+			if(runway_startAttributs.containsKey("Runway_start"+runwayStartCounter.toString()))
+			{
+				value = runway_startAttributs.get("Runway_start"+runwayStartCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				runway_startAttributs.put("Runway_start"+runwayStartCounter.toString(), value);
 			break;
 		case "TaxiwayPoint":
-			taxiwayPointAttributs.put("TaxiwayPoint"+taxiwayPointCounter.toString(), value);
+			if(taxiwayPointAttributs.containsKey("TaxiwayPoint"+taxiwayPointCounter.toString()))
+			{
+				value = taxiwayPointAttributs.get("TaxiwayPoint"+taxiwayPointCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				taxiwayPointAttributs.put("TaxiwayPoint"+taxiwayPointCounter.toString(),value);
 			break;
 		case "TaxiwayParking":
-			taxiwayParkingAttributs.put("TaxiwayParking"+taxiwayParkingCounter.toString(), value);
+			if(taxiwayParkingAttributs.containsKey("TaxiwayParking"+taxiwayParkingCounter.toString()))
+			{
+				value = taxiwayParkingAttributs.get("TaxiwayParking"+taxiwayParkingCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				taxiwayParkingAttributs.put("TaxiwayParking"+taxiwayParkingCounter.toString(), value);
 			break;
 		case "TaxiwayName":
-			taxiwayNameAttributs.put("TaxiwayName"+taxiNameCounter.toString(), value);
+			if(taxiwayNameAttributs.containsKey("TaxiwayName"+taxiNameCounter.toString()))
+			{
+				value = taxiwayNameAttributs.get("TaxiwayName"+taxiNameCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				taxiwayNameAttributs.put("TaxiwayName"+taxiNameCounter.toString(), value);
 			break;
 		case "TaxiwayPath":
-			taxiwayPathAttributs.put("TaxiwayPath"+taxiwayPathCounter.toString(), value);
-
+			if(taxiwayPointAttributs.containsKey("TaxiwayPath"+taxiwayPathCounter.toString()))
+			{
+				value = taxiwayPointAttributs.get("TaxiwayPath"+taxiwayPathCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				taxiwayPathAttributs.put("TaxiwayPath"+taxiwayPathCounter.toString(), value);
 			break;
 		case "Lights":
-			lightsAttributs.put("Lights"+lightsCounter.toString(), value);
+			if(lightsAttributs.containsKey("Lights"+lightsCounter.toString()))
+			{
+				value = lightsAttributs.get("Lights"+lightsCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				lightsAttributs.put("Lights"+lightsCounter.toString(), value);
 			break;
 		case "OffsetThreshold":
-			offsetThresholdAttributs.put("OffsetThreashold"+offsetThresholdCounter.toString(), value);
+			if(offsetThresholdAttributs.containsKey("OffsetThreashold"+offsetThresholdCounter.toString()))
+			{
+				value = offsetThresholdAttributs.get("OffsetThreashold"+offsetThresholdCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				offsetThresholdAttributs.put("OffsetThreashold"+offsetThresholdCounter.toString(), value);
 			break;
 		case "BlastPad":
-			blastPadAttributs.put("BlastPad"+blastPadCounter.toString(), value);
+			if(blastPadAttributs.containsKey("BlastPad"+blastPadCounter.toString()))
+			{
+				value = blastPadAttributs.get("BlastPad"+blastPadCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				blastPadAttributs.put("BlastPad"+blastPadCounter.toString(), value);
 			break;
 		case "Overrun":
-			overrunAttributs.put("Overrun"+overrunCounter.toString(), value);
+			if(overrunAttributs.containsKey("Overrun"+overrunCounter.toString()))
+			{
+				value = overrunAttributs.get("Overrun"+overrunCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				overrunAttributs.put("Overrun"+overrunCounter.toString(), value);
 			break;
 		case "ApproachLights":
-			approachLightsAttributs.put("ApproachLights"+approachLightsCounter.toString(), value);
+			if(approachLightsAttributs.containsKey("ApproachLights"+approachLightsCounter.toString()))
+			{
+				value = approachLightsAttributs.get("ApproachLights"+approachLightsCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				approachLightsAttributs.put("ApproachLights"+approachLightsCounter.toString(), value);
 			break;
 		case "Vasi":
-			vasiAttributs.put("Vasi"+vasiCounter.toString(), value);
+			if(vasiAttributs.containsKey("Vasi"+vasiCounter.toString()))
+			{
+				value = vasiAttributs.get("Vasi"+vasiCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				vasiAttributs.put("Vasi"+vasiCounter.toString(), value);
 			break;
 		case "Visual_model":
-			visualModelAttributs.put("Visual_model"+visualModelCounter.toString(), value);
+			if(visualModelAttributs.containsKey("Visual_model"+visualModelCounter.toString()))
+			{
+				value = visualModelAttributs.get("Visual_model"+visualModelCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				visualModelAttributs.put("Visual_model"+visualModelCounter.toString(), value);
 			break;
 		case "Glide_slope":
-			glide_scopeAttributs.put("Glide_scope"+glideSlopeCounter.toString(), value);
+			if(glide_scopeAttributs.containsKey("Glide_scope"+glideSlopeCounter.toString()))
+			{
+				value = glide_scopeAttributs.get("Glide_scope"+glideSlopeCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				glide_scopeAttributs.put("Glide_scope"+glideSlopeCounter.toString(), value);
 			break;
 		case "Dme":
-			dmeAttributs.put("DME"+dmeCounter.toString(), value);
+			if(dmeAttributs.containsKey("DME"+dmeCounter.toString()))
+			{
+				value = dmeAttributs.get("DME"+dmeCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				dmeAttributs.put("DME"+dmeCounter.toString(), value);
 			break;
 		case "Fuel":
-			fuelAttributs.put("Fuel"+fuelCounter.toString(), value);
+			if(fuelAttributs.containsKey("Fuel"+fuelCounter.toString()))
+			{
+				value = fuelAttributs.get("Fuel"+fuelCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				fuelAttributs.put("Fuel"+fuelCounter.toString(), value);
 			break;
 		case  "Vertex":
-			vertexAttributs.put("Vertex"+vertexCounter.toString(), value);
+			if(vertexAttributs.containsKey("Vertex"+vertexCounter.toString()))
+			{
+				value = vertexAttributs.get("Vertex"+vertexCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				vertexAttributs.put("Vertex"+vertexCounter.toString(), value);
+			break;
+		case "Ils":
+			if(ilsAttributs.containsKey("Ils"+ilsCounter.toString()))
+			{
+				value = vertexAttributs.get("Ils"+ilsCounter.toString());
+				value.put(attName, attValue);
+			}
+			else
+				vertexAttributs.put("Ils"+ilsCounter.toString(), value);
 			break;
 		default:
 			break;
