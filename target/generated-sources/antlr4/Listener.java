@@ -39,13 +39,42 @@ public class Listener extends Airport_ParserBaseListener {
 	Integer  taxiNameCounter=0;
 	Integer  taxiwayPathCounter=0;
 	Integer visualModelCounter = 0;
+	Integer vertexCounter = 0;
+	Integer servicesCounter = 0;
+	private Integer runwayAliasCounter =0;
+	private Integer helipadCounter =0;
+	private Integer dmeCounter;
 
-	String lastName = ""; //serve para saber a que atributo se vai adicionar o name
+
+	String receivingAttributs = ""; //serve para saber a que atributo se vai adicionar o name
 
 	Map<String,Map<String,String>> airportAttributs = new HashMap<String,Map<String,String>>(); 
 
 	Map<String,Map<String,String>> ilsAttributs = new HashMap<String,Map<String,String>>();
 	Map<String,Map<String,String>> visualModelAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> vertexAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> towerAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> runwayAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> runwayAliasAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> helipadAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> runway_startAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> taxiwayPointAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> taxiwayParkingAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> taxiwayNameAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> taxiwayPathAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> markingsAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> lightsAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> offsetThresholdAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> blastPadAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> overrunAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> approachLightsAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> vasiAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> glide_scopeAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> dmeAttributs = new HashMap<String,Map<String,String>>();
+	Map<String,Map<String,String>> fuelAttributs = new HashMap<String,Map<String,String>>();
+
+
+
 
 	@Override public void enterTaxiwayIndex(  Airport_ParserParser.TaxiwayIndexContext ctx) { }
 	/**
@@ -59,7 +88,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTaxiwayName(  Airport_ParserParser.TaxiwayNameContext ctx) { }
+	@Override public void enterTaxiwayName(  Airport_ParserParser.TaxiwayNameContext ctx) { 
+		taxiNameCounter++;
+		receivingAttributs = "TaxiwayName";
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -149,7 +181,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterApproachLights(  Airport_ParserParser.ApproachLightsContext ctx) { }
+	@Override public void enterApproachLights(  Airport_ParserParser.ApproachLightsContext ctx) {
+		approachLightsCounter++;
+		receivingAttributs = "ApproachLights";
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -217,7 +252,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBlastPad(  Airport_ParserParser.BlastPadContext ctx) { }
+	@Override public void enterBlastPad(  Airport_ParserParser.BlastPadContext ctx) { 
+blastPadCounter++;
+		receivingAttributs = "BlastPad";
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -399,7 +437,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOffsetThreshold(  Airport_ParserParser.OffsetThresholdContext ctx) { }
+	@Override public void enterOffsetThreshold(  Airport_ParserParser.OffsetThresholdContext ctx) {
+offsetThresholdCounter++;
+		receivingAttributs = "OffsetThreshold";
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -574,7 +615,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTaxiwayPoint(  Airport_ParserParser.TaxiwayPointContext ctx) { }
+	@Override public void enterTaxiwayPoint(  Airport_ParserParser.TaxiwayPointContext ctx) { 
+taxiwayPointCounter++;
+		receivingAttributs = "TaxiwayPoint";
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -586,7 +630,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLights(  Airport_ParserParser.LightsContext ctx) { }
+	@Override public void enterLights(  Airport_ParserParser.LightsContext ctx) { 
+		lightsCounter++;
+		receivingAttributs = "Lights";
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -643,7 +690,9 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterServices(  Airport_ParserParser.ServicesContext ctx) { }
+	@Override public void enterServices(  Airport_ParserParser.ServicesContext ctx) {
+		servicesCounter++;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -688,7 +737,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVasi(  Airport_ParserParser.VasiContext ctx) { }
+	@Override public void enterVasi(  Airport_ParserParser.VasiContext ctx) {
+		receivingAttributs = "Vasi";
+		vasiCounter++;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -755,19 +807,28 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVertex(  Airport_ParserParser.VertexContext ctx) { }
+	@Override public void enterVertex(  Airport_ParserParser.VertexContext ctx) { 
+		receivingAttributs = "Vertex";
+		vertexCounter++;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVertex(  Airport_ParserParser.VertexContext ctx) { }
+	@Override public void exitVertex(  Airport_ParserParser.VertexContext ctx) { 
+
+
+	}
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuel(  Airport_ParserParser.FuelContext ctx) { }
+	@Override public void enterFuel(  Airport_ParserParser.FuelContext ctx) { 
+		fuelCounter++;
+		receivingAttributs = "Fuel";
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -957,7 +1018,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTower(  Airport_ParserParser.TowerContext ctx) { }
+	@Override public void enterTower(  Airport_ParserParser.TowerContext ctx) { 
+		receivingAttributs = "Tower";
+towerCounter++;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -992,7 +1056,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMarkings(  Airport_ParserParser.MarkingsContext ctx) { }
+	@Override public void enterMarkings(  Airport_ParserParser.MarkingsContext ctx) {
+markingsCounter++;
+		receivingAttributs = "Markings";
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1063,7 +1130,7 @@ public class Listener extends Airport_ParserBaseListener {
 	 */
 	@Override public void enterIls(  Airport_ParserParser.IlsContext ctx) { 
 		ilsCounter++;
-		lastName = "ils";
+		receivingAttributs = "ils";
 	}
 	/**
 	 * {@inheritDoc}
@@ -1187,7 +1254,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOverrun(  Airport_ParserParser.OverrunContext ctx) { }
+	@Override public void enterOverrun(  Airport_ParserParser.OverrunContext ctx) {
+overrunCounter++;
+		receivingAttributs = "Overrun";
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1221,7 +1291,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTaxiwayParking(  Airport_ParserParser.TaxiwayParkingContext ctx) { }
+	@Override public void enterTaxiwayParking(  Airport_ParserParser.TaxiwayParkingContext ctx) { 
+		receivingAttributs = "TaxiwayParking";
+		taxiwayParkingCounter++;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1313,7 +1386,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override public void enterVisual_model(  Airport_ParserParser.Visual_modelContext ctx) {
 
 		visualModelCounter++;
-		lastName = "visual model";
+		receivingAttributs = "Visual_model";
 
 	}
 	/**
@@ -1448,7 +1521,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTaxiwayPath(  Airport_ParserParser.TaxiwayPathContext ctx) { }
+	@Override public void enterTaxiwayPath(  Airport_ParserParser.TaxiwayPathContext ctx) { 
+		receivingAttributs = "TaxiwayPath";
+		taxiwayPathCounter++;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1492,7 +1568,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGlide_slope(  Airport_ParserParser.Glide_slopeContext ctx) { }
+	@Override public void enterGlide_slope(  Airport_ParserParser.Glide_slopeContext ctx) {
+		receivingAttributs = "Glide_slope";
+		glideSlopeCounter++;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1537,7 +1616,10 @@ public class Listener extends Airport_ParserBaseListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDme(  Airport_ParserParser.DmeContext ctx) { }
+	@Override public void enterDme(  Airport_ParserParser.DmeContext ctx) {
+		receivingAttributs = "Dme";
+		dmeCounter++;
+	}
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1720,6 +1802,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override
 	public void enterTaxiwayparkingType(Airport_ParserParser.TaxiwayparkingTypeContext ctx) {
+
 		String str = ctx.getText();
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: TaxiwayparkingType value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("DOCK_GA") && !val.equals("FUEL") && !val.equals("GATE_HEAVY") && !val.equals("GATE_MEDIUM") && !val.equals("GATE_SMALL") && !val.equals("RAMP_CARGO") && !val.equals("RAMP_GA") && !val.equals("RAMP_GA_LARGE") && !val.equals("RAMP_GA_MEDIUM") && !val.equals("RAMP_GA_SMALL") && !val.equals("RAMP_MIL_CARGO") && !val.equals("RAMP_MIL_COMBAT") && !val.equals("VEHICLE"))
@@ -1873,6 +1956,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override
 	public void enterHelipad(Airport_ParserParser.HelipadContext ctx) {
+		receivingAttributs = "Helipad";
 		String str = ctx.getText();
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterHelipad value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
@@ -1913,6 +1997,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override
 	public void enterVasiType(Airport_ParserParser.VasiTypeContext ctx) {
+
 		String str = ctx.getText();
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterVasiType value not expected! Val was: " + val);else
 			if (!val.equals("PAPI2") && !val.equals("PAPI4") && !val.equals("PVASI") && !val.equals("TRICOLOR") && !val.equals("TVASI" )&& !val.equals("VASI21") && !val.equals("VASI22" )&& !val.equals("VASI23" )&& !val.equals("VASI31") && !val.equals("VASI32") && !val.equals("VASI33") && !val.equals("BALL") && !val.equals("APAP") && !val.equals("PANELS"))
@@ -1966,6 +2051,11 @@ public class Listener extends Airport_ParserBaseListener {
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterIdent value not expected! Val was: " + val);else
 			if(!val.matches(ident))
 				System.out.println("Error: Ident value not expected! Got " + val);
+			else//valid value
+			{
+				addAttribute("ident", val);				
+
+			}
 	}
 
 	@Override
@@ -2215,19 +2305,7 @@ public class Listener extends Airport_ParserBaseListener {
 			else
 			{
 				name.put("name", val);
-				switch (lastName) {
-				case "airport":
-					airportAttributs.put("Airport"+airportCounter.toString(), name);
-					break;
-				case "ils":
-					ilsAttributs.put("Ils"+ilsCounter.toString(), name);
-					break;
-				case "visual model":
-					visualModelAttributs.put("Visual Model"+visualModelCounter.toString(), name);
-					break;
-				default:
-					break;
-				}
+				addAttribute("name", val);
 
 
 			}
@@ -2535,7 +2613,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override public void enterAirport( Airport_ParserParser.AirportContext ctx)
 	{
-		lastName = "airport";
+		receivingAttributs = "airport";
 		airportCounter++;
 	}
 
@@ -2566,4 +2644,78 @@ public class Listener extends Airport_ParserBaseListener {
 		}
 	}
 
+
+	public void addAttribute(String attName, String attValue)
+	{
+		Map<String, String> value = new HashMap<String,String>();
+		value.put(attName,attValue);
+		switch (receivingAttributs) {
+		case "Airport":
+			airportAttributs.put("Airport"+airportCounter.toString(), value);
+			break;
+		case "Tower":
+			towerAttributs.put("Tower"+towerCounter.toString(), value);
+			break;
+		case "Runway":
+			runwayAttributs.put("Runway"+runwayCounter.toString(), value);
+			break;
+		case "Runway_alias":
+			runwayAliasAttributs.put("Runway_alias"+runwayAliasCounter.toString(), value);
+			break;
+		case "Helipad":
+			helipadAttributs.put("Helipad"+helipadCounter .toString(), value);
+			break;
+		case "Runway_start":
+			runway_startAttributs.put("Runway_start"+runwayStartCounter.toString(), value);
+			break;
+		case "TaxiwayPoint":
+			taxiwayPointAttributs.put("TaxiwayPoint"+taxiwayPointCounter.toString(), value);
+			break;
+		case "TaxiwayParking":
+			taxiwayParkingAttributs.put("TaxiwayParking"+taxiwayParkingCounter.toString(), value);
+			break;
+		case "TaxiwayName":
+			taxiwayNameAttributs.put("TaxiwayName"+taxiNameCounter.toString(), value);
+			break;
+		case "TaxiwayPath":
+			taxiwayPathAttributs.put("TaxiwayPath"+taxiwayPathCounter.toString(), value);
+
+			break;
+		case "Lights":
+			lightsAttributs.put("Lights"+lightsCounter.toString(), value);
+			break;
+		case "OffsetThreshold":
+			offsetThresholdAttributs.put("OffsetThreashold"+offsetThresholdCounter.toString(), value);
+			break;
+		case "BlastPad":
+			blastPadAttributs.put("BlastPad"+blastPadCounter.toString(), value);
+			break;
+		case "Overrun":
+			overrunAttributs.put("Overrun"+overrunCounter.toString(), value);
+			break;
+		case "ApproachLights":
+			approachLightsAttributs.put("ApproachLights"+approachLightsCounter.toString(), value);
+			break;
+		case "Vasi":
+			vasiAttributs.put("Vasi"+vasiCounter.toString(), value);
+			break;
+		case "Visual_model":
+			visualModelAttributs.put("Visual_model"+visualModelCounter.toString(), value);
+			break;
+		case "Glide_slope":
+			glide_scopeAttributs.put("Glide_scope"+glideSlopeCounter.toString(), value);
+			break;
+		case "Dme":
+			dmeAttributs.put("DME"+dmeCounter.toString(), value);
+			break;
+		case "Fuel":
+			fuelAttributs.put("Fuel"+fuelCounter.toString(), value);
+			break;
+		case  "Vertex":
+			vertexAttributs.put("Vertex"+vertexCounter.toString(), value);
+			break;
+		default:
+			break;
+		}
+	}
 }
