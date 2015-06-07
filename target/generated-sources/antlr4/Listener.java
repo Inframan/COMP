@@ -9,14 +9,14 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 
 public class Listener extends Airport_ParserBaseListener {
 
-	String floatnumber = "[+-]?[0-9]+('.'[0-9]+)?";
+	String floatnumber = "[+-]?[0-9]+(\\.[0-9]+)?";
 	String ident = "[A-Za-z]{0,5}";
-	String heading = "[0-360]('.'[0-9]+)?";
+	String heading = "0*([0-2]?[0-9]?[0-9]|3[0-5][0-9]|360)(\\.[0-9]+)?";
 	String range = "[0-9]+[FMN]";
 	String string = "[a-zA-Z0-9]";
-	String trafficScallar = "[0-9]+['F'|'M'|'N']";
+	String trafficScallar = "[0-9]+[FMN]";
 	String unsigned_int = "[0-9]*";
-	String altitude_value = "[+-]?[0-9]+('.'[0-9]+)?[FM]?";
+	String altitude_value = "[+-]?[0-9]+(\\.[0-9]+)?[FM]?";
 	String string8 = "[A-Za-z0-9]{0,8}";
 
 	Integer airportCounter =0;
@@ -1696,7 +1696,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void enterTaxiwayNameString(Airport_ParserParser.TaxiwayNameStringContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: taxiwayNameString value not expected! Val was: " + val);else
 			if(!val.matches(string8))
 				System.out.println("Error: taxiwayNameString Name value not expected! Got " + val);
 
@@ -1705,7 +1705,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterOrientation(Airport_ParserParser.OrientationContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: Orientation value not expected! Val was: " + val);else
 			if (!val.equals("FORWARD") && !val.equals("REVERSE"))
 				System.out.println("Error: Orientation value not expected! Expected 'FORWARD' OR 'REVERSE' but got " + val);
 	}
@@ -1713,7 +1713,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterTaxiwaypointType(Airport_ParserParser.TaxiwaypointTypeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: TaxiwayPoint type value not expected! Val was: " + val);else
 			if (!val.equals("NORMAL") && !val.equals("HOLD_SHORT") && !val.equals("ILS_HOLD_SHORT") && !val.equals("HOLD_SHORT_NO_DRAWT" )&& !val.equals("ILS_HOLD_SHORT_NO_DRAW"))
 				System.out.println("Error: TaxiwaypointType value not expected! Expected 'NORMAL' or 'HOLD_SHORT' or  'ILS_HOLD_SHORT' or  'HOLD_SHORT_NO_DRAW' or 'ILS_HOLD_SHORT_NO_DRAW' but got " + val);
 	}
@@ -1721,7 +1721,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterTaxiwayparkingType(Airport_ParserParser.TaxiwayparkingTypeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: TaxiwayparkingType value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("DOCK_GA") && !val.equals("FUEL") && !val.equals("GATE_HEAVY") && !val.equals("GATE_MEDIUM") && !val.equals("GATE_SMALL") && !val.equals("RAMP_CARGO") && !val.equals("RAMP_GA") && !val.equals("RAMP_GA_LARGE") && !val.equals("RAMP_GA_MEDIUM") && !val.equals("RAMP_GA_SMALL") && !val.equals("RAMP_MIL_CARGO") && !val.equals("RAMP_MIL_COMBAT") && !val.equals("VEHICLE"))
 				System.out.println("Error: TaxiwayparkingType value not expected! Got " + val);
 	}
@@ -1729,7 +1729,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterTaxiwayparkingName(Airport_ParserParser.TaxiwayparkingNameContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterTaxiwayparkingName value not expected! Val was: " + val);else
 			if (!val.equals("PARKING") && !val.equals("DOCK") && !val.equals("GATE") && !val.startsWith("GATE_") && !val.equals("NONE") && !val.equals("N_PARKING") && !val.equals("NE_PARKING" )&& !val.equals("NW_PARKING" )&& !val.equals("SE_PARKING" )&& !val.equals("S_PARKING") && !val.equals("SW_PARKING" )&& !val.equals("W_PARKING") && !val.equals("E_PARKING" ))
 				System.out.println("Error: TaxiwayparkingName value not expected! Got " + val);
 	}
@@ -1737,7 +1737,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterPush_back(Airport_ParserParser.Push_backContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPush_back value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("BOTH") && !val.equals("LEFT") && !val.equals("RIGHT" ))
 				System.out.println("Error: Push_back value not expected! Got " + val);
 	}
@@ -1745,7 +1745,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterTaxiwayPathType(Airport_ParserParser.TaxiwayPathTypeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterTaxiwayPathType value not expected! Val was: " + val);else
 			if (!val.equals("RUNWAY") && !val.equals("PARKING") && !val.equals("TAXI") && !val.equals("PATH") && !val.equals("CLOSED") && !val.equals("VEHICLE"))
 				System.out.println("Error: TaxiwayPathType value not expected! Got " + val);
 	}
@@ -1753,7 +1753,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterSurface(Airport_ParserParser.SurfaceContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSurface value not expected! Val was: " + val);else
 			if (!val.equals("ASPHALT" )&& !val.equals("BITUMINOUS") && !val.equals("BRICK") && !val.equals("CLAY" )&& !val.equals("CEMENT" )&& !val.equals("CONCRETE" )&& !val.equals("CORAL") && !val.equals("DIRT") && !val.equals("GRASS" )&& !val.equals("GRAVEL") && !val.equals("ICE" )&& !val.equals("MACADAM" )&& !val.equals("OIL_TREATED" )&& !val.equals("PLANKS") && !val.equals("SAND" )&& !val.equals("SHALE") && !val.equals("SNOW" )&& !val.equals("STEEL_MATS" )&& !val.equals("TARMAC") && !val.equals("UNKNOWN") && !val.equals("WATER"))
 				System.out.println("Error: Surface value not expected! Got " + val);
 	}
@@ -1777,9 +1777,20 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterTaxiwayPathNumber(Airport_ParserParser.TaxiwayPathNumberContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		int num;
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterTaxiwayPathNumber value not expected! Val was: " + val);
+		else
 			if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST") && !val.equals("NORTHWEST") && !val.equals("SOUTH" )&& !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST" )&& !val.equals("WEST"))
-				System.out.println("Error: TaxiwayPathNumber value not expected! Got " + val);
+			{
+				if(val.length() < 3)
+				{
+					num = Integer.parseInt(val);
+					if(num < 0 || num > 36 )
+						System.out.println("Error: TaxiwayPathNumber value not expected! Got " + val);
+				}
+				else
+					System.out.println("Error: TaxiwayPathNumber value not expected! Got " + val);
+			}
 	}
 
 	@Override
@@ -1787,9 +1798,24 @@ public class Listener extends Airport_ParserBaseListener {
 		String str = ctx.getText();
 		try{
 
+
 			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-				if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST" )&& !val.equals("NORTHWEST") && !val.equals("SOUTH") && !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST") && !val.equals("WEST"))
-					System.out.println("Error: Number value not expected! Got " + val);
+				if(val.equals("00"))
+					return;
+			if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST" )&& !val.equals("NORTHWEST") && !val.equals("SOUTH") && !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST") && !val.equals("WEST"))
+				if(val.startsWith("0")) {
+					int value = Integer.parseInt(val);
+					if (value < 0 || value > 9) {
+						System.out.println("Error: Aprroach_Runway value out of bounds! Expected [00,09] but got " + val);
+						return;
+					}
+				}
+				else
+				{
+					int value = Integer.parseInt(val);
+					if (value < 0 || value > 36)
+						System.out.println("Error: Aprroach_Runway value out of bounds! Expected [0,36] but got " + val);
+				}
 		}
 		catch(Exception e)
 		{
@@ -1800,7 +1826,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterDesignator(Airport_ParserParser.DesignatorContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterDesignator value not expected! Val was: " + val);else
 			if (!val.equals("NONE" )&& !val.equals("C") && !val.equals("CENTER") && !val.equals("L") && !val.equals("LEFT" )&& !val.equals("R") && !val.equals("RIGHT" )&& !val.equals("W" )&& !val.equals("WATER") && !val.equals("A") && !val.equals("B"))
 				System.out.println("Error: Designator value not expected! Got " + val);
 	}
@@ -1808,7 +1834,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterPrimaryDesignator(Airport_ParserParser.PrimaryDesignatorContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrimaryDesignator value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("C" )&& !val.equals("CENTER") && !val.equals("L") && !val.equals("LEFT" )&& !val.equals("R" )&& !val.equals("RIGHT") && !val.equals("W") && !val.equals("WATER") && !val.equals("A" )&& !val.equals("B"))
 				System.out.println("Error: PrimaryDesignator value not expected! Got " + val);
 	}
@@ -1816,7 +1842,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterSecondaryDesignator(Airport_ParserParser.SecondaryDesignatorContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSecondaryDesignator value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("C") && !val.equals("CENTER") && !val.equals("L") && !val.equals("LEFT") && !val.equals("R") && !val.equals("RIGHT") && !val.equals("W") && !val.equals("WATER" )&& !val.equals("A") && !val.equals("B"))
 				System.out.println("Error: SecondaryDesignator value not expected! Got " + val);
 	}
@@ -1824,39 +1850,39 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterLength(Airport_ParserParser.LengthContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("M") && !val.equals("F" ))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterLength value not expected! Val was: " + val);else
+			if (!val.matches(altitude_value))
 				System.out.println("Error: Length value not expected! Got " + val);
 	}
 
 	@Override
 	public void enterPatternAltitude(Airport_ParserParser.PatternAltitudeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (val.matches(altitude_value) )
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPatternAltitude value not expected! Val was: " + val);else
+			if (!val.matches(altitude_value) )
 				System.out.println("Error: PatternAltitude value not expected! Got " + val);
 	}
 
 	@Override
 	public void enterSpacing(Airport_ParserParser.SpacingContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("M") && !val.equals("F" ))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSpacing value not expected! Val was: " + val);else
+			if (!val.matches(altitude_value))
 				System.out.println("Error: Spacing value not expected! Got " + val);
 	}
 
 	@Override
 	public void enterHelipad(Airport_ParserParser.HelipadContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("M") && !val.equals("F" ))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterHelipad value not expected! Val was: " + val);else
+			if (!val.matches(altitude_value))
 				System.out.println("Error: Helipad value not expected! Got " + val);
 	}
 
 	@Override
 	public void enterCenter(Airport_ParserParser.CenterContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCenter value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("LOW") && !val.equals("MEDIUM") && !val.equals("HIGH"))
 				System.out.println("Error: Center value not expected! Got " + val);
 	}
@@ -1864,7 +1890,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterEdge(Airport_ParserParser.EdgeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterEdge value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("LOW") && !val.equals("MEDIUM") && !val.equals("HIGH"))
 				System.out.println("Error: Edge value not expected! Got " + val);
 	}
@@ -1872,7 +1898,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterEnd(Airport_ParserParser.EndContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterEnd value not expected! Val was: " + val);else
 			if (!val.equals("PRIMARY") && !val.equals("SECONDARY"))
 				System.out.println("Error: End value not expected! Got " + val);
 	}
@@ -1880,7 +1906,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterSystem(Airport_ParserParser.SystemContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSystem value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("ALSF1") && !val.equals("ALSF2") && !val.equals("CALVERT") && !val.equals("CALVERT2") && !val.equals("MALS") && !val.equals("MALSF") && !val.equals("MALSR") && !val.equals("ODALS") && !val.equals("RAIL") && !val.equals("SALS") && !val.equals("SALSF") && !val.equals("SSALF") && !val.equals("SSALR") && !val.equals("SSALS"))
 				System.out.println("Error: System value not expected! Got " + val);
 	}
@@ -1888,7 +1914,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterVasiType(Airport_ParserParser.VasiTypeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterVasiType value not expected! Val was: " + val);else
 			if (!val.equals("PAPI2") && !val.equals("PAPI4") && !val.equals("PVASI") && !val.equals("TRICOLOR") && !val.equals("TVASI" )&& !val.equals("VASI21") && !val.equals("VASI22" )&& !val.equals("VASI23" )&& !val.equals("VASI31") && !val.equals("VASI32") && !val.equals("VASI33") && !val.equals("BALL") && !val.equals("APAP") && !val.equals("PANELS"))
 				System.out.println("Error: VasiType value not expected! Got " + val);
 	}
@@ -1896,7 +1922,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterRunway_start(Airport_ParserParser.Runway_startContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterRunway_start value not expected! Val was: " + val);else
 			if (!val.equals("RUNWAY"))
 				System.out.println("Error: Runway_start value not expected! Got " + val);
 	}
@@ -1904,7 +1930,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterImage_complexety(Airport_ParserParser.Image_complexetyContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterImage_complexety value not expected! Val was: " + val);else
 			if (!val.equals("VERY_SPARSE") && !val.equals("SPARSE") && !val.equals("NORMAL") && !val.equals("DENSE" )&& !val.equals("VERY_DENSE"))
 				System.out.println("Error: Image_complexety value not expected! Got " + val);
 	}
@@ -1912,7 +1938,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterFuel_type(Airport_ParserParser.Fuel_typeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterFuel_type value not expected! Val was: " + val);else
 			if (!val.equals("73") && !val.equals("87") && !val.equals("100") && !val.equals("130") && !val.equals("145") && !val.equals("MOGAS") && !val.equals("JET") && !val.equals("JETA") && !val.equals("JETA1") && !val.equals("JETAP") && !val.equals("JETB") && !val.equals("JET4") && !val.equals("JET5") && !val.equals("UNKNOWN"))
 				System.out.println("Error: Fuel_type value not expected! Got " + val);
 	}
@@ -1937,7 +1963,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterIdent(Airport_ParserParser.IdentContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterIdent value not expected! Val was: " + val);else
 			if(!val.matches(ident))
 				System.out.println("Error: Ident value not expected! Got " + val);
 	}
@@ -1946,8 +1972,8 @@ public class Listener extends Airport_ParserBaseListener {
 	public void enterPitch(Airport_ParserParser.PitchContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if(!val.matches(ident))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPitch value not expected! Val was: " + val);else
+			if(!val.matches(heading))
 				System.out.println("Error: Pitch value not expected! Got " + val);
 	}
 
@@ -1972,16 +1998,16 @@ public class Listener extends Airport_ParserBaseListener {
 	public void enterBiasX(Airport_ParserParser.BiasXContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if(!val.matches(floatnumber))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterBiasX value not expected! Val was: " + val);else
+			if(!val.matches(altitude_value))
 				System.out.println("Error: BiasX value not expected! Got " + val);
 	}
 
 	@Override
 	public void enterRange(Airport_ParserParser.RangeContext ctx){
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if(!val.matches(range))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterRange value not expected! Val was: " + val);else
+			if(!val.matches(altitude_value))
 				System.out.println("Error: Range value not expected! Got " + val);
 	}
 
@@ -1989,8 +2015,8 @@ public class Listener extends Airport_ParserBaseListener {
 	public void enterBiasY(Airport_ParserParser.BiasYContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if(!val.matches(floatnumber))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterBiasY value not expected! Val was: " + val);else
+			if(!val.matches(altitude_value))
 				System.out.println("Error: BiasY value not expected! Got " + val);
 	}
 
@@ -1998,8 +2024,8 @@ public class Listener extends Airport_ParserBaseListener {
 	public void enterBiasZ(Airport_ParserParser.BiasZContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if(!val.matches(floatnumber))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterBiasZ value not expected! Val was: " + val);else
+			if(!val.matches(altitude_value))
 				System.out.println("Error: Biaz value not expected! Got " + val);
 	}
 
@@ -2010,7 +2036,7 @@ public class Listener extends Airport_ParserBaseListener {
 		try
 		{
 
-			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterHeading value not expected! Val was: " + val);else
 				if(!val.matches(heading))
 					System.out.println("Error: Heading value not expected! Got " + val);
 		}
@@ -2037,21 +2063,21 @@ public class Listener extends Airport_ParserBaseListener {
 	public void enterWidth(Airport_ParserParser.WidthContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterWidth value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
 				System.out.println("Error: width value not expected! Got " + val);
 	}
 	@Override
 	public void enterCenterLineLighted(Airport_ParserParser.CenterLineLightedContext ctx){
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCenterLineLighted value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: CenterLineLighted value not expected! Got " + val);
 	}
 	@Override
 	public void enterFrequency(Airport_ParserParser.FrequencyContext ctx){
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterFrequency value not expected! Val was: " + val);else
 			if(!val.matches(floatnumber))
 				System.out.println("Error: Frequency value not expected! Got " + val);
 	}
@@ -2093,28 +2119,28 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterDrawSurface(Airport_ParserParser.DrawSurfaceContext ctx)	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterDrawSurface value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: drawSurface value not expected! Got " + val);
 	}
 	@Override
 	public void enterIdent_ils(Airport_ParserParser.Ident_ilsContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterIdent_ils value not expected! Val was: " + val);else
 			if(!val.matches(ident))
 				System.out.println("Error: Ident_ils value not expected! Got " + val);
 	}
 	@Override
 	public void enterCenterLine(Airport_ParserParser.CenterLineContext ctx){
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCenterLine value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: CenterLine value not expected! Got " + val);
 	}
 	@Override
 	public void enterDrawDetail(Airport_ParserParser.DrawDetailContext ctx)  {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterDrawDetail value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: DrawDetail value not expected! Got " + val);
 	}
@@ -2142,7 +2168,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterRegion(Airport_ParserParser.RegionContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterRegion value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
 				System.out.println("Error: Region value out of bounds! Val size must be minor then 48 but was " + val.length());
 		//  else
@@ -2152,7 +2178,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterCity(Airport_ParserParser.CityContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCity value not expected! Val was: " + val);else
 			if(!val.matches(string) && val.length()>48)
 				System.out.println("Error: City value out of bounds! Val size must be minor then 48 but was " + val.length());
 		//      else
@@ -2162,7 +2188,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterCountry(Airport_ParserParser.CountryContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCountry value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
 				System.out.println("Error: Country value out of bounds! Val size must be minor then 48 but was " + val.length());
 		//  else
@@ -2172,7 +2198,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterState(Airport_ParserParser.StateContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterState value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
 				System.out.println("Error: State value out of bounds! Val size must be minor then 48 but was " + val.length());
 		//       else
@@ -2183,7 +2209,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void enterName(Airport_ParserParser.NameContext ctx) {
 		String str = ctx.getText();
 		Map<String, String> name = new HashMap<String, String>();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterName value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
 				System.out.println("Error: Name value out of bounds! Val size must be minor then 48 but was " + val.length());
 			else
@@ -2211,7 +2237,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterInstanceId(Airport_ParserParser.InstanceIdContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterInstanceId value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48){
 				System.out.println("Error: Name value out of bounds! Val size must be minor then 48 but was " + val.length());
 			}
@@ -2220,55 +2246,55 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterPrimaryTakeoff(Airport_ParserParser.PrimaryTakeoffContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: PrimaryTakeoff value not expected! Val was: " + val);
+		String val = protectedSplit(str); if(isNull(val)) val = "TRUE";
+		if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
+			System.out.println("Error: PrimaryTakeoff value not expected! Val was: " + val);
 	}
 
 	@Override
 	public void enterPrimaryLanding(Airport_ParserParser.PrimaryLandingContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: PrimaryLanding value not expected! Val was: " + val);
+		String val = protectedSplit(str); if(isNull(val)) val = "TRUE";
+		if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
+			System.out.println("Error: PrimaryLanding value not expected! Val was: " + val);
 	}
 
 	@Override
 	public void enterPrimaryPattern(Airport_ParserParser.PrimaryPatternContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("LEFT") || !val.equals("RIGHT"))
-				System.out.println("Error: PrimaryPattern value not expected! Val was: " + val);
+		String val = protectedSplit(str); if(isNull(val)) val = "LEFT";
+		if (!val.equals("LEFT") && !val.equals("RIGHT"))
+			System.out.println("Error: PrimaryPattern value not expected! Val was: " + val);
 	}
 
 	@Override
 	public void enterSecondaryTakeoff(Airport_ParserParser.SecondaryTakeoffContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: SecondaryTakeoff value not expected! Val was: " + val);
+		String val = protectedSplit(str); if(isNull(val)) val = "TRUE";
+		if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
+			System.out.println("Error: SecondaryTakeoff value not expected! Val was: " + val);
 	}
 
 	@Override
 	public void enterSecondaryLanding(Airport_ParserParser.SecondaryLandingContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: SecondaryLanding value not expected! Val was: " + val);
+		String val = protectedSplit(str); if(isNull(val)) val = "TRUE";
+		if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
+			System.out.println("Error: SecondaryLanding value not expected! Val was: " + val);
 	}
 
 	@Override
 	public void enterSecondaryPattern(Airport_ParserParser.SecondaryPatternContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("LEFT") || !val.equals("RIGHT"))
-				System.out.println("Error: SecondaryPattern value not expected! Val was: " + val);
+		String val = protectedSplit(str); if(isNull(val)) val = "LEFT";
+		if (!val.equals("LEFT") && !val.equals("RIGHT"))
+			System.out.println("Error: SecondaryPattern value not expected! Val was: " + val);
 	}
 
 	@Override
 	public void enterPrimaryMarkingBias(Airport_ParserParser.PrimaryMarkingBiasContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrimaryMarkingBias value not expected! Val was: " + val);else
 			if (!val.matches(trafficScallar))
 				System.out.println("Error: PrimaryMarkingBias value not expected! Val was: " + val);
 	}
@@ -2276,7 +2302,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterSecondaryMarkingBias(Airport_ParserParser.SecondaryMarkingBiasContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSecondaryMarkingBias value not expected! Val was: " + val);else
 			if (!val.matches(trafficScallar))
 				System.out.println("Error: SecondaryMarkingBias value not expected! Val was: " + val);
 	}
@@ -2284,7 +2310,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterAlternateThreshold(Airport_ParserParser.AlternateThresholdContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAlternateThreshold value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: AlternateThreshold value not expected! Val was: " + val);
 	}
@@ -2292,7 +2318,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterAlternateTouchdown(Airport_ParserParser.AlternateTouchdownContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAlternateTouchdown value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: AlternateTouchdown value not expected! Val was: " + val);
 	}
@@ -2300,7 +2326,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterAlternateFixedDistance(Airport_ParserParser.AlternateFixedDistanceContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAlternateFixedDistance value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: AlternateFixedDistance value not expected! Val was: " + val);
 	}
@@ -2308,7 +2334,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterAlternatePrecision(Airport_ParserParser.AlternatePrecisionContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAlternatePrecision value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: AlternatePrecision value not expected! Val was: " + val);
 	}
@@ -2316,7 +2342,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterLeadingZeroIdent(Airport_ParserParser.LeadingZeroIdentContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterLeadingZeroIdent value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: LeadingZeroIdent value not expected! Val was: " + val);
 	}
@@ -2324,7 +2350,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterNoThresholdEndArrows(Airport_ParserParser.NoThresholdEndArrowsContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterNoThresholdEndArrows value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: NoThresholdEndArrows value not expected! Val was: " + val);
 	}
@@ -2332,7 +2358,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterEdges(Airport_ParserParser.EdgesContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterEdges value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Edges value not expected! Val was: " + val);
 	}
@@ -2340,7 +2366,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterThreshold(Airport_ParserParser.ThresholdContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterThreshold value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Threshold value not expected! Val was: " + val);
 	}
@@ -2348,7 +2374,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterFixed(Airport_ParserParser.FixedContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterFixed value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Fixed value not expected! Val was: " + val);
 	}
@@ -2356,7 +2382,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterTouchdown(Airport_ParserParser.TouchdownContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterTouchdown value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Touchdown value not expected! Val was: " + val);
 	}
@@ -2364,7 +2390,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterDashes(Airport_ParserParser.DashesContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterDashes value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Dashes value not expected! Val was: " + val);
 	}
@@ -2372,7 +2398,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterIdent_Marking(Airport_ParserParser.Ident_MarkingContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterIdent_Marking value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Ident_Marking value not expected! Val was: " + val);
 	}
@@ -2380,7 +2406,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterPrecision(Airport_ParserParser.PrecisionContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrecision value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Precision value not expected! Val was: " + val);
 	}
@@ -2388,7 +2414,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterEdgePavement(Airport_ParserParser.EdgePavementContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterEdgePavement value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: EdgePavement value not expected! Val was: " + val);
 	}
@@ -2396,7 +2422,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterSingleEnd(Airport_ParserParser.SingleEndContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSingleEnd value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: SingleEnd value not expected! Val was: " + val);
 	}
@@ -2404,7 +2430,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterPrimaryClosed(Airport_ParserParser.PrimaryClosedContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrimaryClosed value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: PrimaryClosed value not expected! Val was: " + val);
 	}
@@ -2412,7 +2438,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterSecondaryClosed(Airport_ParserParser.SecondaryClosedContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSecondaryClosed value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: SecondaryClosed value not expected! Val was: " + val);
 	}
@@ -2420,7 +2446,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterPrimaryStol(Airport_ParserParser.PrimaryStolContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrimaryStol value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: PrimaryStol value not expected! Val was: " + val);
 	}
@@ -2428,7 +2454,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterSecondaryStol(Airport_ParserParser.SecondaryStolContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSecondaryStol value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: SecondaryStol value not expected! Val was: " + val);
 	}
@@ -2436,7 +2462,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterBackCourse(Airport_ParserParser.BackCourseContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterBackCourse value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: BackCourse value not expected! Val was: " + val);
 	}
@@ -2444,7 +2470,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterCenterRed(Airport_ParserParser.CenterRedContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCenterRed value not expected! Val was: " + val);
 		else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: CenterRed value not expected! Val was: " + val);
@@ -2455,7 +2481,7 @@ public class Listener extends Airport_ParserBaseListener {
 		String str = ctx.getText();
 		try
 		{
-			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterStrobes value not expected! Val was: " + val);else
 				if (!val.matches(unsigned_int))
 					System.out.println("Error: Strobes value not expected! Val was: " + val);
 		}
@@ -2469,7 +2495,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterAltitude(Airport_ParserParser.AltitudeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAltitude value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
 				System.out.println("Error: Altitude value not expected! Val was: " + val);
 	}
@@ -2477,16 +2503,16 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void enterAirportTestRadius(Airport_ParserParser.AirportTestRadiusContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.matches(trafficScallar))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAirportTestRadius value not expected! Val was: " + val);else
+			if (!val.matches(altitude_value))
 				System.out.println("Error: AirportTestRadius value not expected! Val was: " + val);
 	}
 
 	@Override
 	public void enterRadius(Airport_ParserParser.RadiusContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.matches(floatnumber))
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterRadius value not expected! Val was: " + val);else
+			if (!val.matches(altitude_value))
 				System.out.println("Error: Radius value not expected! Val was: " + val);
 	}
 
@@ -2502,7 +2528,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void enterAvailability(Airport_ParserParser.AvailabilityContext ctx) {
 		String str = ctx.getText();
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
-			if (!val.equals("TRUE") && !val.equals("FALSE") && !val.equals("UNKNOWN") &&  !val.equals("PRIOR_REQUEST"))
+			if (!val.equals("YES") && !val.equals("NO") && !val.equals("UNKNOWN") &&  !val.equals("PRIOR_REQUEST"))
 				System.out.println("Error: Availability value out of bounds! Expected [0,3999] but got " + val);
 	}
 
