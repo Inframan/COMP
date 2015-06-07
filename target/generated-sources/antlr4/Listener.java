@@ -253,7 +253,7 @@ public class Listener extends Airport_ParserBaseListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterBlastPad(  Airport_ParserParser.BlastPadContext ctx) { 
-blastPadCounter++;
+		blastPadCounter++;
 		receivingAttributs = "BlastPad";
 	}
 	/**
@@ -438,7 +438,7 @@ blastPadCounter++;
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterOffsetThreshold(  Airport_ParserParser.OffsetThresholdContext ctx) {
-offsetThresholdCounter++;
+		offsetThresholdCounter++;
 		receivingAttributs = "OffsetThreshold";
 	}
 	/**
@@ -616,7 +616,7 @@ offsetThresholdCounter++;
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterTaxiwayPoint(  Airport_ParserParser.TaxiwayPointContext ctx) { 
-taxiwayPointCounter++;
+		taxiwayPointCounter++;
 		receivingAttributs = "TaxiwayPoint";
 	}
 	/**
@@ -1020,7 +1020,7 @@ taxiwayPointCounter++;
 	 */
 	@Override public void enterTower(  Airport_ParserParser.TowerContext ctx) { 
 		receivingAttributs = "Tower";
-towerCounter++;
+		towerCounter++;
 	}
 	/**
 	 * {@inheritDoc}
@@ -1057,7 +1057,7 @@ towerCounter++;
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterMarkings(  Airport_ParserParser.MarkingsContext ctx) {
-markingsCounter++;
+		markingsCounter++;
 		receivingAttributs = "Markings";
 	}
 	/**
@@ -1255,7 +1255,7 @@ markingsCounter++;
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void enterOverrun(  Airport_ParserParser.OverrunContext ctx) {
-overrunCounter++;
+		overrunCounter++;
 		receivingAttributs = "Overrun";
 	}
 	/**
@@ -1672,6 +1672,10 @@ overrunCounter++;
 		int val = Integer.parseInt(str.split("=")[1].split("\"")[1]);
 		if(val < 0 || val > 255)
 			System.out.println("Error: Red value out of bounds! Expected [0,255] but got " + val);
+		else
+		{
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+		}
 	}
 	/**
 	 * {@inheritDoc}
@@ -1686,7 +1690,10 @@ overrunCounter++;
 		int val = Integer.parseInt(str.split("=")[1].split("\"")[1]);
 		if(val < 0 || val > 255)
 			System.out.println("Error: Blue value out of bounds! Expected [0,255] but got " + val);
-
+		else
+		{
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+		}
 	}
 	/**
 	 * {@inheritDoc}
@@ -1701,7 +1708,10 @@ overrunCounter++;
 		int val = Integer.parseInt(str.split("=")[1].split("\"")[1]);
 		if(val < 0 || val > 255)
 			System.out.println("Error: Green value out of bounds! Expected [0,255] but got " + val);
-
+		else
+		{
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+		}
 
 	}
 	/**
@@ -1716,9 +1726,18 @@ overrunCounter++;
 		String str = ctx.getText();
 		String value = str.split("=")[1].split("\"")[1];
 
-		if(value.equals("00"))
-			return;
-		if(value.startsWith("0")) {
+		if(( value.equals("EAST") ||
+				value.equals("NORTH") ||
+				value.equals("NORTHEAST")  ||
+				value.equals("NORTHWEST")  ||
+				value.equals("SOUTH") ||
+				value.equals("SOUTHEAST")  ||
+				value.equals("SOUTHWEST")  ||
+				value.equals("WEST")  ||value.equals("00") ||
+				value.equals("EAST") ))
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+		else if(value.startsWith("0"))
+		{
 			int val = Integer.parseInt(value);
 			if (val < 0 || val > 9) {
 				System.out.println("Error: Aprroach_Runway value out of bounds! Expected [00,09] but got " + val);
@@ -1732,23 +1751,15 @@ overrunCounter++;
 				int val = Integer.parseInt(value);
 				if (val < 0 || val > 36)
 					System.out.println("Error: Aprroach_Runway value out of bounds! Expected [0,36] but got " + val);
-				return;
+				else
+					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 			}
 			catch(NumberFormatException nfe)
 			{
+				System.out.println("Error: Aprroach_Runway value out of bounds! Expected cardinal points but got " + value);
 			}
 
 		}
-		if(!( value.equals("EAST") ||
-				value.equals("NORTH") ||
-				value.equals("NORTHEAST")  ||
-				value.equals("NORTHWEST")  ||
-				value.equals("SOUTH") ||
-				value.equals("SOUTHEAST")  ||
-				value.equals("SOUTHWEST")  ||
-				value.equals("WEST")  ||
-				value.equals("EAST") ))
-			System.out.println("Error: Aprroach_Runway value out of bounds! Expected cardinal points but got " + value);
 
 	}
 
@@ -1757,7 +1768,7 @@ overrunCounter++;
 	{
 		String str = ctx.getText();
 		if(str.endsWith("<missing VALUE>"))
-			str = "";
+			addAttribute(str.split("=")[0], "");
 		else
 		{
 			try
@@ -1765,6 +1776,8 @@ overrunCounter++;
 				int val = Integer.parseInt(str.split("=")[1].split("\"")[1]);
 				if(val < 0 || val > 255)
 					System.out.println("Error: Name value out of bounds! Expected [0,255] but got " + val);
+				else
+					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 			}
 			catch(Exception e)
 			{
@@ -1781,6 +1794,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: taxiwayNameString value not expected! Val was: " + val);else
 			if(!val.matches(string8))
 				System.out.println("Error: taxiwayNameString Name value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 
 	}
 
@@ -1790,6 +1805,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: Orientation value not expected! Val was: " + val);else
 			if (!val.equals("FORWARD") && !val.equals("REVERSE"))
 				System.out.println("Error: Orientation value not expected! Expected 'FORWARD' OR 'REVERSE' but got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1798,6 +1815,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: TaxiwayPoint type value not expected! Val was: " + val);else
 			if (!val.equals("NORMAL") && !val.equals("HOLD_SHORT") && !val.equals("ILS_HOLD_SHORT") && !val.equals("HOLD_SHORT_NO_DRAWT" )&& !val.equals("ILS_HOLD_SHORT_NO_DRAW"))
 				System.out.println("Error: TaxiwaypointType value not expected! Expected 'NORMAL' or 'HOLD_SHORT' or  'ILS_HOLD_SHORT' or  'HOLD_SHORT_NO_DRAW' or 'ILS_HOLD_SHORT_NO_DRAW' but got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1807,6 +1826,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: TaxiwayparkingType value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("DOCK_GA") && !val.equals("FUEL") && !val.equals("GATE_HEAVY") && !val.equals("GATE_MEDIUM") && !val.equals("GATE_SMALL") && !val.equals("RAMP_CARGO") && !val.equals("RAMP_GA") && !val.equals("RAMP_GA_LARGE") && !val.equals("RAMP_GA_MEDIUM") && !val.equals("RAMP_GA_SMALL") && !val.equals("RAMP_MIL_CARGO") && !val.equals("RAMP_MIL_COMBAT") && !val.equals("VEHICLE"))
 				System.out.println("Error: TaxiwayparkingType value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1815,6 +1836,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterTaxiwayparkingName value not expected! Val was: " + val);else
 			if (!val.equals("PARKING") && !val.equals("DOCK") && !val.equals("GATE") && !val.startsWith("GATE_") && !val.equals("NONE") && !val.equals("N_PARKING") && !val.equals("NE_PARKING" )&& !val.equals("NW_PARKING" )&& !val.equals("SE_PARKING" )&& !val.equals("S_PARKING") && !val.equals("SW_PARKING" )&& !val.equals("W_PARKING") && !val.equals("E_PARKING" ))
 				System.out.println("Error: TaxiwayparkingName value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1823,6 +1846,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPush_back value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("BOTH") && !val.equals("LEFT") && !val.equals("RIGHT" ))
 				System.out.println("Error: Push_back value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1831,6 +1856,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterTaxiwayPathType value not expected! Val was: " + val);else
 			if (!val.equals("RUNWAY") && !val.equals("PARKING") && !val.equals("TAXI") && !val.equals("PATH") && !val.equals("CLOSED") && !val.equals("VEHICLE"))
 				System.out.println("Error: TaxiwayPathType value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1839,6 +1866,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSurface value not expected! Val was: " + val);else
 			if (!val.equals("ASPHALT" )&& !val.equals("BITUMINOUS") && !val.equals("BRICK") && !val.equals("CLAY" )&& !val.equals("CEMENT" )&& !val.equals("CONCRETE" )&& !val.equals("CORAL") && !val.equals("DIRT") && !val.equals("GRASS" )&& !val.equals("GRAVEL") && !val.equals("ICE" )&& !val.equals("MACADAM" )&& !val.equals("OIL_TREATED" )&& !val.equals("PLANKS") && !val.equals("SAND" )&& !val.equals("SHALE") && !val.equals("SNOW" )&& !val.equals("STEEL_MATS" )&& !val.equals("TARMAC") && !val.equals("UNKNOWN") && !val.equals("WATER"))
 				System.out.println("Error: Surface value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1847,6 +1876,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) val = "FALSE";
 		if (!val.equals("TRUE") && !val.equals("FALSE"))
 			System.out.println("Error: LeftEdgeLighted value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1855,6 +1886,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) val = "FALSE";
 		if (!val.equals("TRUE") && !val.equals("FALSE"))
 			System.out.println("Error: RightEdgeLighted value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1870,6 +1903,8 @@ overrunCounter++;
 					num = Integer.parseInt(val);
 					if(num < 0 || num > 36 )
 						System.out.println("Error: TaxiwayPathNumber value not expected! Got " + val);
+					else
+						addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 				}
 				else
 					System.out.println("Error: TaxiwayPathNumber value not expected! Got " + val);
@@ -1884,20 +1919,23 @@ overrunCounter++;
 
 			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
 				if(val.equals("00"))
-					return;
+						addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 			if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST" )&& !val.equals("NORTHWEST") && !val.equals("SOUTH") && !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST") && !val.equals("WEST"))
 				if(val.startsWith("0")) {
 					int value = Integer.parseInt(val);
 					if (value < 0 || value > 9) {
 						System.out.println("Error: Aprroach_Runway value out of bounds! Expected [00,09] but got " + val);
-						return;
 					}
+					else
+						addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 				}
 				else
 				{
 					int value = Integer.parseInt(val);
 					if (value < 0 || value > 36)
 						System.out.println("Error: Aprroach_Runway value out of bounds! Expected [0,36] but got " + val);
+					else
+						addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 				}
 		}
 		catch(Exception e)
@@ -1912,6 +1950,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterDesignator value not expected! Val was: " + val);else
 			if (!val.equals("NONE" )&& !val.equals("C") && !val.equals("CENTER") && !val.equals("L") && !val.equals("LEFT" )&& !val.equals("R") && !val.equals("RIGHT" )&& !val.equals("W" )&& !val.equals("WATER") && !val.equals("A") && !val.equals("B"))
 				System.out.println("Error: Designator value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1920,6 +1960,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrimaryDesignator value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("C" )&& !val.equals("CENTER") && !val.equals("L") && !val.equals("LEFT" )&& !val.equals("R" )&& !val.equals("RIGHT") && !val.equals("W") && !val.equals("WATER") && !val.equals("A" )&& !val.equals("B"))
 				System.out.println("Error: PrimaryDesignator value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1928,6 +1970,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSecondaryDesignator value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("C") && !val.equals("CENTER") && !val.equals("L") && !val.equals("LEFT") && !val.equals("R") && !val.equals("RIGHT") && !val.equals("W") && !val.equals("WATER" )&& !val.equals("A") && !val.equals("B"))
 				System.out.println("Error: SecondaryDesignator value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1936,6 +1980,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterLength value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
 				System.out.println("Error: Length value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1944,6 +1990,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPatternAltitude value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value) )
 				System.out.println("Error: PatternAltitude value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1952,6 +2000,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSpacing value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
 				System.out.println("Error: Spacing value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1961,6 +2011,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterHelipad value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
 				System.out.println("Error: Helipad value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1969,6 +2021,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCenter value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("LOW") && !val.equals("MEDIUM") && !val.equals("HIGH"))
 				System.out.println("Error: Center value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1977,6 +2031,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterEdge value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("LOW") && !val.equals("MEDIUM") && !val.equals("HIGH"))
 				System.out.println("Error: Edge value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1985,6 +2041,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterEnd value not expected! Val was: " + val);else
 			if (!val.equals("PRIMARY") && !val.equals("SECONDARY"))
 				System.out.println("Error: End value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -1993,6 +2051,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSystem value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("ALSF1") && !val.equals("ALSF2") && !val.equals("CALVERT") && !val.equals("CALVERT2") && !val.equals("MALS") && !val.equals("MALSF") && !val.equals("MALSR") && !val.equals("ODALS") && !val.equals("RAIL") && !val.equals("SALS") && !val.equals("SALSF") && !val.equals("SSALF") && !val.equals("SSALR") && !val.equals("SSALS"))
 				System.out.println("Error: System value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2002,6 +2062,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterVasiType value not expected! Val was: " + val);else
 			if (!val.equals("PAPI2") && !val.equals("PAPI4") && !val.equals("PVASI") && !val.equals("TRICOLOR") && !val.equals("TVASI" )&& !val.equals("VASI21") && !val.equals("VASI22" )&& !val.equals("VASI23" )&& !val.equals("VASI31") && !val.equals("VASI32") && !val.equals("VASI33") && !val.equals("BALL") && !val.equals("APAP") && !val.equals("PANELS"))
 				System.out.println("Error: VasiType value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2010,6 +2072,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterRunway_start value not expected! Val was: " + val);else
 			if (!val.equals("RUNWAY"))
 				System.out.println("Error: Runway_start value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2018,6 +2082,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterImage_complexety value not expected! Val was: " + val);else
 			if (!val.equals("VERY_SPARSE") && !val.equals("SPARSE") && !val.equals("NORMAL") && !val.equals("DENSE" )&& !val.equals("VERY_DENSE"))
 				System.out.println("Error: Image_complexety value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2026,6 +2092,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterFuel_type value not expected! Val was: " + val);else
 			if (!val.equals("73") && !val.equals("87") && !val.equals("100") && !val.equals("130") && !val.equals("145") && !val.equals("MOGAS") && !val.equals("JET") && !val.equals("JETA") && !val.equals("JETA1") && !val.equals("JETAP") && !val.equals("JETB") && !val.equals("JET4") && !val.equals("JET5") && !val.equals("UNKNOWN"))
 				System.out.println("Error: Fuel_type value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2037,6 +2105,8 @@ overrunCounter++;
 			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 			if (val >= 255 || val < 0)
 				System.out.println("Error: TaxiwayPathStart value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 
 		}
 		catch (Exception e)
@@ -2053,7 +2123,7 @@ overrunCounter++;
 				System.out.println("Error: Ident value not expected! Got " + val);
 			else//valid value
 			{
-				addAttribute("ident", val);				
+					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);	
 
 			}
 	}
@@ -2065,6 +2135,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPitch value not expected! Val was: " + val);else
 			if(!val.matches(heading))
 				System.out.println("Error: Pitch value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2076,6 +2148,8 @@ overrunCounter++;
 			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 			if (val >= 3999 || val <= 0)
 				System.out.println("Error: Index value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 
 		}
 		catch (Exception e)
@@ -2091,6 +2165,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterBiasX value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
 				System.out.println("Error: BiasX value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2099,6 +2175,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterRange value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
 				System.out.println("Error: Range value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2108,6 +2186,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterBiasY value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
 				System.out.println("Error: BiasY value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2117,6 +2197,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterBiasZ value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
 				System.out.println("Error: Biaz value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2129,6 +2211,8 @@ overrunCounter++;
 			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterHeading value not expected! Val was: " + val);else
 				if(!val.matches(heading))
 					System.out.println("Error: Heading value not expected! Got " + val);
+				else
+					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		}
 		catch(Exception e)
 		{
@@ -2141,6 +2225,8 @@ overrunCounter++;
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 90 || val <= -90)
 			System.out.println("Error: lattitude value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterMagvar(Airport_ParserParser.MagvarContext ctx) {
@@ -2148,6 +2234,8 @@ overrunCounter++;
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 360 || val <= -360)
 			System.out.println("Error: Magvar value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterWidth(Airport_ParserParser.WidthContext ctx)
@@ -2156,6 +2244,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterWidth value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
 				System.out.println("Error: width value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterCenterLineLighted(Airport_ParserParser.CenterLineLightedContext ctx){
@@ -2163,6 +2253,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCenterLineLighted value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: CenterLineLighted value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterFrequency(Airport_ParserParser.FrequencyContext ctx){
@@ -2170,6 +2262,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterFrequency value not expected! Val was: " + val);else
 			if(!val.matches(floatnumber))
 				System.out.println("Error: Frequency value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterTeeOffSet3(Airport_ParserParser.TeeOffSet3Context ctx) {
@@ -2177,6 +2271,8 @@ overrunCounter++;
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 0.0 || val <= 50.0)
 			System.out.println("Error: TeeOffSet3 value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterTeeOffSet4(Airport_ParserParser.TeeOffSet4Context ctx){
@@ -2184,6 +2280,8 @@ overrunCounter++;
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 0.0 || val <= 50.0)
 			System.out.println("Error: TeeOffSet4 value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterTeeOffSet1(Airport_ParserParser.TeeOffSet1Context ctx){
@@ -2191,6 +2289,8 @@ overrunCounter++;
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 0.0 || val <= 50.0)
 			System.out.println("Error: TeeOffSet1 value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterTeeOffSet2(Airport_ParserParser.TeeOffSet2Context ctx){
@@ -2198,6 +2298,8 @@ overrunCounter++;
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 0.0 || val <= 50.0)
 			System.out.println("Error: TeeOffSet2 value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterLongitude(Airport_ParserParser.LongitudeContext ctx) {
@@ -2205,6 +2307,8 @@ overrunCounter++;
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 180 || val <= -180)
 			System.out.println("Error: Longitude value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterDrawSurface(Airport_ParserParser.DrawSurfaceContext ctx)	{
@@ -2212,6 +2316,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterDrawSurface value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: drawSurface value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterIdent_ils(Airport_ParserParser.Ident_ilsContext ctx) {
@@ -2219,6 +2325,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterIdent_ils value not expected! Val was: " + val);else
 			if(!val.matches(ident))
 				System.out.println("Error: Ident_ils value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterCenterLine(Airport_ParserParser.CenterLineContext ctx){
@@ -2226,6 +2334,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCenterLine value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: CenterLine value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterDrawDetail(Airport_ParserParser.DrawDetailContext ctx)  {
@@ -2233,6 +2343,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterDrawDetail value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: DrawDetail value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void enterTaxiwayPathEnd(Airport_ParserParser.TaxiwayPathEndContext ctx)	{
@@ -2241,6 +2353,8 @@ overrunCounter++;
 			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 			if (val >= 255 || val < 0)
 				System.out.println("Error: TaxiwayPathEnd value not expected! Got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		}
 		catch(Exception e)
 		{
@@ -2253,6 +2367,8 @@ overrunCounter++;
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val < 0)
 			System.out.println("Error: WeightLimit value not expected! Got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2261,6 +2377,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterRegion value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
 				System.out.println("Error: Region value out of bounds! Val size must be minor then 48 but was " + val.length());
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//  else
 		//	airportAttributs.put("region", val);
 	}
@@ -2271,6 +2389,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCity value not expected! Val was: " + val);else
 			if(!val.matches(string) && val.length()>48)
 				System.out.println("Error: City value out of bounds! Val size must be minor then 48 but was " + val.length());
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//      else
 		//    	airportAttributs.put("city", val);
 	}
@@ -2281,6 +2401,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterCountry value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
 				System.out.println("Error: Country value out of bounds! Val size must be minor then 48 but was " + val.length());
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//  else
 		//	airportAttributs.put("country", val);
 	}
@@ -2291,6 +2413,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterState value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
 				System.out.println("Error: State value out of bounds! Val size must be minor then 48 but was " + val.length());
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//       else
 		//     	airportAttributs.put("state", val);
 	}
@@ -2298,17 +2422,11 @@ overrunCounter++;
 	@Override
 	public void enterName(Airport_ParserParser.NameContext ctx) {
 		String str = ctx.getText();
-		Map<String, String> name = new HashMap<String, String>();
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterName value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
 				System.out.println("Error: Name value out of bounds! Val size must be minor then 48 but was " + val.length());
 			else
-			{
-				name.put("name", val);
-				addAttribute("name", val);
-
-
-			}
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//airportAttributs.put("name", val);
 	}
 
@@ -2319,38 +2437,48 @@ overrunCounter++;
 			if(!val.matches(str) && val.length()>48){
 				System.out.println("Error: Name value out of bounds! Val size must be minor then 48 but was " + val.length());
 			}
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
 	public void enterPrimaryTakeoff(Airport_ParserParser.PrimaryTakeoffContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) val = "TRUE";
-		if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
+		String val = protectedSplit(str); if(isNull(val)) addAttribute(str.split("=")[0], "TRUE");
+		else if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
 			System.out.println("Error: PrimaryTakeoff value not expected! Val was: " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
 	public void enterPrimaryLanding(Airport_ParserParser.PrimaryLandingContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) val = "TRUE";
-		if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
+		String val = protectedSplit(str); if(isNull(val)) addAttribute(str.split("=")[0], "TRUE");
+		else if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
 			System.out.println("Error: PrimaryLanding value not expected! Val was: " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
 	public void enterPrimaryPattern(Airport_ParserParser.PrimaryPatternContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) val = "LEFT";
-		if (!val.equals("LEFT") && !val.equals("RIGHT"))
+		String val = protectedSplit(str); if(isNull(val)) addAttribute(str.split("=")[0], "LEFT");
+		else if (!val.equals("LEFT") && !val.equals("RIGHT"))
 			System.out.println("Error: PrimaryPattern value not expected! Val was: " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
 	public void enterSecondaryTakeoff(Airport_ParserParser.SecondaryTakeoffContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) val = "TRUE";
-		if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
+		String val = protectedSplit(str); if(isNull(val)) addAttribute(str.split("=")[0], "TRUE");
+		else if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
 			System.out.println("Error: SecondaryTakeoff value not expected! Val was: " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2359,6 +2487,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) val = "TRUE";
 		if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
 			System.out.println("Error: SecondaryLanding value not expected! Val was: " + val);
+		else
+			addAttribute(str.split("=")[0], val);
 	}
 
 	@Override
@@ -2367,6 +2497,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) val = "LEFT";
 		if (!val.equals("LEFT") && !val.equals("RIGHT"))
 			System.out.println("Error: SecondaryPattern value not expected! Val was: " + val);
+		else
+			addAttribute(str.split("=")[0], val);
 	}
 
 	@Override
@@ -2375,6 +2507,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrimaryMarkingBias value not expected! Val was: " + val);else
 			if (!val.matches(trafficScallar))
 				System.out.println("Error: PrimaryMarkingBias value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2383,6 +2517,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSecondaryMarkingBias value not expected! Val was: " + val);else
 			if (!val.matches(trafficScallar))
 				System.out.println("Error: SecondaryMarkingBias value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2391,6 +2527,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAlternateThreshold value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: AlternateThreshold value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2399,6 +2537,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAlternateTouchdown value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: AlternateTouchdown value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2407,6 +2547,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAlternateFixedDistance value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: AlternateFixedDistance value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2415,6 +2557,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAlternatePrecision value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: AlternatePrecision value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2423,6 +2567,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterLeadingZeroIdent value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: LeadingZeroIdent value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2431,6 +2577,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterNoThresholdEndArrows value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: NoThresholdEndArrows value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2439,6 +2587,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterEdges value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Edges value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2447,6 +2597,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterThreshold value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Threshold value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2455,6 +2607,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterFixed value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Fixed value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2463,6 +2617,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterTouchdown value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Touchdown value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2471,6 +2627,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterDashes value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Dashes value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2479,6 +2637,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterIdent_Marking value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Ident_Marking value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2487,6 +2647,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrecision value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: Precision value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2495,6 +2657,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterEdgePavement value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: EdgePavement value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2503,6 +2667,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSingleEnd value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: SingleEnd value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2511,6 +2677,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrimaryClosed value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: PrimaryClosed value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2519,6 +2687,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSecondaryClosed value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: SecondaryClosed value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2527,6 +2697,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterPrimaryStol value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: PrimaryStol value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2535,6 +2707,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterSecondaryStol value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: SecondaryStol value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2543,6 +2717,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterBackCourse value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: BackCourse value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2552,6 +2728,8 @@ overrunCounter++;
 		else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
 				System.out.println("Error: CenterRed value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2562,6 +2740,8 @@ overrunCounter++;
 			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterStrobes value not expected! Val was: " + val);else
 				if (!val.matches(unsigned_int))
 					System.out.println("Error: Strobes value not expected! Val was: " + val);
+				else
+					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		}
 		catch(Exception e)
 		{
@@ -2576,6 +2756,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAltitude value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
 				System.out.println("Error: Altitude value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2584,6 +2766,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterAirportTestRadius value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
 				System.out.println("Error: AirportTestRadius value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2592,6 +2776,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: enterRadius value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
 				System.out.println("Error: Radius value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2600,6 +2786,8 @@ overrunCounter++;
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 3999 || val < 0)
 			System.out.println("Error: TaxiwayparkingNumber value out of bounds! Expected [0,3999] but got " + val);
+		else
+			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 	@Override
@@ -2608,6 +2796,8 @@ overrunCounter++;
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CenterRed value not expected! Val was: " + val);else
 			if (!val.equals("YES") && !val.equals("NO") && !val.equals("UNKNOWN") &&  !val.equals("PRIOR_REQUEST"))
 				System.out.println("Error: Availability value out of bounds! Expected [0,3999] but got " + val);
+			else
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
 
