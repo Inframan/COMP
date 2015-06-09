@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.antlr.v4.tool.Attribute;
 import org.apache.bcel.generic.GETSTATIC;
+import org.apache.xalan.xsltc.compiler.sym;
 import org.jdom2.DocType;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -114,10 +115,7 @@ public class SDLgenerator {
 		location.addContent(country);
 
 		location.addContent(new Element("country").addContent(airportAtt.get("")));
-		location.addContent(new Element("coordinates").addContent(
-				new Element("latitude").addContent(airportAtt.get("lat"))).addContent(
-						new Element("longitude").addContent(airportAtt.get("lon"))).addContent(
-								new Element("altitude").addContent(airportAtt.get("alt"))));
+		getCoords(airportAtt, location);
 		location.addContent(new Element("availability").setAttribute("available","always"));
 
 	}
@@ -134,8 +132,8 @@ public class SDLgenerator {
 		airport.addContent(new Element("description").addContent("XXX Description XXX"));
 		airport.addContent(contactPerson());
 		airport.addContent(location);
+		airport.addContent(new Element("IATA").addContent("ABC"));
 		airport.addContent(new Element("ICAO").addContent(attributs.get("ident")));
-		airport.addContent(new Element("IATA"));
 		airport.addContent(new Element("magVar").addContent(attributs.get("magvar")));
 
 		airport.addContent(runways);
@@ -154,11 +152,7 @@ public class SDLgenerator {
 				Element runway = new Element("runway");
 				runway.setAttribute("id","r"+airportCounter.toString()+"-"+i.toString());
 				
-				
-				runway.addContent(new Element("coordinates").addContent(
-						new Element("latitude").addContent(runwayAtt.get("lat"))).addContent(
-								new Element("longitude").addContent(runwayAtt.get("lon"))).addContent(
-										new Element("altitude").addContent(runwayAtt.get("alt"))));
+				getCoords(runwayAtt, runway);
 				
 				
 				String[] unit = getLengthUnit(runwayAtt.get("length"));
@@ -169,6 +163,14 @@ public class SDLgenerator {
 				runway.addContent(new Element("surface").addContent(runwayAtt.get("surface")));
 				
 				
+				Element baseEnd = new Element("baseEnd");
+				baseEnd.addContent(new Element("designation").addContent(runwayAtt.get("number")));
+				Element startPoint = new Element("startPoint");
+				getCoords(runwayAtt, startPoint);
+				startPoint.addContent(new Element("connectsTo").addContent(new Element("xway").setAttribute("idr","x02")));
+				baseEnd.addContent(startPoint);
+				runway.addContent(baseEnd);
+				
 				
 				runways.addContent(runway);
 				
@@ -177,6 +179,20 @@ public class SDLgenerator {
 		}
 		
 	}
+	
+	
+	private void getCoords(Map<String,String> attrs, Element root)
+	{
+		String[] unit = getLengthUnit(attrs.get("alt"));
+		
+		root.addContent(new Element("coordinates").addContent(
+				new Element("latitude").addContent(attrs.get("lat"))).addContent(
+						new Element("longitude").addContent(attrs.get("lon"))).addContent(
+								new Element("altitude").addContent(unit[0]).setAttribute("lengthUnit",unit[1])));
+		
+		
+	}
+	
 	
 
 	private String[] getLengthUnit(String length)
