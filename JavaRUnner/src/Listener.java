@@ -40,9 +40,9 @@ public class Listener extends Airport_ParserBaseListener {
 	Integer visualModelCounter = 0;
 	Integer vertexCounter = 0;
 	Integer servicesCounter = 0;
-	private Integer runwayAliasCounter =0;
-	private Integer helipadCounter =0;
-	private Integer dmeCounter = 0;
+	Integer runwayAliasCounter =0;
+	Integer helipadCounter =0;
+	Integer dmeCounter = 0;
 
 
 	String receivingAttributs = ""; //serve para saber a que atributo se vai adicionar o name
