@@ -16,7 +16,9 @@ public class Blg2SDL {
 
 		try {
 			
-			
+			String output="SDLOutputFile.sdl";
+			if(Args.length>1)
+				output=Args[1];
 			String inputFile = null;
 			if(Args.length > 0) inputFile = Args[0];
 			InputStream is = System.in;
@@ -40,7 +42,7 @@ public class Blg2SDL {
 			Listener extractor = new Listener();
 			walker.walk(extractor, tree); // initiate walk of tree with listener
 	
-			SDLgenerator gen = new SDLgenerator(extractor);
+			SDLgenerator gen = new SDLgenerator(extractor,output);
 			
 			gen.export();
 			
