@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scenario xmlns="dcs:scenario" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <bases xmlns="">
+    <baseOfOperations id="b1">
+      <name>Braga</name>
+      <mobility water="true" underwater="false" land="true" air="true" />
+      <description>XXX Description XXX</description>
+      <history>XXX History XXX</history>
+      <contactPerson>
+        <name>XxX Name XxX</name>
+        <title>XxX Title XxX</title>
+        <institution>XxX Institution XxX</institution>
+        <position>XxX position XxX</position>
+        <address>XxX address XxX</address>
+        <zipCode>XxX zipCode XxX</zipCode>
+        <city>XxX city XxX</city>
+        <stateDistrictRegion>XxX stateDistrictRegion XxX</stateDistrictRegion>
+        <country>XxX country XxX</country>
+        <telephone>XxX telephone XxX</telephone>
+        <cellphone>XxX cellphone XxX</cellphone>
+        <fax>XxX fax XxX</fax>
+        <email>XxX email XxX</email>
+      </contactPerson>
+      <location>
+        <address>xXxXxXxXxXxXx</address>
+        <zipCode>xXxXxXxXxXxXx</zipCode>
+        <city>Braga</city>
+        <stateDistrictRegion />
+        <country>Portugal</country>
+        <country />
+        <coordinates>
+          <latitude>41.5850000828505</latitude>
+          <longitude>-8.44999998807907</longitude>
+          <altitude>75.285M</altitude>
+        </coordinates>
+        <availability available="always" />
+      </location>
+      <airport>
+        <name>Braga</name>
+        <description>XXX Description XXX</description>
+        <contactPerson>
+          <name>XxX Name XxX</name>
+          <title>XxX Title XxX</title>
+          <institution>XxX Institution XxX</institution>
+          <position>XxX position XxX</position>
+          <address>XxX address XxX</address>
+          <zipCode>XxX zipCode XxX</zipCode>
+          <city>XxX city XxX</city>
+          <stateDistrictRegion>XxX stateDistrictRegion XxX</stateDistrictRegion>
+          <country>XxX country XxX</country>
+          <telephone>XxX telephone XxX</telephone>
+          <cellphone>XxX cellphone XxX</cellphone>
+          <fax>XxX fax XxX</fax>
+          <email>XxX email XxX</email>
+        </contactPerson>
+        <location>
+          <address>xXxXxXxXxXxXx</address>
+          <zipCode>xXxXxXxXxXxXx</zipCode>
+          <city>Braga</city>
+          <stateDistrictRegion />
+          <country>Portugal</country>
+          <country />
+          <coordinates>
+            <latitude>41.5850000828505</latitude>
+            <longitude>-8.44999998807907</longitude>
+            <altitude>75.285M</altitude>
+          </coordinates>
+          <availability available="always" />
+        </location>
+        <ICAO>LPBR</ICAO>
+        <IATA />
+        <magVar>5.5</magVar>
+        <runways>
+          <runway id="r1-1">
+            <coordinates>
+              <latitude>41.5857215970755</latitude>
+              <longitude>-8.44805404543877</longitude>
+              <altitude>75.285M</altitude>
+            </coordinates>
+            <length lengthUnit="Meter">949.15</length>
+            <width lengthUnit="Meter">24.99</width>
+            <surface>ASPHALT</surface>
+          </runway>
+        </runways>
+      </airport>
+    </baseOfOperations>
+  </bases>
+</scenario>
