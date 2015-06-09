@@ -1,12 +1,7 @@
 /Airport_Parser.tokens
-/Airport_ParserLexer.tokens
-/Blg2SDL.class
-/Hello.tokens
-/HelloLexer.tokens
-/Listener.class
-/SDLgenerator.class
 /Airport_ParserBaseListener.class
 /Airport_ParserLexer.class
+/Airport_ParserLexer.tokens
 /Airport_ParserListener.class
 /Airport_ParserParser$AirlineCodesContext.class
 /Airport_ParserParser$AirportContext.class
@@ -144,3 +139,8 @@
 /Airport_ParserParser$WeightLimitContext.class
 /Airport_ParserParser$WidthContext.class
 /Airport_ParserParser.class
+/Blg2SDL.class
+/Hello.tokens
+/HelloLexer.tokens
+/Listener.class
+/SDLgenerator.class

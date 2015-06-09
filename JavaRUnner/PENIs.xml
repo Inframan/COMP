@@ -31,12 +31,13 @@
         <coordinates>
           <latitude>41.5850000828505</latitude>
           <longitude>-8.44999998807907</longitude>
-          <altitude>75.285M</altitude>
+          <altitude lengthUnit="Meter">75.285</altitude>
         </coordinates>
         <availability available="always" />
       </location>
       <airport>
         <name>Braga</name>
+        <helipads />
         <description>XXX Description XXX</description>
         <contactPerson>
           <name>XxX Name XxX</name>
@@ -63,23 +64,71 @@
           <coordinates>
             <latitude>41.5850000828505</latitude>
             <longitude>-8.44999998807907</longitude>
-            <altitude>75.285M</altitude>
+            <altitude lengthUnit="Meter">75.285</altitude>
           </coordinates>
           <availability available="always" />
         </location>
+        <IATA>ABC</IATA>
         <ICAO>LPBR</ICAO>
-        <IATA />
         <magVar>5.5</magVar>
         <runways>
-          <runway id="r1-1">
+          <runway id="r07-25">
             <coordinates>
               <latitude>41.5857215970755</latitude>
               <longitude>-8.44805404543877</longitude>
-              <altitude>75.285M</altitude>
+              <altitude lengthUnit="Meter">75.285</altitude>
             </coordinates>
             <length lengthUnit="Meter">949.15</length>
             <width lengthUnit="Meter">24.99</width>
             <surface>ASPHALT</surface>
+            <baseEnd>
+              <designation>07</designation>
+              <startpoint>
+                <coordinates>
+                  <latitude>41.5857215970755</latitude>
+                  <longitude>-8.44805404543877</longitude>
+                  <altitude lengthUnit="Meter">75.285</altitude>
+                </coordinates>
+                <connectsTo>
+                  <xway idr="x02" />
+                </connectsTo>
+              </startpoint>
+              <heading headingType="True">62.4599990844727</heading>
+              <endpoint>
+                <coordinates>
+                  <latitude>41.5857215970755</latitude>
+                  <longitude>-8.44805404543877</longitude>
+                  <altitude lengthUnit="Meter">75.285</altitude>
+                </coordinates>
+                <connectsTo>
+                  <xway idr="x04" />
+                </connectsTo>
+              </endpoint>
+            </baseEnd>
+            <reciprocalEnd>
+              <designation>25</designation>
+              <startpoint>
+                <coordinates>
+                  <latitude>41.5857215970755</latitude>
+                  <longitude>-8.44805404543877</longitude>
+                  <altitude lengthUnit="Meter">75.285</altitude>
+                </coordinates>
+                <connectsTo>
+                  <xway idr="x02" />
+                </connectsTo>
+              </startpoint>
+              <heading headingType="True">62.4599990844727</heading>
+              <endpoint>
+                <coordinates>
+                  <latitude>41.5857215970755</latitude>
+                  <longitude>-8.44805404543877</longitude>
+                  <altitude lengthUnit="Meter">75.285</altitude>
+                </coordinates>
+                <connectsTo>
+                  <xway idr="x04" />
+                </connectsTo>
+              </endpoint>
+            </reciprocalEnd>
           </runway>
         </runways>
       </airport>
