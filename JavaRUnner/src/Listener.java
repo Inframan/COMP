@@ -568,7 +568,7 @@ public class Listener extends Airport_ParserBaseListener {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
 		int num;
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitTaxiwayPathNumber value not expected! Val was: " + val);
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitTaxiwayPathNumber value not expected! Val was: " + val);
 		else
 			if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST") && !val.equals("NORTHWEST") && !val.equals("SOUTH" )&& !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST" )&& !val.equals("WEST"))
 			{
@@ -592,7 +592,7 @@ public class Listener extends Airport_ParserBaseListener {
 		try{
 
 
-			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: CexitRed value not expected! Val was: " + val);else
+			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": CexitRed value not expected! Val was: " + val);else
 				if(val.equals("00"))
 					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 			if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST" )&& !val.equals("NORTHWEST") && !val.equals("SOUTH") && !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST") && !val.equals("WEST"))
@@ -623,7 +623,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitDesignator(Airport_ParserParser.DesignatorContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitDesignator value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitDesignator value not expected! Val was: " + val);else
 			if (!val.equals("NONE" )&& !val.equals("C") && !val.equals("Cexit") && !val.equals("L") && !val.equals("LEFT" )&& !val.equals("R") && !val.equals("RIGHT" )&& !val.equals("W" )&& !val.equals("WATER") && !val.equals("A") && !val.equals("B"))
 				System.out.println("Error in line - " + lineErr +": Designator value not expected! Got " + val);
 			else
@@ -634,7 +634,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitPrimaryDesignator(Airport_ParserParser.PrimaryDesignatorContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitPrimaryDesignator value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitPrimaryDesignator value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("C" )&& !val.equals("Cexit") && !val.equals("L") && !val.equals("LEFT" )&& !val.equals("R" )&& !val.equals("RIGHT") && !val.equals("W") && !val.equals("WATER") && !val.equals("A" )&& !val.equals("B"))
 				System.out.println("Error in line - " + lineErr +": PrimaryDesignator value not expected! Got " + val);
 			else
@@ -645,7 +645,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitSecondaryDesignator(Airport_ParserParser.SecondaryDesignatorContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitSecondaryDesignator value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitSecondaryDesignator value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("C") && !val.equals("Cexit") && !val.equals("L") && !val.equals("LEFT") && !val.equals("R") && !val.equals("RIGHT") && !val.equals("W") && !val.equals("WATER" )&& !val.equals("A") && !val.equals("B"))
 				System.out.println("Error in line - " + lineErr +": SecondaryDesignator value not expected! Got " + val);
 			else
@@ -656,7 +656,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitLength(Airport_ParserParser.LengthContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitLength value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitLength value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
 				System.out.println("Error in line - " + lineErr +": Length value not expected! Got " + val);
 			else
@@ -667,7 +667,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitPatternAltitude(Airport_ParserParser.PatternAltitudeContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitPatternAltitude value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitPatternAltitude value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value) )
 				System.out.println("Error in line - " + lineErr +": PatternAltitude value not expected! Got " + val);
 			else
@@ -678,7 +678,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitSpacing(Airport_ParserParser.SpacingContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitSpacing value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitSpacing value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
 				System.out.println("Error in line - " + lineErr +": Spacing value not expected! Got " + val);
 			else
@@ -692,7 +692,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitCenter(Airport_ParserParser.CenterContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitCenter value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitCenter value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("LOW") && !val.equals("MEDIUM") && !val.equals("HIGH"))
 				System.out.println("Error in line - " + lineErr +": Center value not expected! Got " + val);
 			else
@@ -703,7 +703,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitEdge(Airport_ParserParser.EdgeContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitEdge value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitEdge value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("LOW") && !val.equals("MEDIUM") && !val.equals("HIGH"))
 				System.out.println("Error in line - " + lineErr +": Edge value not expected! Got " + val);
 			else
@@ -713,9 +713,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitEnd(Airport_ParserParser.EndContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitEnd value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitEnd value not expected! Val was: " + val);else
 			if (!val.equals("PRIMARY") && !val.equals("SECONDARY"))
-				System.out.println("Error: End value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": End value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -723,9 +724,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitSystem(Airport_ParserParser.SystemContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitSystem value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitSystem value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("ALSF1") && !val.equals("ALSF2") && !val.equals("CALVERT") && !val.equals("CALVERT2") && !val.equals("MALS") && !val.equals("MALSF") && !val.equals("MALSR") && !val.equals("ODALS") && !val.equals("RAIL") && !val.equals("SALS") && !val.equals("SALSF") && !val.equals("SSALF") && !val.equals("SSALR") && !val.equals("SSALS"))
-				System.out.println("Error: System value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": System value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -734,9 +736,10 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitVasiType(Airport_ParserParser.VasiTypeContext ctx) {
 
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitVasiType value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitVasiType value not expected! Val was: " + val);else
 			if (!val.equals("PAPI2") && !val.equals("PAPI4") && !val.equals("PVASI") && !val.equals("TRICOLOR") && !val.equals("TVASI" )&& !val.equals("VASI21") && !val.equals("VASI22" )&& !val.equals("VASI23" )&& !val.equals("VASI31") && !val.equals("VASI32") && !val.equals("VASI33") && !val.equals("BALL") && !val.equals("APAP") && !val.equals("PANELS"))
-				System.out.println("Error: VasiType value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": VasiType value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -746,9 +749,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitImage_complexety(Airport_ParserParser.Image_complexetyContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitImage_complexety value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitImage_complexety value not expected! Val was: " + val);else
 			if (!val.equals("VERY_SPARSE") && !val.equals("SPARSE") && !val.equals("NORMAL") && !val.equals("DENSE" )&& !val.equals("VERY_DENSE"))
-				System.out.println("Error: Image_complexety value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": Image_complexety value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -756,9 +760,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitFuel_type(Airport_ParserParser.Fuel_typeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitFuel_type value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitFuel_type value not expected! Val was: " + val);else
 			if (!val.equals("73") && !val.equals("87") && !val.equals("100") && !val.equals("130") && !val.equals("145") && !val.equals("MOGAS") && !val.equals("JET") && !val.equals("JETA") && !val.equals("JETA1") && !val.equals("JETAP") && !val.equals("JETB") && !val.equals("JET4") && !val.equals("JET5") && !val.equals("UNKNOWN"))
-				System.out.println("Error: Fuel_type value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": Fuel_type value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -767,26 +772,28 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitTaxiwayPathStart(Airport_ParserParser.TaxiwayPathStartContext ctx)
 	{
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		try{
 			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 			if (val >= 255 || val < 0)
-				System.out.println("Error: exitTaxiwayPathStart value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitTaxiwayPathStart value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 
 		}
 		catch (Exception e)
 		{
-			System.out.println("Error: exitTaxiwayPathStart value not expected! Got " + str);
+			System.out.println("Error in line - " + lineErr +": exitTaxiwayPathStart value not expected! Got " + str);
 		}
 	}
 
 	@Override
 	public void exitIdent(Airport_ParserParser.IdentContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitIdent value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitIdent value not expected! Val was: " + val);else
 			if(!val.matches(ident))
-				System.out.println("Error: Ident value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": Ident value not expected! Got " + val);
 			else//valid value
 			{
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);	
@@ -798,9 +805,10 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitPitch(Airport_ParserParser.PitchContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitPitch value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitPitch value not expected! Val was: " + val);else
 			if(!val.matches(heading))
-				System.out.println("Error: Pitch value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": Pitch value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -808,19 +816,19 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitIndex(Airport_ParserParser.IndexContext ctx) {
 		String str = ctx.getText();
-		
+		int lineErr = ctx.getStart().getLine();
 		try
 		{
 			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 			if (val >= 3999 || val <= 0)
-				System.out.println("Error: exitIndex value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitIndex value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 
 		}
 		catch (Exception e)
 		{
-			System.out.println("Error: Index value not expected! Got "+str);
+			System.out.println("Error in line - " + lineErr +": Index value not expected! Got "+str);
 		}
 	}
 
@@ -828,9 +836,10 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitBiasX(Airport_ParserParser.BiasXContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitBiasX value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitBiasX value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
-				System.out.println("Error: exitBiasX value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitBiasX value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -838,9 +847,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitRange(Airport_ParserParser.RangeContext ctx){
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitRange value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitRange value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
-				System.out.println("Error: exitRange value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitRange value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -849,9 +859,10 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitBiasY(Airport_ParserParser.BiasYContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitBiasY value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitBiasY value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
-				System.out.println("Error: exitBiasY value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitBiasY value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -860,9 +871,10 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitBiasZ(Airport_ParserParser.BiasZContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitBiasZ value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitBiasZ value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
-				System.out.println("Error: exitBiasZ value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitBiasZ value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -871,35 +883,38 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitHeading(Airport_ParserParser.HeadingContext ctx)
 	{
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		try
 		{
 
-			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitHeading value not expected! Val was: " + val);else
+			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitHeading value not expected! Val was: " + val);else
 				if(!val.matches(heading))
-					System.out.println("Error: exitHeading value not expected! Got " + val);
+					System.out.println("Error in line - " + lineErr +": exitHeading value not expected! Got " + val);
 				else
 					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error: exitHeading value not expected! Got " + str);
+			System.out.println("Error in line - " + lineErr +": exitHeading value not expected! Got " + str);
 		}
 	}
 	@Override
 	public void exitLattitude(Airport_ParserParser.LattitudeContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 90 || val <= -90)
-			System.out.println("Error: exitLattitude value not expected! Got " + val);
+			System.out.println("Error in line - " + lineErr +": exitLattitude value not expected! Got " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitMagvar(Airport_ParserParser.MagvarContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 360 || val <= -360)
-			System.out.println("Error: exitMagvar value not expected! Got " + val);
+			System.out.println("Error in line - " + lineErr +": exitMagvar value not expected! Got " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -907,18 +922,20 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitWidth(Airport_ParserParser.WidthContext ctx)
 	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitWidth value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitWidth value not expected! Val was: " + val);else
 			if(!val.matches(altitude_value))
-				System.out.println("Error: exitWidth value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitWidth value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitCenterLineLighted(Airport_ParserParser.CenterLineLightedContext ctx){
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitCenterLineLighted value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitCenterLineLighted value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitCenterLineLighted value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitCenterLineLighted value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -926,54 +943,60 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitFrequency(Airport_ParserParser.FrequencyContext ctx){
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitFrequency value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitFrequency value not expected! Val was: " + val);else
 			if(!val.matches(floatnumber))
-				System.out.println("Error: exitFrequency value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitFrequency value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitTeeOffSet3(Airport_ParserParser.TeeOffSet3Context ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 0.0 || val <= 50.0)
-			System.out.println("Error: exitTeeOffSet3 value not expected! Got " + val);
+			System.out.println("Error in line - " + lineErr +": exitTeeOffSet3 value not expected! Got " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitTeeOffSet4(Airport_ParserParser.TeeOffSet4Context ctx){
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 0.0 || val <= 50.0)
-			System.out.println("Error: exitTeeOffSet4 value not expected! Got " + val);
+			System.out.println("Error in line - " + lineErr +": exitTeeOffSet4 value not expected! Got " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitTeeOffSet1(Airport_ParserParser.TeeOffSet1Context ctx){
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 0.0 || val <= 50.0)
-			System.out.println("Error: exitTeeOffSet1 value not expected! Got " + val);
+			System.out.println("Error in line - " + lineErr +": exitTeeOffSet1 value not expected! Got " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitTeeOffSet2(Airport_ParserParser.TeeOffSet2Context ctx){
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 0.0 || val <= 50.0)
-			System.out.println("Error: exitTeeOffSet2 value not expected! Got " + val);
+			System.out.println("Error in line - " + lineErr +": exitTeeOffSet2 value not expected! Got " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitLongitude(Airport_ParserParser.LongitudeContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 180 || val <= -180)
-			System.out.println("Error: exitLongitude value not expected! Got " + val);
+			System.out.println("Error in line - " + lineErr +": exitLongitude value not expected! Got " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -981,60 +1004,66 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitDrawSurface(Airport_ParserParser.DrawSurfaceContext ctx)	{
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitDrawSurface value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitDrawSurface value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitdrawSurface value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitdrawSurface value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitIdent_ils(Airport_ParserParser.Ident_ilsContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitIdent_ils value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitIdent_ils value not expected! Val was: " + val);else
 			if(!val.matches(ident))
-				System.out.println("Error: exitIdent_ils value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitIdent_ils value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitCenterLine(Airport_ParserParser.CenterLineContext ctx){
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitCenterLine value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitCenterLine value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitCenterLine value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitDrawDetail(Airport_ParserParser.DrawDetailContext ctx)  {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitDrawDetail value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitDrawDetail value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitDrawDetail value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitDrawDetail value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 	@Override
 	public void exitTaxiwayPathEnd(Airport_ParserParser.TaxiwayPathEndContext ctx)	{
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		try{
 			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 			if (val >= 255 || val < 0)
-				System.out.println("Error: exitTaxiwayPathEnd value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitTaxiwayPathEnd value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		}
 		catch(Exception e)
 		{
-			System.out.println("Error: exitTaxiwayPathEnd value not expected! Got " + str);
+			System.out.println("Error in line - " + lineErr +": exitTaxiwayPathEnd value not expected! Got " + str);
 		}
 	}
 	@Override
 	public void exitWeightLimit(Airport_ParserParser.WeightLimitContext ctx)	{
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val < 0)
-			System.out.println("Error: exitWeightLimit value not expected! Got " + val);
+			System.out.println("Error in line - " + lineErr +": exitWeightLimit value not expected! Got " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1042,9 +1071,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitRegion(Airport_ParserParser.RegionContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitRegion value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitRegion value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
-				System.out.println("Error: exitRegion value out of bounds! Val size must be minor then 48 but was " + val.length());
+				System.out.println("Error in line - " + lineErr +": exitRegion value out of bounds! Val size must be minor then 48 but was " + val.length());
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//  else
@@ -1054,9 +1084,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitCity(Airport_ParserParser.CityContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitCity value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitCity value not expected! Val was: " + val);else
 			if(!val.matches(string) && val.length()>48)
-				System.out.println("Error: exitCity value out of bounds! Val size must be minor then 48 but was " + val.length());
+				System.out.println("Error in line - " + lineErr +": exitCity value out of bounds! Val size must be minor then 48 but was " + val.length());
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//      else
@@ -1066,9 +1097,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitCountry(Airport_ParserParser.CountryContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitCountry value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitCountry value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
-				System.out.println("Error: exitCountry value out of bounds! Val size must be minor then 48 but was " + val.length());
+				System.out.println("Error in line - " + lineErr +": exitCountry value out of bounds! Val size must be minor then 48 but was " + val.length());
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//  else
@@ -1078,9 +1110,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitState(Airport_ParserParser.StateContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitState value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitState value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
-				System.out.println("Error: exitState value out of bounds! Val size must be minor then 48 but was " + val.length());
+				System.out.println("Error in line - " + lineErr +": exitState value out of bounds! Val size must be minor then 48 but was " + val.length());
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//       else
@@ -1090,9 +1123,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitName(Airport_ParserParser.NameContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitName value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitName value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48)
-				System.out.println("Error: exitName value out of bounds! Val size must be minor then 48 but was " + val.length());
+				System.out.println("Error in line - " + lineErr +": exitName value out of bounds! Val size must be minor then 48 but was " + val.length());
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		//airportAttributs.put("name", val);
@@ -1101,9 +1135,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitInstanceId(Airport_ParserParser.InstanceIdContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitInstanceId value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitInstanceId value not expected! Val was: " + val);else
 			if(!val.matches(str) && val.length()>48){
-				System.out.println("Error: exitName value out of bounds! Val size must be minor then 48 but was " + val.length());
+				System.out.println("Error in line - " + lineErr +": exitName value out of bounds! Val size must be minor then 48 but was " + val.length());
 			}
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
@@ -1112,9 +1147,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitPrimaryTakeoff(Airport_ParserParser.PrimaryTakeoffContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		String val = protectedSplit(str); if(isNull(val)) addAttribute(str.split("=")[0], "TRUE");
 		else if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
-			System.out.println("Error: exitPrimaryTakeoff value not expected! Val was: " + val);
+			System.out.println("Error in line - " + lineErr +": exitPrimaryTakeoff value not expected! Val was: " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1122,9 +1158,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitPrimaryLanding(Airport_ParserParser.PrimaryLandingContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		String val = protectedSplit(str); if(isNull(val)) addAttribute(str.split("=")[0], "TRUE");
 		else if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
-			System.out.println("Error: exitPrimaryLanding value not expected! Val was: " + val);
+			System.out.println("Error in line - " + lineErr +": exitPrimaryLanding value not expected! Val was: " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1132,9 +1169,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitPrimaryPattern(Airport_ParserParser.PrimaryPatternContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		String val = protectedSplit(str); if(isNull(val)) addAttribute(str.split("=")[0], "LEFT");
 		else if (!val.equals("LEFT") && !val.equals("RIGHT"))
-			System.out.println("Error: exitPrimaryPattern value not expected! Val was: " + val);
+			System.out.println("Error in line - " + lineErr +": exitPrimaryPattern value not expected! Val was: " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1142,9 +1180,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitSecondaryTakeoff(Airport_ParserParser.SecondaryTakeoffContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		String val = protectedSplit(str); if(isNull(val)) addAttribute(str.split("=")[0], "TRUE");
 		else if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
-			System.out.println("Error: exitSecondaryTakeoff value not expected! Val was: " + val);
+			System.out.println("Error in line - " + lineErr +": exitSecondaryTakeoff value not expected! Val was: " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1152,9 +1191,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitSecondaryLanding(Airport_ParserParser.SecondaryLandingContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		String val = protectedSplit(str); if(isNull(val)) val = "TRUE";
 		if (!val.equals("YES") && !val.equals("NO") && !val.equals("TRUE") && !val.equals("FALSE"))
-			System.out.println("Error: exitSecondaryLanding value not expected! Val was: " + val);
+			System.out.println("Error in line - " + lineErr +": exitSecondaryLanding value not expected! Val was: " + val);
 		else
 			addAttribute(str.split("=")[0], val);
 	}
@@ -1162,9 +1202,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitSecondaryPattern(Airport_ParserParser.SecondaryPatternContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		String val = protectedSplit(str); if(isNull(val)) val = "LEFT";
 		if (!val.equals("LEFT") && !val.equals("RIGHT"))
-			System.out.println("Error: exitSecondaryPattern value not expected! Val was: " + val);
+			System.out.println("Error in line - " + lineErr +": exitSecondaryPattern value not expected! Val was: " + val);
 		else
 			addAttribute(str.split("=")[0], val);
 	}
@@ -1172,9 +1213,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitPrimaryMarkingBias(Airport_ParserParser.PrimaryMarkingBiasContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitPrimaryMarkingBias value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitPrimaryMarkingBias value not expected! Val was: " + val);else
 			if (!val.matches(trafficScallar))
-				System.out.println("Error: exitPrimaryMarkingBias value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitPrimaryMarkingBias value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1182,9 +1224,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitSecondaryMarkingBias(Airport_ParserParser.SecondaryMarkingBiasContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitSecondaryMarkingBias value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitSecondaryMarkingBias value not expected! Val was: " + val);else
 			if (!val.matches(trafficScallar))
-				System.out.println("Error: exitSecondaryMarkingBias value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitSecondaryMarkingBias value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1192,9 +1235,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitAlternateThreshold(Airport_ParserParser.AlternateThresholdContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitAlternateThreshold value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitAlternateThreshold value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitAlternateThreshold value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitAlternateThreshold value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1202,9 +1246,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitAlternateTouchdown(Airport_ParserParser.AlternateTouchdownContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitAlternateTouchdown value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitAlternateTouchdown value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitAlternateTouchdown value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitAlternateTouchdown value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1212,9 +1257,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitAlternateFixedDistance(Airport_ParserParser.AlternateFixedDistanceContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitAlternateFixedDistance value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitAlternateFixedDistance value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitAlternateFixedDistance value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitAlternateFixedDistance value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1222,9 +1268,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitAlternatePrecision(Airport_ParserParser.AlternatePrecisionContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitAlternatePrecision value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitAlternatePrecision value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitAlternatePrecision value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitAlternatePrecision value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1232,9 +1279,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitLeadingZeroIdent(Airport_ParserParser.LeadingZeroIdentContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitLeadingZeroIdent value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitLeadingZeroIdent value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitLeadingZeroIdent value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitLeadingZeroIdent value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1242,9 +1290,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitNoThresholdEndArrows(Airport_ParserParser.NoThresholdEndArrowsContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitNoThresholdEndArrows value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitNoThresholdEndArrows value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitNoThresholdEndArrows value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitNoThresholdEndArrows value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1252,9 +1301,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitEdges(Airport_ParserParser.EdgesContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitEdges value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitEdges value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitEdges value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitEdges value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1262,9 +1312,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitThreshold(Airport_ParserParser.ThresholdContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitThreshold value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitThreshold value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitThreshold value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitThreshold value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1272,9 +1323,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitFixed(Airport_ParserParser.FixedContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitFixed value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitFixed value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitFixed value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitFixed value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1282,9 +1334,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitTouchdown(Airport_ParserParser.TouchdownContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitTouchdown value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitTouchdown value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitTouchdown value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitTouchdown value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1292,9 +1345,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitDashes(Airport_ParserParser.DashesContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitDashes value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitDashes value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitDashes value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitDashes value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1302,9 +1356,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitIdent_Marking(Airport_ParserParser.Ident_MarkingContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitIdent_Marking value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitIdent_Marking value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitIdent_Marking value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitIdent_Marking value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1312,9 +1367,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitPrecision(Airport_ParserParser.PrecisionContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitPrecision value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitPrecision value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitPrecision value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitPrecision value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1322,9 +1378,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitEdgePavement(Airport_ParserParser.EdgePavementContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitEdgePavement value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitEdgePavement value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitEdgePavement value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitEdgePavement value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1332,9 +1389,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitSingleEnd(Airport_ParserParser.SingleEndContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitSingleEnd value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitSingleEnd value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitSingleEnd value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitSingleEnd value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1342,9 +1400,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitPrimaryClosed(Airport_ParserParser.PrimaryClosedContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitPrimaryClosed value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitPrimaryClosed value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitPrimaryClosed value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitPrimaryClosed value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1352,9 +1411,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitSecondaryClosed(Airport_ParserParser.SecondaryClosedContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitSecondaryClosed value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitSecondaryClosed value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitSecondaryClosed value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitSecondaryClosed value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1362,9 +1422,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitPrimaryStol(Airport_ParserParser.PrimaryStolContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitPrimaryStol value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitPrimaryStol value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitPrimaryStol value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitPrimaryStol value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1372,9 +1433,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitSecondaryStol(Airport_ParserParser.SecondaryStolContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitSecondaryStol value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitSecondaryStol value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitSecondaryStol value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitSecondaryStol value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1382,9 +1444,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitBackCourse(Airport_ParserParser.BackCourseContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitBackCourse value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitBackCourse value not expected! Val was: " + val);else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitBackCourse value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitBackCourse value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1392,10 +1455,11 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitCenterRed(Airport_ParserParser.CenterRedContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitCenterRed value not expected! Val was: " + val);
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitCenterRed value not expected! Val was: " + val);
 		else
 			if (!val.equals("TRUE") && !val.equals("FALSE"))
-				System.out.println("Error: exitCenterRed value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitCenterRed value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1403,27 +1467,29 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitStrobes(Airport_ParserParser.StrobesContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		try
 		{
-			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitStrobes value not expected! Val was: " + val);else
+			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitStrobes value not expected! Val was: " + val);else
 				if (!val.matches(unsigned_int))
-					System.out.println("Error: exitStrobes value not expected! Val was: " + val);
+					System.out.println("Error in line - " + lineErr +": exitStrobes value not expected! Val was: " + val);
 				else
 					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		}
 		catch(Exception e)
 		{
 
-			System.out.println("Error: exitStrobes value not expected! Val was: " + str);
+			System.out.println("Error in line - " + lineErr +": exitStrobes value not expected! Val was: " + str);
 		}
 	}
 
 	@Override
 	public void exitAltitude(Airport_ParserParser.AltitudeContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitAltitude value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitAltitude value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
-				System.out.println("Error: exitAltitude value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitAltitude value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1431,9 +1497,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitAirportTestRadius(Airport_ParserParser.AirportTestRadiusContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitAirportTestRadius value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitAirportTestRadius value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
-				System.out.println("Error: exitAirportTestRadius value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitAirportTestRadius value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1441,9 +1508,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitRadius(Airport_ParserParser.RadiusContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitRadius value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitRadius value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
-				System.out.println("Error: exitRadius value not expected! Val was: " + val);
+				System.out.println("Error in line - " + lineErr +": exitRadius value not expected! Val was: " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1451,9 +1519,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitTaxiwayparkingNumber(Airport_ParserParser.TaxiwayparkingNumberContext ctx) {
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
 		if (val >= 3999 || val < 0)
-			System.out.println("Error: exitTaxiwayparkingNumber value out of bounds! Expected [0,3999] but got " + val);
+			System.out.println("Error in line - " + lineErr +": exitTaxiwayparkingNumber value out of bounds! Expected [0,3999] but got " + val);
 		else
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1461,9 +1530,10 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitAvailability(Airport_ParserParser.AvailabilityContext ctx) {
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitCenterRed value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitCenterRed value not expected! Val was: " + val);else
 			if (!val.equals("YES") && !val.equals("NO") && !val.equals("UNKNOWN") &&  !val.equals("PRIOR_REQUEST"))
-				System.out.println("Error: exitAvailability value out of bounds! Expected [0,3999] but got " + val);
+				System.out.println("Error in line - " + lineErr +": exitAvailability value out of bounds! Expected [0,3999] but got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1472,9 +1542,10 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitRunway_start(Airport_ParserParser.Runway_startContext ctx) {
 		airportElements.put("Runway_start"+runwayStartCounter.toString(), "Airport"+airportCounter.toString());
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitRunway_start value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitRunway_start value not expected! Val was: " + val);else
 			if (!val.equals("RUNWAY"))
-				System.out.println("Error: exitRunway_start value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitRunway_start value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
@@ -1484,9 +1555,10 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitHelipad(Airport_ParserParser.HelipadContext ctx) {
 		airportElements.put("Helipad"+helipadCounter.toString(), "Airport"+airportCounter.toString());
 		String str = ctx.getText();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitHelipad value not expected! Val was: " + val);else
+		int lineErr = ctx.getStart().getLine();
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitHelipad value not expected! Val was: " + val);else
 			if (!val.matches(altitude_value))
-				System.out.println("Error: exitHelipad value not expected! Got " + val);
+				System.out.println("Error in line - " + lineErr +": exitHelipad value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
