@@ -86,7 +86,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override public void exitTaxiwayName(  Airport_ParserParser.TaxiwayNameContext ctx) { 
 		airportElements.put("TaxiwayName"+taxiNameCounter.toString(), "Airport"+airportCounter.toString());
-		
+
 	}
 
 
@@ -102,14 +102,14 @@ public class Listener extends Airport_ParserBaseListener {
 
 
 	@Override public void enterRunway_alias(  Airport_ParserParser.Runway_aliasContext ctx) { 
-		
+
 		runwayAliasCounter++;
 	}
 
 
 	@Override public void exitRunway_alias(  Airport_ParserParser.Runway_aliasContext ctx) { 
 		airportElements.put("Runway_alias"+runwayAliasCounter.toString(), "Airport"+airportCounter.toString());
-		
+
 	}
 
 
@@ -132,7 +132,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override public void exitOffsetThreshold(  Airport_ParserParser.OffsetThresholdContext ctx) {
 		runwayElements.put("OffsetThreshold"+offsetThresholdCounter.toString(), "Runway"+runwayCounter.toString());
-		
+
 	}
 
 
@@ -144,7 +144,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override public void exitTaxiwayPoint(  Airport_ParserParser.TaxiwayPointContext ctx) { 
 		airportElements.put("TaxiwayPoint"+taxiwayPointCounter.toString(), "Airport"+airportCounter.toString());
-		
+
 	}
 
 
@@ -152,7 +152,7 @@ public class Listener extends Airport_ParserBaseListener {
 		lightsCounter++;
 		receivingAttributs = "Lights";
 	}
-	
+
 	@Override
 	public void enterHelipad(Airport_ParserParser.HelipadContext ctx) {
 		helipadCounter++;
@@ -176,7 +176,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override public void exitLights(  Airport_ParserParser.LightsContext ctx) { 
 		runwayElements.put("Lights"+lightsCounter.toString(), "Runway"+runwayCounter.toString());
-		
+
 	}
 
 
@@ -186,7 +186,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 
 	@Override public void exitServices(  Airport_ParserParser.ServicesContext ctx) {
-		
+
 		airportElements.put("Services"+servicesCounter.toString(), "Airport"+airportCounter.toString());
 	}
 
@@ -221,7 +221,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 
 	@Override public void exitFuel(  Airport_ParserParser.FuelContext ctx) {
-		
+
 		servicesElements.put("Fuel"+fuelCounter.toString(),"Services"+servicesCounter.toString());
 	}
 
@@ -233,7 +233,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 
 	@Override public void exitTower(  Airport_ParserParser.TowerContext ctx) { 
-		
+
 		airportElements.put("Tower"+towerCounter.toString(), "Airport"+airportCounter.toString());
 	}
 
@@ -246,19 +246,19 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override public void exitMarkings(  Airport_ParserParser.MarkingsContext ctx) { 
 		runwayElements.put("Markings"+markingsCounter.toString(), "Runway"+runwayCounter.toString());
-		
+
 	}
 
 	@Override public void enterRunway(  Airport_ParserParser.RunwayContext ctx) { 
 		runwayCounter++;
 		receivingAttributs = "Runway";
-		
+
 	}
 
 
 	@Override public void exitRunway(  Airport_ParserParser.RunwayContext ctx) { 
 		airportElements.put("Runway"+runwayCounter.toString(), "Airport"+airportCounter.toString());
-		
+
 	}
 
 
@@ -290,7 +290,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 
 	@Override public void exitTaxiwayParking(  Airport_ParserParser.TaxiwayParkingContext ctx) {
-		
+
 		airportElements.put("TaxiwayParking"+taxiwayParkingCounter.toString(), "Airport"+airportCounter.toString());
 	}
 
@@ -305,7 +305,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override public void exitVisual_model(  Airport_ParserParser.Visual_modelContext ctx) { 
 		ilsElements.put("Visual_model"+visualModelCounter.toString(), "Ils"+ilsCounter.toString());
 	}
-	
+
 	@Override public void enterTaxiwayPath(  Airport_ParserParser.TaxiwayPathContext ctx) { 
 		receivingAttributs = "TaxiwayPath";
 		taxiwayPathCounter++;
@@ -313,7 +313,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override public void exitTaxiwayPath(  Airport_ParserParser.TaxiwayPathContext ctx) { 
 		airportElements.put("TaxiwayPath"+taxiwayPathCounter.toString(), "Airport"+airportCounter.toString());
-		
+
 	}
 
 
@@ -337,7 +337,7 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override public void exitDme(  Airport_ParserParser.DmeContext ctx) { 
 		ilsElements.put("Dme"+dmeCounter.toString(), "Ils"+ilsCounter.toString());
 	}
-	
+
 	@Override 
 	public void exitRed(Airport_ParserParser.RedContext ctx)
 	{
@@ -351,7 +351,7 @@ public class Listener extends Airport_ParserBaseListener {
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		}
 	}
-	
+
 	@Override 
 	public void exitBlue(Airport_ParserParser.BlueContext ctx)
 	{
@@ -366,7 +366,7 @@ public class Listener extends Airport_ParserBaseListener {
 		}
 
 	}
-	
+
 	@Override 
 	public void exitGreen(Airport_ParserParser.GreenContext ctx)
 	{
@@ -380,7 +380,7 @@ public class Listener extends Airport_ParserBaseListener {
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 		}
 	}
-	
+
 	@Override
 	public void exitApproach_runway(Airport_ParserParser.Approach_runwayContext ctx)
 	{
@@ -455,7 +455,7 @@ public class Listener extends Airport_ParserBaseListener {
 	{
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: taxiwayNameString value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": taxiwayNameString value not expected! Val was: " + val);else
 			if(!val.matches(string8))
 				System.out.println("Error in line - " + lineErr +": taxiwayNameString Name value not expected! Got " + val);
 			else
@@ -467,7 +467,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitOrientation(Airport_ParserParser.OrientationContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: Orientation value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": Orientation value not expected! Val was: " + val);else
 			if (!val.equals("FORWARD") && !val.equals("REVERSE"))
 				System.out.println("Error in line - " + lineErr +": Orientation value not expected! Expected 'FORWARD' OR 'REVERSE' but got " + val);
 			else
@@ -478,7 +478,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitTaxiwaypointType(Airport_ParserParser.TaxiwaypointTypeContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: TaxiwayPoint type value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": TaxiwayPoint type value not expected! Val was: " + val);else
 			if (!val.equals("NORMAL") && !val.equals("HOLD_SHORT") && !val.equals("ILS_HOLD_SHORT") && !val.equals("HOLD_SHORT_NO_DRAWT" )&& !val.equals("ILS_HOLD_SHORT_NO_DRAW"))
 				System.out.println("Error in line - " + lineErr +": TaxiwaypointType value not expected! Expected 'NORMAL' or 'HOLD_SHORT' or  'ILS_HOLD_SHORT' or  'HOLD_SHORT_NO_DRAW' or 'ILS_HOLD_SHORT_NO_DRAW' but got " + val);
 			else
@@ -490,7 +490,7 @@ public class Listener extends Airport_ParserBaseListener {
 
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: TaxiwayparkingType value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": TaxiwayparkingType value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("DOCK_GA") && !val.equals("FUEL") && !val.equals("GATE_HEAVY") && !val.equals("GATE_MEDIUM") && !val.equals("GATE_SMALL") && !val.equals("RAMP_CARGO") && !val.equals("RAMP_GA") && !val.equals("RAMP_GA_LARGE") && !val.equals("RAMP_GA_MEDIUM") && !val.equals("RAMP_GA_SMALL") && !val.equals("RAMP_MIL_CARGO") && !val.equals("RAMP_MIL_COMBAT") && !val.equals("VEHICLE"))
 				System.out.println("Error in line - " + lineErr +": TaxiwayparkingType value not expected! Got " + val);
 			else
@@ -501,7 +501,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitTaxiwayparkingName(Airport_ParserParser.TaxiwayparkingNameContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitTaxiwayparkingName value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitTaxiwayparkingName value not expected! Val was: " + val);else
 			if (!val.equals("PARKING") && !val.equals("DOCK") && !val.equals("GATE") && !val.startsWith("GATE_") && !val.equals("NONE") && !val.equals("N_PARKING") && !val.equals("NE_PARKING" )&& !val.equals("NW_PARKING" )&& !val.equals("SE_PARKING" )&& !val.equals("S_PARKING") && !val.equals("SW_PARKING" )&& !val.equals("W_PARKING") && !val.equals("E_PARKING" ))
 				System.out.println("Error in line - " + lineErr +": TaxiwayparkingName value not expected! Got " + val);
 			else
@@ -512,7 +512,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitPush_back(Airport_ParserParser.Push_backContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitPush_back value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitPush_back value not expected! Val was: " + val);else
 			if (!val.equals("NONE") && !val.equals("BOTH") && !val.equals("LEFT") && !val.equals("RIGHT" ))
 				System.out.println("Error in line - " + lineErr +": Push_back value not expected! Got " + val);
 			else
@@ -523,7 +523,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitTaxiwayPathType(Airport_ParserParser.TaxiwayPathTypeContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitTaxiwayPathType value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitTaxiwayPathType value not expected! Val was: " + val);else
 			if (!val.equals("RUNWAY") && !val.equals("PARKING") && !val.equals("TAXI") && !val.equals("PATH") && !val.equals("CLOSED") && !val.equals("VEHICLE"))
 				System.out.println("Error in line - " + lineErr +": TaxiwayPathType value not expected! Got " + val);
 			else
@@ -534,7 +534,7 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitSurface(Airport_ParserParser.SurfaceContext ctx) {
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
-		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error: exitSurface value not expected! Val was: " + val);else
+		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitSurface value not expected! Val was: " + val);else
 			if (!val.equals("ASPHALT" )&& !val.equals("BITUMINOUS") && !val.equals("BRICK") && !val.equals("CLAY" )&& !val.equals("CEMENT" )&& !val.equals("CONCRETE" )&& !val.equals("CORAL") && !val.equals("DIRT") && !val.equals("GRASS" )&& !val.equals("GRAVEL") && !val.equals("ICE" )&& !val.equals("MACADAM" )&& !val.equals("OIL_TREATED" )&& !val.equals("PLANKS") && !val.equals("SAND" )&& !val.equals("SHALE") && !val.equals("SNOW" )&& !val.equals("STEEL_MATS" )&& !val.equals("TARMAC") && !val.equals("UNKNOWN") && !val.equals("WATER"))
 				System.out.println("Error in line - " + lineErr +": Surface value not expected! Got " + val);
 			else
@@ -592,7 +592,8 @@ public class Listener extends Airport_ParserBaseListener {
 		try{
 
 
-			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": CexitRed value not expected! Val was: " + val);else
+			String val = protectedSplit(str); 
+			if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitNumber value not expected! Val was: " + val);else
 				if(val.equals("00"))
 					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 			if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST" )&& !val.equals("NORTHWEST") && !val.equals("SOUTH") && !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST") && !val.equals("WEST"))
@@ -744,8 +745,6 @@ public class Listener extends Airport_ParserBaseListener {
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
-	
-
 	@Override
 	public void exitImage_complexety(Airport_ParserParser.Image_complexetyContext ctx) {
 		String str = ctx.getText();
@@ -768,7 +767,7 @@ public class Listener extends Airport_ParserBaseListener {
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
-		@Override
+	@Override
 	public void exitTaxiwayPathStart(Airport_ParserParser.TaxiwayPathStartContext ctx)
 	{
 		String str = ctx.getText();
@@ -819,11 +818,15 @@ public class Listener extends Airport_ParserBaseListener {
 		int lineErr = ctx.getStart().getLine();
 		try
 		{
+			if(str.equals("0"))
+				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+			else{
 			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
-			if (val >= 3999 || val <= 0)
+			if (val > 3999 || val < 0)
 				System.out.println("Error in line - " + lineErr +": exitIndex value not expected! Got " + val);
 			else
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+			}
 
 		}
 		catch (Exception e)
@@ -1470,11 +1473,11 @@ public class Listener extends Airport_ParserBaseListener {
 		int lineErr = ctx.getStart().getLine();
 		try
 		{
-			String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitStrobes value not expected! Val was: " + val);else
-				if (!val.matches(unsigned_int))
-					System.out.println("Error in line - " + lineErr +": exitStrobes value not expected! Val was: " + val);
-				else
-					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+			String val = protectedSplit(str); if(isNull(val)) val = "0";
+			if (!val.matches(unsigned_int))
+				System.out.println("Error in line - " + lineErr +": exitStrobes value not expected! Val was: " + val);
+			else
+				addAttribute(str.split("=")[0], val);
 		}
 		catch(Exception e)
 		{
@@ -1550,7 +1553,7 @@ public class Listener extends Airport_ParserBaseListener {
 				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
 	}
 
-	
+
 	@Override
 	public void exitHelipad(Airport_ParserParser.HelipadContext ctx) {
 		airportElements.put("Helipad"+helipadCounter.toString(), "Airport"+airportCounter.toString());

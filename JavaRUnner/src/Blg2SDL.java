@@ -22,7 +22,7 @@ public class Blg2SDL {
 			InputStream is = System.in;
 			if(inputFile != null) is = new FileInputStream(inputFile);
 			else
-				is = new FileInputStream("oneAirport.bgl.xml");
+				is = new FileInputStream("Portugal CentroNorte.bgl.xml");
 			System.out.println(is);
 			ANTLRInputStream input = new ANTLRInputStream(is);
 			
