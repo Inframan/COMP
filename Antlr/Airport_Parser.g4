@@ -539,4 +539,4 @@ airport: AIRPORT_OPEN region? country? state? city? name? lattitude longitude al
             )*
           AIRPORT_CLOSE;
 
-airports: airport* EOF;
+airports: airport+ EOF;

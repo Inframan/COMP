@@ -2,7 +2,7 @@
 <scenario xmlns="dcs:scenario" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <bases xmlns="">
     <baseOfOperations id="b1">
-      <name>Braga</name>
+      <name>Francisco Sa Carneiro</name>
       <mobility water="true" underwater="false" land="true" air="true" />
       <description>XXX Description XXX</description>
       <history>XXX History XXX</history>
@@ -24,19 +24,19 @@
       <location>
         <address>xXxXxXxXxXxXx</address>
         <zipCode>xXxXxXxXxXxXx</zipCode>
-        <city>Braga</city>
+        <city>Porto</city>
         <stateDistrictRegion />
         <country>Portugal</country>
         <country />
         <coordinates>
-          <latitude>41.5850000828505</latitude>
-          <longitude>-8.44999998807907</longitude>
-          <altitude lengthUnit="Meter">75.285</altitude>
+          <latitude>41.2355555221438</latitude>
+          <longitude>-8.67805570363998</longitude>
+          <altitude lengthUnit="Meter">69.494</altitude>
         </coordinates>
         <availability available="always" />
       </location>
       <airport>
-        <name>Braga</name>
+        <name>Francisco Sa Carneiro</name>
         <description>XXX Description XXX</description>
         <contactPerson>
           <name>XxX Name XxX</name>
@@ -56,37 +56,37 @@
         <location>
           <address>xXxXxXxXxXxXx</address>
           <zipCode>xXxXxXxXxXxXx</zipCode>
-          <city>Braga</city>
+          <city>Porto</city>
           <stateDistrictRegion />
           <country>Portugal</country>
           <country />
           <coordinates>
-            <latitude>41.5850000828505</latitude>
-            <longitude>-8.44999998807907</longitude>
-            <altitude lengthUnit="Meter">75.285</altitude>
+            <latitude>41.2355555221438</latitude>
+            <longitude>-8.67805570363998</longitude>
+            <altitude lengthUnit="Meter">69.494</altitude>
           </coordinates>
           <availability available="always" />
         </location>
         <IATA>ABC</IATA>
-        <ICAO>LPBR</ICAO>
-        <magVar>5.5</magVar>
+        <ICAO>LPPR</ICAO>
+        <magVar>5</magVar>
         <runways>
           <runway id="r1-1">
             <coordinates>
-              <latitude>41.5857215970755</latitude>
-              <longitude>-8.44805404543877</longitude>
-              <altitude lengthUnit="Meter">75.285</altitude>
+              <latitude>41.24785579741</latitude>
+              <longitude>-8.6812050640583</longitude>
+              <altitude lengthUnit="Meter">69.494</altitude>
             </coordinates>
-            <length lengthUnit="Meter">949.15</length>
-            <width lengthUnit="Meter">24.99</width>
+            <length lengthUnit="Meter">3485.08</length>
+            <width lengthUnit="Meter">45.11</width>
             <surface>ASPHALT</surface>
             <baseEnd>
-              <designation>07</designation>
+              <designation>17</designation>
               <startPoint>
                 <coordinates>
-                  <latitude>41.5857215970755</latitude>
-                  <longitude>-8.44805404543877</longitude>
-                  <altitude lengthUnit="Meter">75.285</altitude>
+                  <latitude>41.24785579741</latitude>
+                  <longitude>-8.6812050640583</longitude>
+                  <altitude lengthUnit="Meter">69.494</altitude>
                 </coordinates>
                 <connectsTo>
                   <xway idr="x02" />

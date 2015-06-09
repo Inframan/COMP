@@ -4,9 +4,13 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Arrays;
 
-import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.antlr.v4.runtime.tree.gui.TreeViewer;
 
 
 
@@ -36,7 +40,10 @@ public class Blg2SDL {
 			
 			ParserRuleContext tree = parser.airports(); // parse
 			
-			System.out.println(tree.toStringTree(parser)); // print LISP-style tree
+			//System.out.println(tree.toStringTree(parser)); // print LISP-style tree
+			TreeViewer viewr = new TreeViewer(Arrays.asList(parser.getRuleNames()),tree);
+			viewr.setScale(1);		
+			PanAndZoom pan = new PanAndZoom(viewr);
 			ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
 			
 			Listener extractor = new Listener();
@@ -50,6 +57,8 @@ public class Blg2SDL {
 		catch(IOException e)
 		{
 			e.printStackTrace();
+		} catch(Exception e){
+			System.out.println("Couldn't parse");
 		}
 			 
 	}

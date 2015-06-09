@@ -144,3 +144,7 @@
 /Airport_ParserParser$WeightLimitContext.class
 /Airport_ParserParser$WidthContext.class
 /Airport_ParserParser.class
+/PanAndZoom$PanAndZoomCanvas.class
+/PanAndZoom$PanningHandler.class
+/PanAndZoom$ScaleHandler.class
+/PanAndZoom.class

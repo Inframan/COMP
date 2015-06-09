@@ -453,7 +453,11 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitTaxiwayNameString(Airport_ParserParser.TaxiwayNameStringContext ctx)
 	{
-		String str = ctx.getText();
+		String str;
+		if(ctx.getText().equals("<missing VALUE>"))
+			str = "0";
+		else
+			str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
 		String val = protectedSplit(str); if(isNull(val)) System.out.println("Error in line - " + lineErr +": taxiwayNameString value not expected! Val was: " + val);else
 			if(!val.matches(string8))
@@ -587,23 +591,32 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override
 	public void exitNumber(Airport_ParserParser.NumberContext ctx) {
+		
+		
+		
+		
 		String str = ctx.getText();
 		int lineErr = ctx.getStart().getLine();
 		try{
-
-
-			String val = protectedSplit(str); 
+			
+			
+			String val;
+			if(str.endsWith("<missing VALUE>"))
+				val = "00";
+			else
+				val = protectedSplit(str); 
+			
 			if(isNull(val)) System.out.println("Error in line - " + lineErr +": exitNumber value not expected! Val was: " + val);else
 				if(val.equals("00"))
-					addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
-			if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST" )&& !val.equals("NORTHWEST") && !val.equals("SOUTH") && !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST") && !val.equals("WEST"))
+					addAttribute(str.split("=")[0], val);
+				else if (!val.equals("EAST") && !val.equals("NORTH") && !val.equals("NORTHEAST" )&& !val.equals("NORTHWEST") && !val.equals("SOUTH") && !val.equals("SOUTHEAST") && !val.equals("SOUTHWEST") && !val.equals("WEST"))
 				if(val.startsWith("0")) {
 					int value = Integer.parseInt(val);
 					if (value < 0 || value > 9) {
 						System.out.println("Error in line - " + lineErr +": Aprroach_Runway value out of bounds! Expected [00,09] but got " + val);
 					}
 					else
-						addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+						addAttribute(str.split("=")[0],  str.split("=")[1].split("\"")[1]);
 				}
 				else
 				{
@@ -770,14 +783,20 @@ public class Listener extends Airport_ParserBaseListener {
 	@Override
 	public void exitTaxiwayPathStart(Airport_ParserParser.TaxiwayPathStartContext ctx)
 	{
-		String str = ctx.getText();
+		String str;
+		String value;
+		str = ctx.getText();
+		if(ctx.getText().endsWith("<missing VALUE>"))
+			value = "\"0\"";
+		else
+			value = str.split("=")[1];
 		int lineErr = ctx.getStart().getLine();
 		try{
-			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
+			Double val = Double.parseDouble(value.split("\"")[1]);
 			if (val >= 255 || val < 0)
 				System.out.println("Error in line - " + lineErr +": exitTaxiwayPathStart value not expected! Got " + val);
 			else
-				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+				addAttribute(str.split("=")[0], value.split("\"")[1]);
 
 		}
 		catch (Exception e)
@@ -814,23 +833,28 @@ public class Listener extends Airport_ParserBaseListener {
 
 	@Override
 	public void exitIndex(Airport_ParserParser.IndexContext ctx) {
-		String str = ctx.getText();
+		String str= ctx.getText();
 		int lineErr = ctx.getStart().getLine();
+		Double val;
 		try
 		{
-			if(str.equals("0"))
-				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+			String s;
+			if(str.endsWith("<missing VALUE>")){
+				val=0.0;
+			}
 			else{
-			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
+				 s = str.split("\"")[1];
+				 val = Double.parseDouble(s.split("\"")[0]);
+			}
 			if (val > 3999 || val < 0)
 				System.out.println("Error in line - " + lineErr +": exitIndex value not expected! Got " + val);
 			else
-				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
-			}
+				addAttribute(str.split("=")[0], val.toString());
 
 		}
 		catch (Exception e)
 		{
+			e.printStackTrace();
 			System.out.println("Error in line - " + lineErr +": Index value not expected! Got "+str);
 		}
 	}
@@ -1046,14 +1070,20 @@ public class Listener extends Airport_ParserBaseListener {
 	}
 	@Override
 	public void exitTaxiwayPathEnd(Airport_ParserParser.TaxiwayPathEndContext ctx)	{
-		String str = ctx.getText();
+		String str;
+		str = ctx.getText();
+		String value;
+		if(ctx.getText().endsWith("<missing VALUE>"))
+			value = "\"0\"";
+		else
+			value = str.split("=")[1];
 		int lineErr = ctx.getStart().getLine();
 		try{
-			Double val = Double.parseDouble(str.split("=")[1].split("\"")[1]);
+			Double val = Double.parseDouble(value.split("\"")[1]);
 			if (val >= 255 || val < 0)
 				System.out.println("Error in line - " + lineErr +": exitTaxiwayPathEnd value not expected! Got " + val);
 			else
-				addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
+				addAttribute(str.split("=")[0], value.split("\"")[1]);
 		}
 		catch(Exception e)
 		{
