@@ -17,8 +17,9 @@ import org.jdom2.output.XMLOutputter;
 public class SDLgenerator {
 
 	Listener symbolTable;
-
-	public SDLgenerator(Listener extractor) {
+String output;
+	
+	public SDLgenerator(Listener extractor,String output) {
 		// TODO Auto-generated constructor stub
 		symbolTable = extractor;
 	}
@@ -82,7 +83,7 @@ public class SDLgenerator {
 
 		FileWriter writer;
 		try {
-			writer = new FileWriter("PENIs.xml");
+			writer = new FileWriter("output");
 			out.output(doc, writer);
 			writer.close();
 		} catch (IOException e1) {
