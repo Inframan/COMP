@@ -4,6 +4,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import org.antlr.v4.tool.Attribute;
+import org.apache.bcel.generic.GETSTATIC;
 import org.jdom2.DocType;
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -70,7 +71,7 @@ public class SDLgenerator {
 			baseOfOperations.addContent(location);
 			baseOfOperations.addContent(airport);
 
-			scenario.addContent(baseOfOperations);
+			bases.addContent(baseOfOperations);
 
 		}
 
@@ -125,19 +126,79 @@ public class SDLgenerator {
 	{
 		//////////name is already added
 		Element location = new Element("location");
+		Element runways = new Element("runways");
 		locationFiller(location, attributs);
+		runwaysFiller(runways, counter);
+		
 		
 		airport.addContent(new Element("description").addContent("XXX Description XXX"));
 		airport.addContent(contactPerson());
 		airport.addContent(location);
-		
-		
+		airport.addContent(new Element("ICAO").addContent(attributs.get("ident")));
+		airport.addContent(new Element("IATA"));
+		airport.addContent(new Element("magVar").addContent(attributs.get("magvar")));
 
-
+		airport.addContent(runways);
 
 	}
 
+	
+	private void runwaysFiller(Element runways, Integer airportCounter)
+	{
+		Map<String,String> runwayAtt;
+		for(Integer i = 1; i < symbolTable.runwayCounter+1;i++)
+		{
+			if(symbolTable.airportElements.get("Runway"+i.toString()).equals("Airport"+airportCounter.toString()))
+			{
+				runwayAtt = symbolTable.runwayAttributs.get("Runway"+i.toString());
+				Element runway = new Element("runway");
+				runway.setAttribute("id","r"+airportCounter.toString()+"-"+i.toString());
+				
+				
+				runway.addContent(new Element("coordinates").addContent(
+						new Element("latitude").addContent(runwayAtt.get("lat"))).addContent(
+								new Element("longitude").addContent(runwayAtt.get("lon"))).addContent(
+										new Element("altitude").addContent(runwayAtt.get("alt"))));
+				
+				
+				String[] unit = getLengthUnit(runwayAtt.get("length"));
+				runway.addContent(new Element("length").addContent(unit[0]).setAttribute("lengthUnit",unit[1]));
+				unit = getLengthUnit(runwayAtt.get("width"));
+				runway.addContent(new Element("width").addContent(unit[0]).setAttribute("lengthUnit",unit[1]));
+				
+				runway.addContent(new Element("surface").addContent(runwayAtt.get("surface")));
+				
+				
+				
+				runways.addContent(runway);
+				
+			}
+			
+		}
+		
+	}
+	
 
+	private String[] getLengthUnit(String length)
+	{
+		if(length.endsWith("M"))
+		{
+			String ret[] = {length.split("M")[0],"Meter"};
+			return ret;
+		}
+		else if(length.endsWith("F"))
+		{
+			String ret[] = {length.split("F")[0],"Foot"};
+			return ret;
+		}
+		
+		
+		String ret[] = {length,"Meter"};
+		return ret;//default value 	
+	}
+	
+	
+	
 	private Element contactPerson()
 	{
 		Element contact = new Element("contactPerson");
