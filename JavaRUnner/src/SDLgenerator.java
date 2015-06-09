@@ -21,6 +21,7 @@ String output;
 	
 	public SDLgenerator(Listener extractor,String output) {
 		// TODO Auto-generated constructor stub
+		this.output = output;
 		symbolTable = extractor;
 	}
 
@@ -83,7 +84,7 @@ String output;
 
 		FileWriter writer;
 		try {
-			writer = new FileWriter("output");
+			writer = new FileWriter(output);
 			out.output(doc, writer);
 			writer.close();
 		} catch (IOException e1) {

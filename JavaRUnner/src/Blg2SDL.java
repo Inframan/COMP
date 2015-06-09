@@ -41,9 +41,7 @@ public class Blg2SDL {
 			ParserRuleContext tree = parser.airports(); // parse
 			
 			//System.out.println(tree.toStringTree(parser)); // print LISP-style tree
-			TreeViewer viewr = new TreeViewer(Arrays.asList(parser.getRuleNames()),tree);
-			viewr.setScale(1);		
-			PanAndZoom pan = new PanAndZoom(viewr);
+		
 			ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
 			
 			Listener extractor = new Listener();
