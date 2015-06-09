@@ -342,9 +342,10 @@ public class Listener extends Airport_ParserBaseListener {
 	public void exitRed(Airport_ParserParser.RedContext ctx)
 	{
 		String str = ctx.getText();
+		int lineErr = ctx.getStart().getLine();
 		int val = Integer.parseInt(str.split("=")[1].split("\"")[1]);
 		if(val < 0 || val > 255)
-			System.out.println("Error: Red value out of bounds! Expected [0,255] but got " + val);
+			System.out.println("Error in line - " + lineErr +": Red value out of bounds! Expected [0,255] but got " + val);
 		else
 		{
 			addAttribute(str.split("=")[0], str.split("=")[1].split("\"")[1]);
